@@ -1,0 +1,880 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C0340B72C98C7D4004A8D36 /* runner.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340B52C98C7D4004A8D36 /* runner.h */; };
+		5C0340BE2C98C7EF004A8D36 /* text_decoder_runner.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340BA2C98C7EF004A8D36 /* text_decoder_runner.h */; };
+		5C0340BF2C98C7EF004A8D36 /* text_prefiller.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340BB2C98C7EF004A8D36 /* text_prefiller.h */; };
+		5C0340C22C98C80E004A8D36 /* util.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340C12C98C80D004A8D36 /* util.h */; };
+		5C0340C52C98C825004A8D36 /* sampler.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340C32C98C825004A8D36 /* sampler.h */; };
+		5C0340C82C98C839004A8D36 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340C72C98C839004A8D36 /* base64.h */; };
+		5C0340CB2C98C84C004A8D36 /* bpe_tokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340C92C98C84C004A8D36 /* bpe_tokenizer.h */; };
+		5C0340D02C98C85F004A8D36 /* tokenizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340CD2C98C85F004A8D36 /* tokenizer.h */; };
+		5C0340D12C98C85F004A8D36 /* tiktoken.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340CE2C98C85F004A8D36 /* tiktoken.h */; };
+		5C0340D62C98C872004A8D36 /* llama_tiktoken.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340D42C98C872004A8D36 /* llama_tiktoken.h */; };
+		5C0340E12C98C8BC004A8D36 /* runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C0340B62C98C7D4004A8D36 /* runner.cpp */; };
+		5C0340E32C98C8BC004A8D36 /* text_decoder_runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C0340BC2C98C7EF004A8D36 /* text_decoder_runner.cpp */; };
+		5C0340E52C98C8BC004A8D36 /* text_prefiller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C0340B92C98C7EF004A8D36 /* text_prefiller.cpp */; };
+		5C0340E82C98C8BC004A8D36 /* sampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C0340C42C98C825004A8D36 /* sampler.cpp */; };
+		5C0340EA2C98C8BC004A8D36 /* llama_tiktoken.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C0340D32C98C872004A8D36 /* llama_tiktoken.cpp */; };
+		5C0340EC2C98C8BC004A8D36 /* tiktoken.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C0340CF2C98C85F004A8D36 /* tiktoken.cpp */; };
+		5C0340EF2C98C8BC004A8D36 /* bpe_tokenizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C0340CA2C98C84C004A8D36 /* bpe_tokenizer.cpp */; };
+		5C0340F52C98C900004A8D36 /* LLaMARunner.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C0340F32C98C900004A8D36 /* LLaMARunner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C0340F62C98C900004A8D36 /* LLaMARunner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C0340F42C98C900004A8D36 /* LLaMARunner.mm */; };
+		5C0340F72C98C910004A8D36 /* LLaMARunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3829D52C98C0C1006885DF /* LLaMARunner.framework */; platformFilter = ios; };
+		5C0340F82C98C910004A8D36 /* LLaMARunner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3829D52C98C0C1006885DF /* LLaMARunner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5C3829A72C98BF4A006885DF /* LlamaStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C3829A62C98BF4A006885DF /* LlamaStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5C3829BB2C98BF69006885DF /* InferenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829AD2C98BF69006885DF /* InferenceService.swift */; };
+		5C3829BC2C98BF69006885DF /* LocalInferenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829AE2C98BF69006885DF /* LocalInferenceService.swift */; };
+		5C3829BD2C98BF69006885DF /* Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829AF2C98BF69006885DF /* Parsing.swift */; };
+		5C3829BE2C98BF69006885DF /* PromptTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B02C98BF69006885DF /* PromptTemplate.swift */; };
+		5C3829BF2C98BF69006885DF /* RemoteInferenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B12C98BF69006885DF /* RemoteInferenceService.swift */; };
+		5C3829C02C98BF69006885DF /* SystemPrompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B22C98BF69006885DF /* SystemPrompts.swift */; };
+		5C3829C12C98BF69006885DF /* AgenticSystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B42C98BF69006885DF /* AgenticSystemService.swift */; };
+		5C3829C22C98BF69006885DF /* ChatAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B52C98BF69006885DF /* ChatAgent.swift */; };
+		5C3829C32C98BF69006885DF /* CustomTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B62C98BF69006885DF /* CustomTools.swift */; };
+		5C3829C42C98BF69006885DF /* LocalAgenticSystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B72C98BF69006885DF /* LocalAgenticSystemService.swift */; };
+		5C3829C52C98BF69006885DF /* RemoteAgenticSystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B82C98BF69006885DF /* RemoteAgenticSystemService.swift */; };
+		5C3829C62C98BF69006885DF /* TypeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B92C98BF69006885DF /* TypeExtensions.swift */; };
+		5C3829C92C98BFB0006885DF /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 5C3829C82C98BFB0006885DF /* OpenAPIRuntime */; };
+		5C3829CC2C98BFCF006885DF /* Stencil in Frameworks */ = {isa = PBXBuildFile; productRef = 5C3829CB2C98BFCF006885DF /* Stencil */; };
+		5C3829CF2C98BFEA006885DF /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = 5C3829CE2C98BFEA006885DF /* OpenAPIURLSession */; };
+		5C3C73952C98D9A5004FB7A8 /* llava_runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C73932C98D9A5004FB7A8 /* llava_runner.cpp */; };
+		5C3C73962C98D9A5004FB7A8 /* llava_runner.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C3C73942C98D9A5004FB7A8 /* llava_runner.h */; };
+		5C3C739B2C98E04D004FB7A8 /* executorch.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C739A2C98E04D004FB7A8 /* executorch.xcframework */; };
+		5C3C739C2C98E04D004FB7A8 /* executorch.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C739A2C98E04D004FB7A8 /* executorch.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5CBD7DBC2C98D7D500750B17 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 5CBD7DBA2C98D7D500750B17 /* openapi.yaml */; };
+		5CBD7DBD2C98D7D500750B17 /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 5CBD7DBB2C98D7D500750B17 /* openapi-generator-config.yaml */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5C0340F92C98C910004A8D36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C38299A2C98BF4A006885DF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C3829D42C98C0C1006885DF;
+			remoteInfo = LLaMARunner;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5C0340FB2C98C910004A8D36 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5C0340F82C98C910004A8D36 /* LLaMARunner.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C3C739D2C98E04D004FB7A8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5C3C739C2C98E04D004FB7A8 /* executorch.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5C0340B52C98C7D4004A8D36 /* runner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = runner.h; path = ../../../executorch/examples/models/llama2/runner/runner.h; sourceTree = "<group>"; };
+		5C0340B62C98C7D4004A8D36 /* runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = runner.cpp; path = ../../../executorch/examples/models/llama2/runner/runner.cpp; sourceTree = "<group>"; };
+		5C0340B92C98C7EF004A8D36 /* text_prefiller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = text_prefiller.cpp; path = ../../../executorch/extension/llm/runner/text_prefiller.cpp; sourceTree = "<group>"; };
+		5C0340BA2C98C7EF004A8D36 /* text_decoder_runner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = text_decoder_runner.h; path = ../../../executorch/extension/llm/runner/text_decoder_runner.h; sourceTree = "<group>"; };
+		5C0340BB2C98C7EF004A8D36 /* text_prefiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = text_prefiller.h; path = ../../../executorch/extension/llm/runner/text_prefiller.h; sourceTree = "<group>"; };
+		5C0340BC2C98C7EF004A8D36 /* text_decoder_runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = text_decoder_runner.cpp; path = ../../../executorch/extension/llm/runner/text_decoder_runner.cpp; sourceTree = "<group>"; };
+		5C0340C12C98C80D004A8D36 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = ../../../executorch/extension/llm/runner/util.h; sourceTree = "<group>"; };
+		5C0340C32C98C825004A8D36 /* sampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sampler.h; path = ../../../executorch/extension/llm/sampler/sampler.h; sourceTree = "<group>"; };
+		5C0340C42C98C825004A8D36 /* sampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sampler.cpp; path = ../../../executorch/extension/llm/sampler/sampler.cpp; sourceTree = "<group>"; };
+		5C0340C72C98C839004A8D36 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = base64.h; path = ../../../executorch/extension/llm/tokenizer/base64.h; sourceTree = "<group>"; };
+		5C0340C92C98C84C004A8D36 /* bpe_tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bpe_tokenizer.h; path = ../../../executorch/extension/llm/tokenizer/bpe_tokenizer.h; sourceTree = "<group>"; };
+		5C0340CA2C98C84C004A8D36 /* bpe_tokenizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bpe_tokenizer.cpp; path = ../../../executorch/extension/llm/tokenizer/bpe_tokenizer.cpp; sourceTree = "<group>"; };
+		5C0340CD2C98C85F004A8D36 /* tokenizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tokenizer.h; path = ../../../executorch/extension/llm/tokenizer/tokenizer.h; sourceTree = "<group>"; };
+		5C0340CE2C98C85F004A8D36 /* tiktoken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tiktoken.h; path = ../../../executorch/extension/llm/tokenizer/tiktoken.h; sourceTree = "<group>"; };
+		5C0340CF2C98C85F004A8D36 /* tiktoken.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tiktoken.cpp; path = ../../../executorch/extension/llm/tokenizer/tiktoken.cpp; sourceTree = "<group>"; };
+		5C0340D32C98C872004A8D36 /* llama_tiktoken.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = llama_tiktoken.cpp; path = ../../../executorch/examples/models/llama2/tokenizer/llama_tiktoken.cpp; sourceTree = "<group>"; };
+		5C0340D42C98C872004A8D36 /* llama_tiktoken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = llama_tiktoken.h; path = ../../../executorch/examples/models/llama2/tokenizer/llama_tiktoken.h; sourceTree = "<group>"; };
+		5C0340F32C98C900004A8D36 /* LLaMARunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLaMARunner.h; path = "../../../executorch/examples/demo-apps/apple_ios/LLaMA/LLaMARunner/LLaMARunner/Exported/LLaMARunner.h"; sourceTree = "<group>"; };
+		5C0340F42C98C900004A8D36 /* LLaMARunner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LLaMARunner.mm; path = "../../../executorch/examples/demo-apps/apple_ios/LLaMA/LLaMARunner/LLaMARunner/Exported/LLaMARunner.mm"; sourceTree = "<group>"; };
+		5C3829A32C98BF4A006885DF /* LlamaStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LlamaStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C3829A62C98BF4A006885DF /* LlamaStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LlamaStack.h; sourceTree = "<group>"; };
+		5C3829AD2C98BF69006885DF /* InferenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InferenceService.swift; sourceTree = "<group>"; };
+		5C3829AE2C98BF69006885DF /* LocalInferenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalInferenceService.swift; sourceTree = "<group>"; };
+		5C3829AF2C98BF69006885DF /* Parsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parsing.swift; sourceTree = "<group>"; };
+		5C3829B02C98BF69006885DF /* PromptTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptTemplate.swift; sourceTree = "<group>"; };
+		5C3829B12C98BF69006885DF /* RemoteInferenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteInferenceService.swift; sourceTree = "<group>"; };
+		5C3829B22C98BF69006885DF /* SystemPrompts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPrompts.swift; sourceTree = "<group>"; };
+		5C3829B42C98BF69006885DF /* AgenticSystemService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgenticSystemService.swift; sourceTree = "<group>"; };
+		5C3829B52C98BF69006885DF /* ChatAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAgent.swift; sourceTree = "<group>"; };
+		5C3829B62C98BF69006885DF /* CustomTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTools.swift; sourceTree = "<group>"; };
+		5C3829B72C98BF69006885DF /* LocalAgenticSystemService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAgenticSystemService.swift; sourceTree = "<group>"; };
+		5C3829B82C98BF69006885DF /* RemoteAgenticSystemService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteAgenticSystemService.swift; sourceTree = "<group>"; };
+		5C3829B92C98BF69006885DF /* TypeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeExtensions.swift; sourceTree = "<group>"; };
+		5C3829D52C98C0C1006885DF /* LLaMARunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LLaMARunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C3C73932C98D9A5004FB7A8 /* llava_runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = llava_runner.cpp; path = ../../../executorch/examples/models/llava/runner/llava_runner.cpp; sourceTree = "<group>"; };
+		5C3C73942C98D9A5004FB7A8 /* llava_runner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = llava_runner.h; path = ../../../executorch/examples/models/llava/runner/llava_runner.h; sourceTree = "<group>"; };
+		5C3C739A2C98E04D004FB7A8 /* executorch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = executorch.xcframework; path = ../executorch_products_2b3cc27/executorch.xcframework; sourceTree = "<group>"; };
+		5CBD7DBA2C98D7D500750B17 /* openapi.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = SOURCE_ROOT; };
+		5CBD7DBB2C98D7D500750B17 /* openapi-generator-config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5C3829A02C98BF4A006885DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C3829C92C98BFB0006885DF /* OpenAPIRuntime in Frameworks */,
+				5C3829CF2C98BFEA006885DF /* OpenAPIURLSession in Frameworks */,
+				5C0340F72C98C910004A8D36 /* LLaMARunner.framework in Frameworks */,
+				5C3829CC2C98BFCF006885DF /* Stencil in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C3829D22C98C0C1006885DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C3C739B2C98E04D004FB7A8 /* executorch.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C03408A2C98C2FF004A8D36 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C3C739A2C98E04D004FB7A8 /* executorch.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5C0340AA2C98C6B4004A8D36 /* runner */ = {
+			isa = PBXGroup;
+			children = (
+				5C3C73932C98D9A5004FB7A8 /* llava_runner.cpp */,
+				5C3C73942C98D9A5004FB7A8 /* llava_runner.h */,
+				5C0340B62C98C7D4004A8D36 /* runner.cpp */,
+				5C0340B52C98C7D4004A8D36 /* runner.h */,
+				5C0340BC2C98C7EF004A8D36 /* text_decoder_runner.cpp */,
+				5C0340BA2C98C7EF004A8D36 /* text_decoder_runner.h */,
+				5C0340B92C98C7EF004A8D36 /* text_prefiller.cpp */,
+				5C0340BB2C98C7EF004A8D36 /* text_prefiller.h */,
+				5C0340C12C98C80D004A8D36 /* util.h */,
+			);
+			path = runner;
+			sourceTree = "<group>";
+		};
+		5C0340AF2C98C6FC004A8D36 /* sampler */ = {
+			isa = PBXGroup;
+			children = (
+				5C0340C42C98C825004A8D36 /* sampler.cpp */,
+				5C0340C32C98C825004A8D36 /* sampler.h */,
+			);
+			path = sampler;
+			sourceTree = "<group>";
+		};
+		5C0340B42C98C71E004A8D36 /* tokenizer */ = {
+			isa = PBXGroup;
+			children = (
+				5C0340D32C98C872004A8D36 /* llama_tiktoken.cpp */,
+				5C0340D42C98C872004A8D36 /* llama_tiktoken.h */,
+				5C0340CF2C98C85F004A8D36 /* tiktoken.cpp */,
+				5C0340CE2C98C85F004A8D36 /* tiktoken.h */,
+				5C0340CD2C98C85F004A8D36 /* tokenizer.h */,
+				5C0340CA2C98C84C004A8D36 /* bpe_tokenizer.cpp */,
+				5C0340C92C98C84C004A8D36 /* bpe_tokenizer.h */,
+				5C0340C72C98C839004A8D36 /* base64.h */,
+			);
+			path = tokenizer;
+			sourceTree = "<group>";
+		};
+		5C0340F22C98C8E2004A8D36 /* Exported */ = {
+			isa = PBXGroup;
+			children = (
+				5C0340F32C98C900004A8D36 /* LLaMARunner.h */,
+				5C0340F42C98C900004A8D36 /* LLaMARunner.mm */,
+			);
+			path = Exported;
+			sourceTree = "<group>";
+		};
+		5C3829992C98BF4A006885DF = {
+			isa = PBXGroup;
+			children = (
+				5C3829A52C98BF4A006885DF /* LlamaStack */,
+				5C3829D62C98C0C1006885DF /* LLaMARunner */,
+				5C3829A42C98BF4A006885DF /* Products */,
+				5C03408A2C98C2FF004A8D36 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5C3829A42C98BF4A006885DF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C3829A32C98BF4A006885DF /* LlamaStack.framework */,
+				5C3829D52C98C0C1006885DF /* LLaMARunner.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5C3829A52C98BF4A006885DF /* LlamaStack */ = {
+			isa = PBXGroup;
+			children = (
+				5CBD7DBB2C98D7D500750B17 /* openapi-generator-config.yaml */,
+				5CBD7DBA2C98D7D500750B17 /* openapi.yaml */,
+				5C3829BA2C98BF69006885DF /* AgenticSystem */,
+				5C3829B32C98BF69006885DF /* Inference */,
+				5C3829A62C98BF4A006885DF /* LlamaStack.h */,
+			);
+			path = LlamaStack;
+			sourceTree = "<group>";
+		};
+		5C3829B32C98BF69006885DF /* Inference */ = {
+			isa = PBXGroup;
+			children = (
+				5C3829AD2C98BF69006885DF /* InferenceService.swift */,
+				5C3829AE2C98BF69006885DF /* LocalInferenceService.swift */,
+				5C3829AF2C98BF69006885DF /* Parsing.swift */,
+				5C3829B02C98BF69006885DF /* PromptTemplate.swift */,
+				5C3829B12C98BF69006885DF /* RemoteInferenceService.swift */,
+				5C3829B22C98BF69006885DF /* SystemPrompts.swift */,
+			);
+			path = Inference;
+			sourceTree = "<group>";
+		};
+		5C3829BA2C98BF69006885DF /* AgenticSystem */ = {
+			isa = PBXGroup;
+			children = (
+				5C3829B42C98BF69006885DF /* AgenticSystemService.swift */,
+				5C3829B52C98BF69006885DF /* ChatAgent.swift */,
+				5C3829B62C98BF69006885DF /* CustomTools.swift */,
+				5C3829B72C98BF69006885DF /* LocalAgenticSystemService.swift */,
+				5C3829B82C98BF69006885DF /* RemoteAgenticSystemService.swift */,
+				5C3829B92C98BF69006885DF /* TypeExtensions.swift */,
+			);
+			path = AgenticSystem;
+			sourceTree = "<group>";
+		};
+		5C3829D62C98C0C1006885DF /* LLaMARunner */ = {
+			isa = PBXGroup;
+			children = (
+				5C0340F22C98C8E2004A8D36 /* Exported */,
+				5C0340AA2C98C6B4004A8D36 /* runner */,
+				5C0340AF2C98C6FC004A8D36 /* sampler */,
+				5C0340B42C98C71E004A8D36 /* tokenizer */,
+			);
+			path = LLaMARunner;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5C38299E2C98BF4A006885DF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C3829A72C98BF4A006885DF /* LlamaStack.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C3829D02C98C0C1006885DF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C0340F52C98C900004A8D36 /* LLaMARunner.h in Headers */,
+				5C3C73962C98D9A5004FB7A8 /* llava_runner.h in Headers */,
+				5C0340BF2C98C7EF004A8D36 /* text_prefiller.h in Headers */,
+				5C0340BE2C98C7EF004A8D36 /* text_decoder_runner.h in Headers */,
+				5C0340C52C98C825004A8D36 /* sampler.h in Headers */,
+				5C0340D62C98C872004A8D36 /* llama_tiktoken.h in Headers */,
+				5C0340C22C98C80E004A8D36 /* util.h in Headers */,
+				5C0340D02C98C85F004A8D36 /* tokenizer.h in Headers */,
+				5C0340D12C98C85F004A8D36 /* tiktoken.h in Headers */,
+				5C0340B72C98C7D4004A8D36 /* runner.h in Headers */,
+				5C0340C82C98C839004A8D36 /* base64.h in Headers */,
+				5C0340CB2C98C84C004A8D36 /* bpe_tokenizer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5C3829A22C98BF4A006885DF /* LlamaStack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C3829AA2C98BF4A006885DF /* Build configuration list for PBXNativeTarget "LlamaStack" */;
+			buildPhases = (
+				5C38299E2C98BF4A006885DF /* Headers */,
+				5C38299F2C98BF4A006885DF /* Sources */,
+				5C3829A02C98BF4A006885DF /* Frameworks */,
+				5C3829A12C98BF4A006885DF /* Resources */,
+				5C0340FB2C98C910004A8D36 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C0341002C98CC66004A8D36 /* PBXTargetDependency */,
+				5C0340FA2C98C910004A8D36 /* PBXTargetDependency */,
+			);
+			name = LlamaStack;
+			packageProductDependencies = (
+				5C3829C82C98BFB0006885DF /* OpenAPIRuntime */,
+				5C3829CB2C98BFCF006885DF /* Stencil */,
+				5C3829CE2C98BFEA006885DF /* OpenAPIURLSession */,
+			);
+			productName = LlamaStack;
+			productReference = 5C3829A32C98BF4A006885DF /* LlamaStack.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5C3829D42C98C0C1006885DF /* LLaMARunner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C3829D92C98C0C1006885DF /* Build configuration list for PBXNativeTarget "LLaMARunner" */;
+			buildPhases = (
+				5C03408D2C98C52F004A8D36 /* Build Cmake Dependencies */,
+				5C3829D02C98C0C1006885DF /* Headers */,
+				5C3829D12C98C0C1006885DF /* Sources */,
+				5C3829D22C98C0C1006885DF /* Frameworks */,
+				5C3829D32C98C0C1006885DF /* Resources */,
+				5C3C739D2C98E04D004FB7A8 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LLaMARunner;
+			packageProductDependencies = (
+			);
+			productName = LLaMARunner;
+			productReference = 5C3829D52C98C0C1006885DF /* LLaMARunner.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5C38299A2C98BF4A006885DF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					5C3829A22C98BF4A006885DF = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					5C3829D42C98C0C1006885DF = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = 5C38299D2C98BF4A006885DF /* Build configuration list for PBXProject "LlamaStack" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5C3829992C98BF4A006885DF;
+			packageReferences = (
+				5C3829C72C98BFB0006885DF /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */,
+				5C3829CA2C98BFCF006885DF /* XCRemoteSwiftPackageReference "Stencil" */,
+				5C3829CD2C98BFEA006885DF /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */,
+				5C0340FE2C98CC5F004A8D36 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */,
+			);
+			productRefGroup = 5C3829A42C98BF4A006885DF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C3829A22C98BF4A006885DF /* LlamaStack */,
+				5C3829D42C98C0C1006885DF /* LLaMARunner */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5C3829A12C98BF4A006885DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CBD7DBC2C98D7D500750B17 /* openapi.yaml in Resources */,
+				5CBD7DBD2C98D7D500750B17 /* openapi-generator-config.yaml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C3829D32C98C0C1006885DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5C03408D2C98C52F004A8D36 /* Build Cmake Dependencies */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Cmake Dependencies";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/newOutputFile",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# TODO: Figure out why Xcode can't find cmake\nexport PATH=\"$HOME/homebrew/bin:$HOME/homebrew/sbin:$PATH\"\n\nif ! command -v cmake &> /dev/null\nthen\n    echo \"cmake not found, please install cmake.\"\n    exit 1\nfi\n\nCMAKE_DIR=\"$TEMP_DIR/cmake\"\nrm -rf \"$CMAKE_DIR\"\n\nPLATFORM=\"SIMULATORARM64\"\nDEPLOYMENT_TARGET=\"17.0\"\n\nif [[ \"$PLATFORM_NAME\" == *\"iphoneos\"* ]]; then\n  PLATFORM=\"OS64\"\nelif [[ \"$PLATFORM_NAME\" == *\"macos\"* ]]; then\n  PLATFORM=\"MAC_ARM64\"\n  DEPLOYMENT_TARGET=\"10.15\"\nfi\n\ncmake_build() {\n    local src_dir=$1\n    shift\n    local extra_args=(\"$@\")\n    local build_dir=\"$CMAKE_DIR/build/$(basename \"$src_dir\")\"\n\n    mkdir -p \"$build_dir\" && cd \"$build_dir\"\n    cmake -G Xcode \\\n          -DCMAKE_BUILD_TYPE=\"Release\" \\\n          -DCMAKE_CXX_STANDARD=17 \\\n          -DCMAKE_TOOLCHAIN_FILE=\"$SRCROOT/../executorch/third-party/ios-cmake/ios.toolchain.cmake\" \\\n          -DCMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LANGUAGE_STANDARD=\"c++17\" \\\n          -DCMAKE_XCODE_ATTRIBUTE_CLANG_CXX_LIBRARY=\"libc++\" \\\n          -DPLATFORM=\"$PLATFORM\" \\\n          -DDEPLOYMENT_TARGET=\"$DEPLOYMENT_TARGET\" \\\n          \"${extra_args[@]}\" \\\n          \"$src_dir\"\n    cmake --build . --config \"Release\"\n    cmake --install . --prefix \"$CMAKE_DIR\"\n}\n\ncmake_build \"$SRCROOT/../executorch/extension/llm/third-party/abseil-cpp\" \\\n    -DABSL_PROPAGATE_CXX_STD=ON\n\ncmake_build \"$SRCROOT/../executorch/extension/llm/third-party/re2\" \\\n    -DCMAKE_PREFIX_PATH=\"$CMAKE_DIR/lib/cmake/absl\"\n    \ncmake_build \"$SRCROOT/../executorch/extension/llm/third-party/sentencepiece\" \\\n    -DSPM_ENABLE_SHARED=OFF\n\necho \"$(find $CMAKE_DIR/lib -name \"*.a\" | sed -E 's|^.*/lib([^/]+)\\.a|-l\\1|g' | tr '\\n' ' ')\" > \"$CMAKE_DIR/linker_flags\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5C38299F2C98BF4A006885DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C3829C02C98BF69006885DF /* SystemPrompts.swift in Sources */,
+				5C3829C52C98BF69006885DF /* RemoteAgenticSystemService.swift in Sources */,
+				5C3829C22C98BF69006885DF /* ChatAgent.swift in Sources */,
+				5C3829BB2C98BF69006885DF /* InferenceService.swift in Sources */,
+				5C3829BE2C98BF69006885DF /* PromptTemplate.swift in Sources */,
+				5C3829C62C98BF69006885DF /* TypeExtensions.swift in Sources */,
+				5C3829C32C98BF69006885DF /* CustomTools.swift in Sources */,
+				5C3829BF2C98BF69006885DF /* RemoteInferenceService.swift in Sources */,
+				5C3829C12C98BF69006885DF /* AgenticSystemService.swift in Sources */,
+				5C3829BD2C98BF69006885DF /* Parsing.swift in Sources */,
+				5C3829C42C98BF69006885DF /* LocalAgenticSystemService.swift in Sources */,
+				5C3829BC2C98BF69006885DF /* LocalInferenceService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C3829D12C98C0C1006885DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C0340E12C98C8BC004A8D36 /* runner.cpp in Sources */,
+				5C3C73952C98D9A5004FB7A8 /* llava_runner.cpp in Sources */,
+				5C0340E32C98C8BC004A8D36 /* text_decoder_runner.cpp in Sources */,
+				5C0340E52C98C8BC004A8D36 /* text_prefiller.cpp in Sources */,
+				5C0340E82C98C8BC004A8D36 /* sampler.cpp in Sources */,
+				5C0340EA2C98C8BC004A8D36 /* llama_tiktoken.cpp in Sources */,
+				5C0340EC2C98C8BC004A8D36 /* tiktoken.cpp in Sources */,
+				5C0340EF2C98C8BC004A8D36 /* bpe_tokenizer.cpp in Sources */,
+				5C0340F62C98C900004A8D36 /* LLaMARunner.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5C0340FA2C98C910004A8D36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 5C3829D42C98C0C1006885DF /* LLaMARunner */;
+			targetProxy = 5C0340F92C98C910004A8D36 /* PBXContainerItemProxy */;
+		};
+		5C0341002C98CC66004A8D36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 5C0340FF2C98CC66004A8D36 /* OpenAPIGenerator */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5C3829A82C98BF4A006885DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5C3829A92C98BF4A006885DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5C3829AB2C98BF4A006885DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = meta.LlamaStack;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5C3829AC2C98BF4A006885DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = meta.LlamaStack;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5C3829DA2C98C0C1006885DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"ET_USE_TIKTOKEN=1",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../\"",
+					"\"$(TEMP_DIR)/cmake/include\"",
+				);
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "\"$(TEMP_DIR)/cmake/lib\"";
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "@$(TEMP_DIR)/cmake/linker_flags";
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "@$(TEMP_DIR)/cmake/linker_flags";
+				PRODUCT_BUNDLE_IDENTIFIER = meta.LLaMARunner;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5C3829DB2C98C0C1006885DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "ET_USE_TIKTOKEN=1";
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../\"",
+					"\"$(TEMP_DIR)/cmake/include\"",
+				);
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "\"$(TEMP_DIR)/cmake/lib\"";
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "@$(TEMP_DIR)/cmake/linker_flags";
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "@$(TEMP_DIR)/cmake/linker_flags";
+				PRODUCT_BUNDLE_IDENTIFIER = meta.LLaMARunner;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C38299D2C98BF4A006885DF /* Build configuration list for PBXProject "LlamaStack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C3829A82C98BF4A006885DF /* Debug */,
+				5C3829A92C98BF4A006885DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C3829AA2C98BF4A006885DF /* Build configuration list for PBXNativeTarget "LlamaStack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C3829AB2C98BF4A006885DF /* Debug */,
+				5C3829AC2C98BF4A006885DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C3829D92C98C0C1006885DF /* Build configuration list for PBXNativeTarget "LLaMARunner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C3829DA2C98C0C1006885DF /* Debug */,
+				5C3829DB2C98C0C1006885DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5C0340FE2C98CC5F004A8D36 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-generator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
+		5C3829C72C98BFB0006885DF /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-runtime";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
+		5C3829CA2C98BFCF006885DF /* XCRemoteSwiftPackageReference "Stencil" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stencilproject/Stencil";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.1;
+			};
+		};
+		5C3829CD2C98BFEA006885DF /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-openapi-urlsession";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5C0340FF2C98CC66004A8D36 /* OpenAPIGenerator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C0340FE2C98CC5F004A8D36 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */;
+			productName = "plugin:OpenAPIGenerator";
+		};
+		5C3829C82C98BFB0006885DF /* OpenAPIRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C3829C72C98BFB0006885DF /* XCRemoteSwiftPackageReference "swift-openapi-runtime" */;
+			productName = OpenAPIRuntime;
+		};
+		5C3829CB2C98BFCF006885DF /* Stencil */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C3829CA2C98BFCF006885DF /* XCRemoteSwiftPackageReference "Stencil" */;
+			productName = Stencil;
+		};
+		5C3829CE2C98BFEA006885DF /* OpenAPIURLSession */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5C3829CD2C98BFEA006885DF /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */;
+			productName = OpenAPIURLSession;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 5C38299A2C98BF4A006885DF /* Project object */;
+}

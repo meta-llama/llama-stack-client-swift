@@ -1,0 +1,6 @@
+xcuserdata/
+*.hmap
+.DS_Store
+.build/
+Package.resolved
+*.pte
