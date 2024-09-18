@@ -31,7 +31,7 @@ public class LocalAgenticSystemService: AgenticSystemService {
     }
   }
   
-  public func create(request: Components.Schemas.CreateAgenticSystemRequest) async throws -> Components.Schemas.AgenticSystemCreateResponse {
+  public func create(request: Components.Schemas.CreateAgentRequest) async throws -> Components.Schemas.AgentCreateResponse {
     let agentId = UUID().uuidString
     let agent = ChatAgent(
       agentConfig: request.agent_config,
@@ -40,18 +40,18 @@ public class LocalAgenticSystemService: AgenticSystemService {
     
     agents[agentId] = agent
     
-    return Components.Schemas.AgenticSystemCreateResponse(agent_id: agentId)
+    return Components.Schemas.AgentCreateResponse(agent_id: agentId)
   }
   
-  public func createSession(request: Components.Schemas.CreateAgenticSystemSessionRequest) async throws -> Components.Schemas.AgenticSystemSessionCreateResponse {
+  public func createSession(request: Components.Schemas.CreateAgentSessionRequest) async throws -> Components.Schemas.AgentSessionCreateResponse {
     let agent = agents[request.agent_id]
     let session = agent!.createSession(name: request.session_name)
-    return Components.Schemas.AgenticSystemSessionCreateResponse(
+    return Components.Schemas.AgentSessionCreateResponse(
       session_id: session.session_id
     )
   }
   
-  public func createTurn(request: Components.Schemas.CreateAgenticSystemTurnRequest) async throws -> AsyncStream<Components.Schemas.AgenticSystemTurnResponseStreamChunk> {
+  public func createTurn(request: Components.Schemas.CreateAgentTurnRequest) async throws -> AsyncStream<Components.Schemas.AgentTurnResponseStreamChunk> {
     let agent = agents[request.agent_id]!
     return try await agent.createAndExecuteTurn(request: request)
   }

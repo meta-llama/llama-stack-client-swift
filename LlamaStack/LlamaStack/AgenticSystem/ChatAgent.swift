@@ -31,16 +31,16 @@ class ChatAgent {
     return session
   }
   
-  public func createAndExecuteTurn(request: Components.Schemas.CreateAgenticSystemTurnRequest) async throws -> AsyncStream<Components.Schemas.AgenticSystemTurnResponseStreamChunk> {
-    return AsyncStream<Components.Schemas.AgenticSystemTurnResponseStreamChunk> { continuation in
+  public func createAndExecuteTurn(request: Components.Schemas.CreateAgentTurnRequest) async throws -> AsyncStream<Components.Schemas.AgentTurnResponseStreamChunk> {
+    return AsyncStream<Components.Schemas.AgentTurnResponseStreamChunk> { continuation in
       Task {
         let session = sessions[request.session_id]
         let turnId = UUID().uuidString
         let startTime = Date()
         
         continuation.yield(
-          Components.Schemas.AgenticSystemTurnResponseStreamChunk(event: Components.Schemas.AgenticSystemTurnResponseEvent(payload:
-              .AgenticSystemTurnResponseTurnStartPayload(Components.Schemas.AgenticSystemTurnResponseTurnStartPayload(
+          Components.Schemas.AgentTurnResponseStreamChunk(event: Components.Schemas.AgentTurnResponseEvent(payload:
+              .AgentTurnResponseTurnStartPayload(Components.Schemas.AgentTurnResponseTurnStartPayload(
                 event_type: .turn_start,
                 turn_id: turnId
               ))
@@ -63,11 +63,11 @@ class ChatAgent {
         ) {
           let payload = chunk.event.payload
           switch (payload) {
-          case .AgenticSystemTurnResponseStepStartPayload(_):
+          case .AgentTurnResponseStepStartPayload(_):
             break
-          case .AgenticSystemTurnResponseStepProgressPayload(let step):
+          case .AgentTurnResponseStepProgressPayload(let step):
             break
-          case .AgenticSystemTurnResponseStepCompletePayload(let step):
+          case .AgentTurnResponseStepCompletePayload(let step):
             switch (step.step_details) {
             case .InferenceStep(let step):
               outputMessage = step.model_response
@@ -78,9 +78,9 @@ class ChatAgent {
             case .MemoryRetrievalStep(_):
               break
             }
-          case .AgenticSystemTurnResponseTurnStartPayload(_):
+          case .AgentTurnResponseTurnStartPayload(_):
             break
-          case .AgenticSystemTurnResponseTurnCompletePayload(_):
+          case .AgentTurnResponseTurnCompletePayload(_):
             break
           }
           
@@ -103,10 +103,10 @@ class ChatAgent {
         }
         
         continuation.yield(
-          Components.Schemas.AgenticSystemTurnResponseStreamChunk(
-            event: Components.Schemas.AgenticSystemTurnResponseEvent(
+          Components.Schemas.AgentTurnResponseStreamChunk(
+            event: Components.Schemas.AgentTurnResponseEvent(
               payload:
-                  .AgenticSystemTurnResponseTurnCompletePayload(Components.Schemas.AgenticSystemTurnResponseTurnCompletePayload(
+                  .AgentTurnResponseTurnCompletePayload(Components.Schemas.AgentTurnResponseTurnCompletePayload(
                     event_type: .turn_complete,
                     turn: turn))
             )
@@ -123,8 +123,8 @@ class ChatAgent {
     attachments: [Components.Schemas.Attachment],
     samplingParams: Components.Schemas.SamplingParams?,
     stream: Bool = false
-  ) -> AsyncStream<Components.Schemas.AgenticSystemTurnResponseStreamChunk> {
-    return AsyncStream<Components.Schemas.AgenticSystemTurnResponseStreamChunk> { continuation in
+  ) -> AsyncStream<Components.Schemas.AgentTurnResponseStreamChunk> {
+    return AsyncStream<Components.Schemas.AgentTurnResponseStreamChunk> { continuation in
       Task {
         for try await chunk in try await inferenceApi.chatCompletion(
           request: Components.Schemas.ChatCompletionRequest(
@@ -137,11 +137,11 @@ class ChatAgent {
           switch(chunk.event.delta) {
           case .case1(let s):
             continuation.yield(
-              Components.Schemas.AgenticSystemTurnResponseStreamChunk(
-                event: Components.Schemas.AgenticSystemTurnResponseEvent(
+              Components.Schemas.AgentTurnResponseStreamChunk(
+                event: Components.Schemas.AgentTurnResponseEvent(
                   payload:
-                      .AgenticSystemTurnResponseStepProgressPayload(
-                        Components.Schemas.AgenticSystemTurnResponseStepProgressPayload(
+                      .AgentTurnResponseStepProgressPayload(
+                        Components.Schemas.AgentTurnResponseStepProgressPayload(
                           event_type: .step_progress,
                           model_response_text_delta: s,
                           step_id: UUID().uuidString,
@@ -153,11 +153,11 @@ class ChatAgent {
             )
           case .ToolCallDelta(let toolDelta):
             continuation.yield(
-              Components.Schemas.AgenticSystemTurnResponseStreamChunk(
-                event: Components.Schemas.AgenticSystemTurnResponseEvent(
+              Components.Schemas.AgentTurnResponseStreamChunk(
+                event: Components.Schemas.AgentTurnResponseEvent(
                   payload:
-                      .AgenticSystemTurnResponseStepProgressPayload(
-                        Components.Schemas.AgenticSystemTurnResponseStepProgressPayload(
+                      .AgentTurnResponseStepProgressPayload(
+                        Components.Schemas.AgentTurnResponseStepProgressPayload(
                           event_type: .step_progress,
                           step_id: UUID().uuidString,
                           step_type: .inference,

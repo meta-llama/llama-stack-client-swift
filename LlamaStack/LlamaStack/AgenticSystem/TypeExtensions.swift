@@ -3,7 +3,7 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 
 public extension Components.Schemas.ChatCompletionRequest.messagesPayloadPayload {
-  func toAgenticSystemTurnCreateRequest() -> Components.Schemas.CreateAgenticSystemTurnRequest.messagesPayloadPayload? {
+  func toAgenticSystemTurnCreateRequest() -> Components.Schemas.CreateAgentTurnRequest.messagesPayloadPayload? {
     switch self {
     case .UserMessage(let userMessage):
       return .UserMessage(userMessage)
@@ -15,7 +15,7 @@ public extension Components.Schemas.ChatCompletionRequest.messagesPayloadPayload
   }
 }
 
-public extension Components.Schemas.CreateAgenticSystemTurnRequest.messagesPayloadPayload {
+public extension Components.Schemas.CreateAgentTurnRequest.messagesPayloadPayload {
   func toChatCompletionRequest() -> Components.Schemas.ChatCompletionRequest.messagesPayloadPayload {
     switch self {
     case .UserMessage(let userMessage):

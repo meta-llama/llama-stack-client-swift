@@ -3,8 +3,8 @@
 set -euo pipefail
 
 cd llama-stack/
-bash ./rfcs/openapi_generator/run_openapi_generator.sh ../LlamaStack/LlamaStack
-cd ../LlamaStack/LlamaStack
+bash ./rfcs/openapi_generator/run_openapi_generator.sh ../LlamaStack
+cd ../LlamaStack
 
 OPENAPI_FILE="llama-stack-spec.yaml"
 
