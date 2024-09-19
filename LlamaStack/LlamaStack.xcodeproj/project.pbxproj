@@ -19,8 +19,8 @@
 		5C3829C12C98BF69006885DF /* AgenticSystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B42C98BF69006885DF /* AgenticSystemService.swift */; };
 		5C3829C22C98BF69006885DF /* ChatAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B52C98BF69006885DF /* ChatAgent.swift */; };
 		5C3829C32C98BF69006885DF /* CustomTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B62C98BF69006885DF /* CustomTools.swift */; };
-		5C3829C42C98BF69006885DF /* LocalAgenticSystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B72C98BF69006885DF /* LocalAgenticSystemService.swift */; };
-		5C3829C52C98BF69006885DF /* RemoteAgenticSystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B82C98BF69006885DF /* RemoteAgenticSystemService.swift */; };
+		5C3829C42C98BF69006885DF /* LocalAgentsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B72C98BF69006885DF /* LocalAgentsService.swift */; };
+		5C3829C52C98BF69006885DF /* RemoteAgentsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B82C98BF69006885DF /* RemoteAgentsService.swift */; };
 		5C3829C62C98BF69006885DF /* TypeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3829B92C98BF69006885DF /* TypeExtensions.swift */; };
 		5C3829C92C98BFB0006885DF /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 5C3829C82C98BFB0006885DF /* OpenAPIRuntime */; };
 		5C3829CC2C98BFCF006885DF /* Stencil in Frameworks */ = {isa = PBXBuildFile; productRef = 5C3829CB2C98BFCF006885DF /* Stencil */; };
@@ -101,8 +101,8 @@
 		5C3829B42C98BF69006885DF /* AgenticSystemService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgenticSystemService.swift; sourceTree = "<group>"; };
 		5C3829B52C98BF69006885DF /* ChatAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAgent.swift; sourceTree = "<group>"; };
 		5C3829B62C98BF69006885DF /* CustomTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTools.swift; sourceTree = "<group>"; };
-		5C3829B72C98BF69006885DF /* LocalAgenticSystemService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAgenticSystemService.swift; sourceTree = "<group>"; };
-		5C3829B82C98BF69006885DF /* RemoteAgenticSystemService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteAgenticSystemService.swift; sourceTree = "<group>"; };
+		5C3829B72C98BF69006885DF /* LocalAgentsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalAgentsService.swift; sourceTree = "<group>"; };
+		5C3829B82C98BF69006885DF /* RemoteAgentsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteAgentsService.swift; sourceTree = "<group>"; };
 		5C3829B92C98BF69006885DF /* TypeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeExtensions.swift; sourceTree = "<group>"; };
 		5C3829D52C98C0C1006885DF /* LLaMARunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LLaMARunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C3C739A2C98E04D004FB7A8 /* executorch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = executorch.xcframework; path = ../executorch_products_2b3cc27/executorch.xcframework; sourceTree = "<group>"; };
@@ -218,8 +218,8 @@
 				5C3829B42C98BF69006885DF /* AgenticSystemService.swift */,
 				5C3829B52C98BF69006885DF /* ChatAgent.swift */,
 				5C3829B62C98BF69006885DF /* CustomTools.swift */,
-				5C3829B72C98BF69006885DF /* LocalAgenticSystemService.swift */,
-				5C3829B82C98BF69006885DF /* RemoteAgenticSystemService.swift */,
+				5C3829B72C98BF69006885DF /* LocalAgentsService.swift */,
+				5C3829B82C98BF69006885DF /* RemoteAgentsService.swift */,
 				5C3829B92C98BF69006885DF /* TypeExtensions.swift */,
 			);
 			path = AgenticSystem;
@@ -425,7 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C3829C02C98BF69006885DF /* SystemPrompts.swift in Sources */,
-				5C3829C52C98BF69006885DF /* RemoteAgenticSystemService.swift in Sources */,
+				5C3829C52C98BF69006885DF /* RemoteAgentsService.swift in Sources */,
 				5C3829C22C98BF69006885DF /* ChatAgent.swift in Sources */,
 				5C3829BB2C98BF69006885DF /* InferenceService.swift in Sources */,
 				5C3829BE2C98BF69006885DF /* PromptTemplate.swift in Sources */,
@@ -434,7 +434,7 @@
 				5C3829BF2C98BF69006885DF /* RemoteInferenceService.swift in Sources */,
 				5C3829C12C98BF69006885DF /* AgenticSystemService.swift in Sources */,
 				5C3829BD2C98BF69006885DF /* Parsing.swift in Sources */,
-				5C3829C42C98BF69006885DF /* LocalAgenticSystemService.swift in Sources */,
+				5C3829C42C98BF69006885DF /* LocalAgentsService.swift in Sources */,
 				5C3829BC2C98BF69006885DF /* LocalInferenceService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

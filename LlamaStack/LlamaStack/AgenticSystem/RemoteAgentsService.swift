@@ -8,9 +8,38 @@ public class RemoteAgentsService: AgentsService {
   private let client: Client
   private let encoder = JSONEncoder()
   
-  public init (url: URL) {
-    self.url = url
+  public init () {
+    self.url = URL(string: "http://192.168.1.126:5001")!
     self.client = Client(serverURL: url, transport: URLSessionTransport())
+  }
+  
+  public func initAndCreateTurn(
+    messages: [Components.Schemas.CreateAgentTurnRequest.messagesPayloadPayload]
+  ) async throws -> AsyncStream<Components.Schemas.AgentTurnResponseStreamChunk> {
+    let createSystemResponse = try await create(
+      request: Components.Schemas.CreateAgentRequest(
+        agent_config: Components.Schemas.AgentConfig(
+          instructions: "You are a pirate",
+          model: "Meta-Llama3.1-8B-Instruct",
+          tools: []
+        )
+      )
+    )
+    let agentId = createSystemResponse.agent_id
+    
+    let createSessionResponse = try await createSession(
+      request: Components.Schemas.CreateAgentSessionRequest(agent_id: agentId, session_name: "pocket-llama")
+    )
+    let agenticSystemSessionId = createSessionResponse.session_id
+    
+    let request1 = Components.Schemas.CreateAgentTurnRequest(
+      agent_id: agentId,
+      messages: messages,
+      session_id: agenticSystemSessionId,
+      stream: true
+    )
+    
+    return try await createTurn(request: request1)
   }
   
   public func create(request: Components.Schemas.CreateAgentRequest) async throws -> Components.Schemas.AgentCreateResponse {
