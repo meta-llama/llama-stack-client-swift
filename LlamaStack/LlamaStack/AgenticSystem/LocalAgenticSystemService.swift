@@ -2,7 +2,7 @@ import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
 
-public class LocalAgenticSystemService: AgenticSystemService {
+public class LocalAgentsService: AgentsService {
   
   let inferenceService: InferenceService
   var agents: [String: ChatAgent] = [:]

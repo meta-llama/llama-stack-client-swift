@@ -2,7 +2,7 @@ import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
 
-public protocol AgenticSystemService {
+public protocol AgentsService {
   func create(request: Components.Schemas.CreateAgentRequest) async throws -> Components.Schemas.AgentCreateResponse
   
   func createSession(request: Components.Schemas.CreateAgentSessionRequest) async throws -> Components.Schemas.AgentSessionCreateResponse

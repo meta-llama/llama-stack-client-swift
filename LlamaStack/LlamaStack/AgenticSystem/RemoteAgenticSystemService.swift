@@ -2,7 +2,7 @@ import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
 
-public class RemoteAgenticSystemService: AgenticSystemService {
+public class RemoteAgentsService: AgentsService {
   
   private let url: URL
   private let client: Client
