@@ -8,8 +8,8 @@ public class RemoteAgentsService: AgentsService {
   private let client: Client
   private let encoder = JSONEncoder()
   
-  public init () {
-    self.url = URL(string: "http://192.168.1.126:5001")!
+  public init (url: URL) {
+    self.url = url
     self.client = Client(serverURL: url, transport: URLSessionTransport())
   }
   
