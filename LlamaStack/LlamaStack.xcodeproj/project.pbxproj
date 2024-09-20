@@ -105,7 +105,6 @@
 		5C3829B82C98BF69006885DF /* RemoteAgentsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteAgentsService.swift; sourceTree = "<group>"; };
 		5C3829B92C98BF69006885DF /* TypeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeExtensions.swift; sourceTree = "<group>"; };
 		5C3829D52C98C0C1006885DF /* LLaMARunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LLaMARunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C3C739A2C98E04D004FB7A8 /* executorch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = executorch.xcframework; path = ../executorch_products_2b3cc27/executorch.xcframework; sourceTree = "<group>"; };
 		5C3C73F52C99223A004FB7A8 /* text_prefiller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = text_prefiller.cpp; path = ../../executorch/extension/llm/runner/text_prefiller.cpp; sourceTree = "<group>"; };
 		5C3C73F62C99223A004FB7A8 /* text_prefiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = text_prefiller.h; path = ../../executorch/extension/llm/runner/text_prefiller.h; sourceTree = "<group>"; };
 		5C3C73F72C99223A004FB7A8 /* text_token_generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = text_token_generator.h; path = ../../executorch/extension/llm/runner/text_token_generator.h; sourceTree = "<group>"; };
@@ -163,7 +162,6 @@
 			children = (
 				5C3C74362C993266004FB7A8 /* executorch.xcframework */,
 				5C3C74132C992451004FB7A8 /* CoreFoundation.framework */,
-				5C3C739A2C98E04D004FB7A8 /* executorch.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
