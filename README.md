@@ -6,8 +6,8 @@ llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](h
 
 ## Features
 
-- **Local Inference & Agents:** Run Llama completely on-device via [executorch](https://github.com/pytorch/executorch)).
-- **Remote Inference & Agents:** Leverage a remote Llama Stack distribution for larger models, executing code remotely, and remote safety.
+- **Local Inference & Agents:** Run Llama completely on-device via [executorch](https://github.com/pytorch/executorch).
+- **Remote Inference & Agents:** Leverage a remote Llama Stack distribution for larger models, code execution, and safety.
 - **Custom Tool Calling:**  Provide Swift tools that Llama agents can understand and use.
 
 ## Installation
@@ -18,11 +18,11 @@ llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](h
 
 ![Drag the xcodeproj to the Project navigator](docs/drag_xcodeproj.png)
 
-3. In Targets, add a Framework:
+3. In the app's targets, add a framework:
 
 ![Frameworks in the App Target](docs/app_frameworks.png)
 
-4. Select and add the LlamaStack framework to your Project
+4. Select and add the LlamaStack framework
 
 ![Adding LlamaStack framework to the app target](docs/add_llamastack.png)
 
