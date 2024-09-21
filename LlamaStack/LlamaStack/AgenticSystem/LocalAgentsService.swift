@@ -3,31 +3,19 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 
 public class LocalAgentsService: AgentsService {
-  
-  let inferenceService: InferenceService
+  let inferenceService = LocalInferenceService()
   var agents: [String: ChatAgent] = [:]
   
-  public init (localInference: Bool = true) {
-    if (localInference) {
-      self.inferenceService = LocalInferenceService()
-    } else {
-      self.inferenceService = RemoteInferenceService()
-    }
-  }
+  public init () {}
   
   public func loadModel(modelPath: String, tokenizerPath: String, completion: @escaping (Result<Void, Error>) -> Void) {
-    if (inferenceService is LocalInferenceService) {
-      let localInferenceService = inferenceService as! LocalInferenceService
-      localInferenceService.loadModel(modelPath: modelPath, tokenizerPath: tokenizerPath) { result in
-        switch result {
-        case .success:
-          completion(.success(()))
-        case .failure(let error):
-          completion(.failure(error))
-        }
+    inferenceService.loadModel(modelPath: modelPath, tokenizerPath: tokenizerPath) { result in
+      switch result {
+      case .success:
+        completion(.success(()))
+      case .failure(let error):
+        completion(.failure(error))
       }
-    } else {
-      completion(.success(()))
     }
   }
   

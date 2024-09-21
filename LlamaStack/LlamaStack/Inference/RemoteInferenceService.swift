@@ -3,10 +3,14 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 
 public class RemoteInferenceService: InferenceService {
-  private let client = Client(serverURL: URL(string: "http://127.0.0.1:5001")!, transport: URLSessionTransport())
+  private let url: URL
+  private let client: Client
   private let encoder = JSONEncoder()
   
-  public init () {}
+  public init (url: URL) {
+    self.url = url
+    self.client = Client(serverURL: url, transport: URLSessionTransport())
+  }
   
   public func chatCompletion(request: Components.Schemas.ChatCompletionRequest) async throws -> AsyncStream<Components.Schemas.ChatCompletionResponseStreamChunk> {
     assert(request.stream == true, "Only supports streaming right now")
