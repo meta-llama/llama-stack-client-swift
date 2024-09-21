@@ -40,7 +40,7 @@
 		5C3C74102C9922B0004FB7A8 /* llama_tiktoken.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C3C740E2C9922B0004FB7A8 /* llama_tiktoken.h */; };
 		5C3C74112C9922B0004FB7A8 /* llama_tiktoken.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C740F2C9922B0004FB7A8 /* llama_tiktoken.cpp */; };
 		5C3C74142C992451004FB7A8 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C74132C992451004FB7A8 /* CoreFoundation.framework */; };
-		5C3C74182C99247B004FB7A8 /* LLaMARunner.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C3C74162C99247B004FB7A8 /* LLaMARunner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+			5C3C74182C99247B004FB7A8 /* LLaMARunner.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C3C74162C99247B004FB7A8 /* LLaMARunner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5C3C74192C99247B004FB7A8 /* LLaMARunner.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C74172C99247B004FB7A8 /* LLaMARunner.mm */; };
 		5C3C741D2C9924D9004FB7A8 /* llava_runner.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C3C741B2C9924D9004FB7A8 /* llava_runner.h */; };
 		5C3C741E2C9924D9004FB7A8 /* llava_runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C741C2C9924D9004FB7A8 /* llava_runner.cpp */; };
@@ -48,10 +48,9 @@
 		5C3C74232C99256D004FB7A8 /* bpe_tokenizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C74212C99256D004FB7A8 /* bpe_tokenizer.cpp */; };
 		5C3C74272C992687004FB7A8 /* runner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C74252C992687004FB7A8 /* runner.cpp */; };
 		5C3C74282C992687004FB7A8 /* runner.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C3C74262C992687004FB7A8 /* runner.h */; };
-		5C3C74372C993266004FB7A8 /* executorch.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C74362C993266004FB7A8 /* executorch.xcframework */; };
-		5C3C74382C993266004FB7A8 /* executorch.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3C74362C993266004FB7A8 /* executorch.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5CBD7DBC2C98D7D500750B17 /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 5CBD7DBA2C98D7D500750B17 /* openapi.yaml */; };
 		5CBD7DBD2C98D7D500750B17 /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 5CBD7DBB2C98D7D500750B17 /* openapi-generator-config.yaml */; };
+		5CCEBC1B2C9F4F8A00B1861E /* executorch_debug in Frameworks */ = {isa = PBXBuildFile; productRef = 5CCEBC1A2C9F4F8A00B1861E /* executorch_debug */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,17 +71,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				5C0340F82C98C910004A8D36 /* LLaMARunner.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5C3C74392C993266004FB7A8 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				5C3C74382C993266004FB7A8 /* executorch.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,7 +108,7 @@
 		5C3C740E2C9922B0004FB7A8 /* llama_tiktoken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = llama_tiktoken.h; path = ../../executorch/examples/models/llama2/tokenizer/llama_tiktoken.h; sourceTree = "<group>"; };
 		5C3C740F2C9922B0004FB7A8 /* llama_tiktoken.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = llama_tiktoken.cpp; path = ../../executorch/examples/models/llama2/tokenizer/llama_tiktoken.cpp; sourceTree = "<group>"; };
 		5C3C74132C992451004FB7A8 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		5C3C74162C99247B004FB7A8 /* LLaMARunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLaMARunner.h; path = "../../executorch/examples/demo-apps/apple_ios/LLaMA/LLaMARunner/LLaMARunner/Exported/LLaMARunner.h"; sourceTree = "<group>"; };
+				5C3C74162C99247B004FB7A8 /* LLaMARunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLaMARunner.h; path = "../../executorch/examples/demo-apps/apple_ios/LLaMA/LLaMARunner/LLaMARunner/Exported/LLaMARunner.h"; sourceTree = "<group>"; };
 		5C3C74172C99247B004FB7A8 /* LLaMARunner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LLaMARunner.mm; path = "../../executorch/examples/demo-apps/apple_ios/LLaMA/LLaMARunner/LLaMARunner/Exported/LLaMARunner.mm"; sourceTree = "<group>"; };
 		5C3C741B2C9924D9004FB7A8 /* llava_runner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = llava_runner.h; path = ../../executorch/examples/models/llava/runner/llava_runner.h; sourceTree = "<group>"; };
 		5C3C741C2C9924D9004FB7A8 /* llava_runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = llava_runner.cpp; path = ../../executorch/examples/models/llava/runner/llava_runner.cpp; sourceTree = "<group>"; };
@@ -128,7 +116,6 @@
 		5C3C74212C99256D004FB7A8 /* bpe_tokenizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bpe_tokenizer.cpp; path = ../../executorch/extension/llm/tokenizer/bpe_tokenizer.cpp; sourceTree = "<group>"; };
 		5C3C74252C992687004FB7A8 /* runner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = runner.cpp; path = ../../executorch/examples/models/llama2/runner/runner.cpp; sourceTree = "<group>"; };
 		5C3C74262C992687004FB7A8 /* runner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = runner.h; path = ../../executorch/examples/models/llama2/runner/runner.h; sourceTree = "<group>"; };
-		5C3C74362C993266004FB7A8 /* executorch.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = executorch.xcframework; path = ../executorch_prebuilt/executorch.xcframework; sourceTree = "<group>"; };
 		5CBD7DBA2C98D7D500750B17 /* openapi.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = SOURCE_ROOT; };
 		5CBD7DBB2C98D7D500750B17 /* openapi-generator-config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -149,8 +136,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CCEBC1B2C9F4F8A00B1861E /* executorch_debug in Frameworks */,
 				5C3C74142C992451004FB7A8 /* CoreFoundation.framework in Frameworks */,
-				5C3C74372C993266004FB7A8 /* executorch.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +147,6 @@
 		5C03408A2C98C2FF004A8D36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5C3C74362C993266004FB7A8 /* executorch.xcframework */,
 				5C3C74132C992451004FB7A8 /* CoreFoundation.framework */,
 			);
 			name = Frameworks;
@@ -321,7 +307,6 @@
 				5C3829D12C98C0C1006885DF /* Sources */,
 				5C3829D22C98C0C1006885DF /* Frameworks */,
 				5C3829D32C98C0C1006885DF /* Resources */,
-				5C3C74392C993266004FB7A8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -329,6 +314,7 @@
 			);
 			name = LLaMARunner;
 			packageProductDependencies = (
+				5CCEBC1A2C9F4F8A00B1861E /* executorch_debug */,
 			);
 			productName = LLaMARunner;
 			productReference = 5C3829D52C98C0C1006885DF /* LLaMARunner.framework */;
@@ -365,6 +351,7 @@
 				5C3829CA2C98BFCF006885DF /* XCRemoteSwiftPackageReference "Stencil" */,
 				5C3829CD2C98BFEA006885DF /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */,
 				5C0340FE2C98CC5F004A8D36 /* XCRemoteSwiftPackageReference "swift-openapi-generator" */,
+				5CCEBC192C9F4F8A00B1861E /* XCRemoteSwiftPackageReference "executorch" */,
 			);
 			productRefGroup = 5C3829A42C98BF4A006885DF /* Products */;
 			projectDirPath = "";
@@ -706,15 +693,11 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
-					"@$(TEMP_DIR)/cmake/linker_flags",
-					"-force_load",
-					"$(SRCROOT)/../executorch_prebuilt/executorch.xcframework/ios-arm64/libexecutorch-ios-debug.a",
-				);
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "@$(TEMP_DIR)/cmake/linker_flags";
 				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
 					"@$(TEMP_DIR)/cmake/linker_flags",
 					"-force_load",
-					"$(SRCROOT)/../executorch_prebuilt/executorch.xcframework/ios-arm64-simulator/libexecutorch-simulator-debug.a",
+					"$(BUILT_PRODUCTS_DIR)/libexecutorch-simulator-debug.a",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = meta.LLaMARunner;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -756,16 +739,8 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
-					"@$(TEMP_DIR)/cmake/linker_flags",
-					"-force_load",
-					"$(SRCROOT)/../executorch_prebuilt/executorch.xcframework/ios-arm64/libexecutorch-ios-debug.a",
-				);
-				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
-					"@$(TEMP_DIR)/cmake/linker_flags",
-					"-force_load",
-					"$(SRCROOT)/../executorch_prebuilt/executorch.xcframework/ios-arm64-simulator/libexecutorch-simulator-debug.a",
-				);
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "@$(TEMP_DIR)/cmake/linker_flags";
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "@$(TEMP_DIR)/cmake/linker_flags";
 				PRODUCT_BUNDLE_IDENTIFIER = meta.LLaMARunner;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
@@ -843,6 +818,14 @@
 				minimumVersion = 1.0.2;
 			};
 		};
+		5CCEBC192C9F4F8A00B1861E /* XCRemoteSwiftPackageReference "executorch" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pytorch/executorch";
+			requirement = {
+				branch = latest;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -865,6 +848,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5C3829CD2C98BFEA006885DF /* XCRemoteSwiftPackageReference "swift-openapi-urlsession" */;
 			productName = OpenAPIURLSession;
+		};
+		5CCEBC1A2C9F4F8A00B1861E /* executorch_debug */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CCEBC192C9F4F8A00B1861E /* XCRemoteSwiftPackageReference "executorch" */;
+			productName = executorch_debug;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

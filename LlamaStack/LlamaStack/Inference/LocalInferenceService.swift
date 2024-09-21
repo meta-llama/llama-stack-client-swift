@@ -8,15 +8,15 @@ class RunnerHolder: ObservableObject {
 
 public class LocalInferenceService: InferenceService {
   private var runnerHolder = RunnerHolder()
-  
+
   public init () {}
-  
+
   public func loadModel(modelPath: String, tokenizerPath: String, completion: @escaping (Result<Void, Error>) -> Void) {
     runnerHolder.runner = runnerHolder.runner ?? Runner(
       modelPath: modelPath,
       tokenizerPath: tokenizerPath
     )
-    
+
     Task {
       let runner = runnerHolder.runner
       do {
@@ -27,24 +27,24 @@ public class LocalInferenceService: InferenceService {
       }
     }
   }
-  
+
   public func chatCompletion(request: Components.Schemas.ChatCompletionRequest) -> AsyncStream<Components.Schemas.ChatCompletionResponseStreamChunk> {
-    
+
     return AsyncStream { continuation in
       Task {
         do {
           var tokens: [String] = []
-          
+
           let prompt = try encodeDialogPrompt(messages: prepareMessages(request: request))
           var stopReason: Components.Schemas.StopReason? = nil
           var buffer = ""
           var ipython = false
-          
+
           try self.runnerHolder.runner?.generate(prompt, sequenceLength: 4096) { token in
             print("token: [" + token + "]\n")
             buffer += token
             tokens.append(token)
-            
+
             if !ipython && buffer.starts(with: "<|python_tag|>") {
               ipython = true
               continuation.yield(
@@ -59,12 +59,12 @@ public class LocalInferenceService: InferenceService {
                   )
                 )
               )
-              
+
               buffer = String(buffer.dropFirst("<|python_tag|>".count))
             }
-            
+
             // TODO: Non-streaming lobprobs
-            
+
             var text = ""
             if token == "<|eot_id|>" {
               stopReason = Components.Schemas.StopReason.end_of_turn
@@ -73,7 +73,7 @@ public class LocalInferenceService: InferenceService {
             } else {
               text = token
             }
-            
+
             var delta: Components.Schemas.ChatCompletionResponseEvent.deltaPayload
             if ipython {
               delta = .ToolCallDelta(Components.Schemas.ToolCallDelta(
@@ -83,7 +83,7 @@ public class LocalInferenceService: InferenceService {
             } else {
               delta = .case1(text)
             }
-            
+
             if stopReason == nil {
               continuation.yield(
                 Components.Schemas.ChatCompletionResponseStreamChunk(
@@ -95,14 +95,14 @@ public class LocalInferenceService: InferenceService {
               )
             }
           }
-          
+
           if stopReason == nil {
             stopReason = Components.Schemas.StopReason.out_of_tokens
           }
-          
+
           let message = decodeAssistantMessage(tokens: tokens.joined(), stopReason: stopReason!)
           // TODO: non-streaming support
-          
+
           let didParseToolCalls = message.tool_calls.count > 0
           if ipython && !didParseToolCalls {
             continuation.yield(
@@ -115,7 +115,7 @@ public class LocalInferenceService: InferenceService {
               )
             )
           }
-          
+
           for toolCall in message.tool_calls {
             continuation.yield(
               Components.Schemas.ChatCompletionResponseStreamChunk(
@@ -130,7 +130,7 @@ public class LocalInferenceService: InferenceService {
               )
             )
           }
-          
+
           continuation.yield(
             Components.Schemas.ChatCompletionResponseStreamChunk(
               event: Components.Schemas.ChatCompletionResponseEvent(
@@ -145,4 +145,3 @@ public class LocalInferenceService: InferenceService {
     }
   }
 }
-

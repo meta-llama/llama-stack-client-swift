@@ -26,7 +26,11 @@ llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](h
 
 ![Adding LlamaStack framework to the app target](docs/add_llamastack.png)
 
-5. Test out a call to a remote Llama Stack:
+4. Build your Project
+
+5. When prompted, Enable & Trust OpenAPIGenerator
+
+6. Test out a call to a remote Llama Stack:
 
 ```swift
 import LlamaStack
