@@ -19,9 +19,21 @@ public class RemoteAgentsService: AgentsService {
     let createSystemResponse = try await create(
       request: Components.Schemas.CreateAgentRequest(
         agent_config: Components.Schemas.AgentConfig(
-          instructions: "You are a pirate",
-          model: "Meta-Llama3.1-8B-Instruct",
-          tools: []
+          input_shields: [
+                Components.Schemas.ShieldDefinition(
+                    on_violation_action: Components.Schemas.OnViolationAction._1,
+                    shield_type: .BuiltinShield(.llama_guard)
+                )
+            ],
+            instructions: "You are a pirate",
+            model: "Meta-Llama3.1-8B-Instruct",
+            output_shields: [
+                Components.Schemas.ShieldDefinition(
+                    on_violation_action: Components.Schemas.OnViolationAction._1,
+                    shield_type: .BuiltinShield(.llama_guard)
+                )
+            ],
+            tools: []
         )
       )
     )
