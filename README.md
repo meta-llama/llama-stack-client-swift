@@ -23,7 +23,7 @@ llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](h
 
 ```swift
 import LlamaStackClient
-let inference = RemoteInferenceProvider(url: URL(string: "http://127.0.0.1:5000")!)
+let inference = RemoteInference(url: URL(string: "http://127.0.0.1:5000")!)
     for await chunk in try await inference.chatCompletion(
         request:
             Components.Schemas.ChatCompletionRequest(
