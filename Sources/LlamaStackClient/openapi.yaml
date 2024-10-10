@@ -209,8 +209,11 @@ components:
         content:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
           - $ref: '#/components/schemas/URL'
         mime_type:
@@ -272,8 +275,11 @@ components:
           items:
             oneOf:
             - type: string
+            - $ref: '#/components/schemas/ImageMedia'
             - items:
-                type: string
+                oneOf:
+                - type: string
+                - $ref: '#/components/schemas/ImageMedia'
               type: array
           type: array
         logprobs:
@@ -440,8 +446,11 @@ components:
         content:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
         role:
           const: assistant
@@ -465,8 +474,11 @@ components:
         content:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
         logprobs:
           additionalProperties: false
@@ -741,8 +753,11 @@ components:
           items:
             oneOf:
             - type: string
+            - $ref: '#/components/schemas/ImageMedia'
             - items:
-                type: string
+                oneOf:
+                - type: string
+                - $ref: '#/components/schemas/ImageMedia'
               type: array
           type: array
         model:
@@ -892,6 +907,23 @@ components:
       required:
       - document_ids
       type: object
+    ImageMedia:
+      additionalProperties: false
+      properties:
+        image:
+          oneOf:
+          - additionalProperties: false
+            properties:
+              format:
+                type: string
+              format_description:
+                type: string
+            title: This class represents an image object.  To create
+            type: object
+          - $ref: '#/components/schemas/URL'
+      required:
+      - image
+      type: object
     InferenceStep:
       additionalProperties: false
       properties:
@@ -1040,8 +1072,11 @@ components:
         content:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
           - $ref: '#/components/schemas/URL'
         document_id:
@@ -1105,8 +1140,11 @@ components:
         inserted_context:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
         memory_bank_ids:
           items:
@@ -1536,8 +1574,11 @@ components:
         query:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
       required:
       - bank_id
@@ -1553,8 +1594,11 @@ components:
               content:
                 oneOf:
                 - type: string
+                - $ref: '#/components/schemas/ImageMedia'
                 - items:
-                    type: string
+                    oneOf:
+                    - type: string
+                    - $ref: '#/components/schemas/ImageMedia'
                   type: array
               document_id:
                 type: string
@@ -2048,8 +2092,11 @@ components:
         content:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
         role:
           const: system
@@ -2181,6 +2228,13 @@ components:
     ToolParamDefinition:
       additionalProperties: false
       properties:
+        default:
+          oneOf:
+          - type: boolean
+          - type: number
+          - type: string
+          - type: array
+          - type: object
         description:
           type: string
         param_type:
@@ -2203,6 +2257,7 @@ components:
       enum:
       - json
       - function_tag
+      - python_list
       title: This Enum refers to the prompt format for calling custom / zero shot
         tools
       type: string
@@ -2214,8 +2269,11 @@ components:
         content:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
         tool_name:
           oneOf:
@@ -2234,8 +2292,11 @@ components:
         content:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
         role:
           const: ipython
@@ -2427,14 +2488,20 @@ components:
         content:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
         context:
           oneOf:
           - type: string
+          - $ref: '#/components/schemas/ImageMedia'
           - items:
-              type: string
+              oneOf:
+              - type: string
+              - $ref: '#/components/schemas/ImageMedia'
             type: array
         role:
           const: user
@@ -2477,7 +2544,7 @@ info:
   description: "This is the specification of the llama stack that provides\n     \
     \           a set of endpoints and their corresponding interfaces that are tailored\
     \ to\n                best leverage Llama Models. The specification is still in\
-    \ draft and subject to change.\n                Generated at 2024-09-24 01:51:24.392718"
+    \ draft and subject to change.\n                Generated at 2024-10-10 11:24:03.032659"
   title: '[DRAFT] Llama Stack Specification'
   version: 0.0.1
 jsonSchemaDialect: https://json-schema.org/draft/2020-12/schema
@@ -3710,24 +3777,26 @@ servers:
 - url: http://any-hosted-llama-stack.com
 tags:
 - name: Shields
-- name: Memory
 - name: BatchInference
 - name: PostTraining
-- name: Datasets
+- name: Memory
 - name: Evaluations
-- name: MemoryBanks
-- name: Telemetry
-- name: SyntheticDataGeneration
+- name: Datasets
 - name: Models
-- name: Agents
-- name: RewardScoring
+- name: MemoryBanks
 - name: Inference
+- name: RewardScoring
 - name: Safety
+- name: Telemetry
+- name: Agents
+- name: SyntheticDataGeneration
 - description: <SchemaDefinition schemaRef="#/components/schemas/BuiltinTool" />
   name: BuiltinTool
 - description: <SchemaDefinition schemaRef="#/components/schemas/CompletionMessage"
     />
   name: CompletionMessage
+- description: <SchemaDefinition schemaRef="#/components/schemas/ImageMedia" />
+  name: ImageMedia
 - description: <SchemaDefinition schemaRef="#/components/schemas/SamplingParams" />
   name: SamplingParams
 - description: <SchemaDefinition schemaRef="#/components/schemas/SamplingStrategy"
@@ -3760,6 +3829,8 @@ tags:
 - description: <SchemaDefinition schemaRef="#/components/schemas/ToolResponseMessage"
     />
   name: ToolResponseMessage
+- description: <SchemaDefinition schemaRef="#/components/schemas/URL" />
+  name: URL
 - description: <SchemaDefinition schemaRef="#/components/schemas/UserMessage" />
   name: UserMessage
 - description: <SchemaDefinition schemaRef="#/components/schemas/BatchChatCompletionRequest"
@@ -3846,8 +3917,6 @@ tags:
 - description: <SchemaDefinition schemaRef="#/components/schemas/SearchToolDefinition"
     />
   name: SearchToolDefinition
-- description: <SchemaDefinition schemaRef="#/components/schemas/URL" />
-  name: URL
 - description: <SchemaDefinition schemaRef="#/components/schemas/WolframAlphaToolDefinition"
     />
   name: WolframAlphaToolDefinition
@@ -4203,6 +4272,7 @@ x-tagGroups:
   - FunctionCallToolDefinition
   - GetAgentsSessionRequest
   - GetDocumentsRequest
+  - ImageMedia
   - InferenceStep
   - InsertDocumentsRequest
   - LogEventRequest
