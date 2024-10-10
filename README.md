@@ -43,3 +43,15 @@ let inference = RemoteInference(url: URL(string: "http://127.0.0.1:5000")!)
         }
     }
 ```
+
+## Contributing
+
+### Syncing the API spec
+
+Llama Stack types are generated from the OpenAPI spec in the [main repo](https://github.com/meta-llama/llama-stack). 
+That spec is synced to this repo via a git submodule and script. We'll typically take care of this and you shouldn't need to run this. 
+
+```
+git submodule update --init --recursive
+scripts/generate_swift_types.sh
+```
