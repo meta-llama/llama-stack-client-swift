@@ -127,7 +127,7 @@ class ChatAgent {
           for try await chunk in try await inferenceApi.chatCompletion(
             request: Components.Schemas.ChatCompletionRequest(
               messages: inputMessages,
-              model: agentConfig.model,
+              model_id: agentConfig.model,
               stream: true,
               tools: agentConfig.toolDefinitions
             )

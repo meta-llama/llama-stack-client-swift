@@ -52,12 +52,12 @@ public class RemoteAgents: Agents {
   }
 
   public func create(request: Components.Schemas.CreateAgentRequest) async throws -> Components.Schemas.AgentCreateResponse {
-    let response = try await client.post_sol_agents_sol_create(body: Operations.post_sol_agents_sol_create.Input.Body.json(request))
+    let response = try await client.post_sol_alpha_sol_agents_sol_create(body: Operations.post_sol_alpha_sol_agents_sol_create.Input.Body.json(request))
     return try response.ok.body.json
   }
 
   public func createSession(request: Components.Schemas.CreateAgentSessionRequest) async throws -> Components.Schemas.AgentSessionCreateResponse {
-    let response = try await client.post_sol_agents_sol_session_sol_create(body: Operations.post_sol_agents_sol_session_sol_create.Input.Body.json(request))
+    let response = try await client.post_sol_alpha_sol_agents_sol_session_sol_create(body: Operations.post_sol_alpha_sol_agents_sol_session_sol_create.Input.Body.json(request))
     return try response.ok.body.json
   }
 
@@ -65,8 +65,8 @@ public class RemoteAgents: Agents {
     return AsyncStream<Components.Schemas.AgentTurnResponseStreamChunk> { continuation in
       Task {
         do {
-          let response = try await self.client.post_sol_agents_sol_turn_sol_create(
-            body: Operations.post_sol_agents_sol_turn_sol_create.Input.Body.json(request)
+          let response = try await self.client.post_sol_alpha_sol_agents_sol_turn_sol_create(
+            body: Operations.post_sol_alpha_sol_agents_sol_turn_sol_create.Input.Body.json(request)
           )
           let stream = try response.ok.body.text_event_hyphen_stream.asDecodedServerSentEventsWithJSONData(
             of: Components.Schemas.AgentTurnResponseStreamChunk.self
