@@ -4337,7 +4337,9 @@ paths:
             schema:
               $ref: '#/components/schemas/RegisterMemoryBankRequest'
         required: true
-      responses: {}
+      responses:
+        '200':
+          description: OK
       tags:
       - MemoryBanks
   /alpha/memory-banks/unregister:
