@@ -32,7 +32,7 @@ let inference = RemoteInference(url: URL(string: "http://127.0.0.1:5000")!)
                     content: .case1("Hello Llama!"),
                     role: .user)
                 )
-            ], model: "Meta-Llama3.1-8B-Instruct",
+            ], model_id: "Meta-Llama3.1-8B-Instruct",
             stream: true)
         ) {
         switch (chunk.event.delta) {
