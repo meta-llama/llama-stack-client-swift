@@ -3,11 +3,10 @@ import OpenAPIRuntime
 
 public class CustomTools {
   
-  public class func getCreateEventTool() -> Components.Schemas.FunctionCallToolDefinition {
-    return Components.Schemas.FunctionCallToolDefinition(
+  public class func getCreateEventTool() -> Components.Schemas.ToolDefinition {
+    return Components.Schemas.ToolDefinition(
       description: "Create a calendar event",
-      function_name: "create_event",
-      parameters: Components.Schemas.FunctionCallToolDefinition.parametersPayload(
+      parameters: Components.Schemas.ToolDefinition.parametersPayload(
         additionalProperties: [
           "event_name": Components.Schemas.ToolParamDefinition(
             description: "The name of the meeting",
@@ -26,7 +25,8 @@ public class CustomTools {
           ),
         ]
       ),
-      _type: .function_call
+      tool_name: Components.Schemas.ToolDefinition.tool_namePayload.case2( "create_event")
+
     )
   }
 }
