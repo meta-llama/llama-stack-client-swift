@@ -89,3 +89,6 @@ Llama Stack `Types.swift` file is generated from the Llama Stack [API spec](http
 git submodule update --init --recursive
 scripts/generate_swift_types.sh
 ```
+
+This will update the `openapi.yaml` file in the Llama Stack Swift SDK source folder `Sources/LlamaStackClient`.
+
