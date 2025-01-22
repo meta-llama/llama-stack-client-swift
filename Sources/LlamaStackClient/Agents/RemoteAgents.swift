@@ -20,12 +20,13 @@ public class RemoteAgents: Agents {
     let createSystemResponse = try await create(
       request: Components.Schemas.CreateAgentRequest(
         agent_config: Components.Schemas.AgentConfig(
+          client_tools: [ CustomTools.getCreateEventToolForAgent() ],
           enable_session_persistence: false,
-          input_shields: ["llama_guard"],
+          //input_shields: ["llama_guard"],
           instructions: "You are a helpful assistant",
           max_infer_iters: 1,
-          model: "Meta-Llama3.1-8B-Instruct",
-          output_shields: ["llama_guard"]
+          model: "Meta-Llama3.1-8B-Instruct"
+          //output_shields: ["llama_guard"]
 //          tools: [
 //            Components.Schemas.AgentConfig.toolsPayloadPayload.FunctionCallToolDefinition(
 //              CustomTools.getCreateEventTool()
