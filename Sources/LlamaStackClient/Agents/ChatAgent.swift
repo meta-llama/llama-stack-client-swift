@@ -40,7 +40,7 @@ class ChatAgent {
 
         continuation.yield(
           Components.Schemas.AgentTurnResponseStreamChunk(event: Components.Schemas.AgentTurnResponseEvent(payload:
-              .AgentTurnResponseTurnStartPayload(Components.Schemas.AgentTurnResponseTurnStartPayload(
+                .turn_start(Components.Schemas.AgentTurnResponseTurnStartPayload(
                 event_type: .turn_start,
                 turn_id: turnId
               ))
@@ -69,15 +69,13 @@ class ChatAgent {
               tools: [] //agentConfig.client_tools
             )
           ) {
-            switch(chunk.event.delta) {
-            case .TextDelta(let s):
               continuation.yield(
                 Components.Schemas.AgentTurnResponseStreamChunk(
                   event: Components.Schemas.AgentTurnResponseEvent(
                     payload:
-                        .AgentTurnResponseStepProgressPayload(
+                        .step_progress(
                           Components.Schemas.AgentTurnResponseStepProgressPayload(
-                            delta: .TextDelta(s),
+                            delta: chunk.event.delta,
                             event_type: .step_progress,
                             step_id: UUID().uuidString,
                             step_type: .inference
@@ -86,39 +84,6 @@ class ChatAgent {
                   )
                 )
               )
-            case .ImageDelta(let s):
-              continuation.yield(
-                Components.Schemas.AgentTurnResponseStreamChunk(
-                  event: Components.Schemas.AgentTurnResponseEvent(
-                    payload:
-                        .AgentTurnResponseStepProgressPayload(
-                          Components.Schemas.AgentTurnResponseStepProgressPayload(
-                            delta: .ImageDelta(s),
-                            event_type: .step_progress,
-                            step_id: UUID().uuidString,
-                            step_type: .inference
-                          )
-                        )
-                  )
-                )
-              )
-            case .ToolCallDelta(let s):
-              continuation.yield(
-                Components.Schemas.AgentTurnResponseStreamChunk(
-                  event: Components.Schemas.AgentTurnResponseEvent(
-                    payload:
-                        .AgentTurnResponseStepProgressPayload(
-                          Components.Schemas.AgentTurnResponseStepProgressPayload(
-                            delta: .ToolCallDelta(s),
-                            event_type: .step_progress,
-                            step_id: UUID().uuidString,
-                            step_type: .inference
-                          )
-                        )
-                  )
-                )
-              )
-            }
           }
           continuation.finish()
         } catch {
