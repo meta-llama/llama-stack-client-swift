@@ -20,54 +20,52 @@ public class RemoteAgents: Agents {
     let createSystemResponse = try await create(
       request: Components.Schemas.CreateAgentRequest(
         agent_config: Components.Schemas.AgentConfig(
+          client_tools: [ CustomTools.getCreateEventToolForAgent() ],
           enable_session_persistence: false,
           input_shields: ["llama_guard"],
           instructions: "You are a helpful assistant",
           max_infer_iters: 1,
           model: "Meta-Llama3.1-8B-Instruct",
-          output_shields: ["llama_guard"],
-          tools: [
-            Components.Schemas.AgentConfig.toolsPayloadPayload.FunctionCallToolDefinition(
-              CustomTools.getCreateEventTool()
-              )
-          ]
+          output_shields: ["llama_guard"]
         )
       )
     )
     let agentId = createSystemResponse.agent_id
 
     let createSessionResponse = try await createSession(
-      request: Components.Schemas.CreateAgentSessionRequest(agent_id: agentId, session_name: "pocket-llama")
+      agent_id: agentId, request: Components.Schemas.CreateAgentSessionRequest(session_name: "pocket-llama")
     )
     let agenticSystemSessionId = createSessionResponse.session_id
 
     let request = Components.Schemas.CreateAgentTurnRequest(
-      agent_id: agentId,
       messages: messages,
-      session_id: agenticSystemSessionId,
       stream: true
     )
 
-    return try await createTurn(request: request)
+    return try await createTurn(agent_id: agentId, session_id: agenticSystemSessionId, request: request)
   }
 
   public func create(request: Components.Schemas.CreateAgentRequest) async throws -> Components.Schemas.AgentCreateResponse {
-    let response = try await client.post_sol_alpha_sol_agents_sol_create(body: Operations.post_sol_alpha_sol_agents_sol_create.Input.Body.json(request))
+    let response = try await client.post_sol_v1_sol_agents(body: Operations.post_sol_v1_sol_agents.Input.Body.json(request))
     return try response.ok.body.json
   }
 
-  public func createSession(request: Components.Schemas.CreateAgentSessionRequest) async throws -> Components.Schemas.AgentSessionCreateResponse {
-    let response = try await client.post_sol_alpha_sol_agents_sol_session_sol_create(body: Operations.post_sol_alpha_sol_agents_sol_session_sol_create.Input.Body.json(request))
+  public func createSession(agent_id: String, request: Components.Schemas.CreateAgentSessionRequest) async throws -> Components.Schemas.AgentSessionCreateResponse {
+    let response = try await client.post_sol_v1_sol_agents_sol__lcub_agent_id_rcub__sol_session(
+      path: Operations.post_sol_v1_sol_agents_sol__lcub_agent_id_rcub__sol_session.Input.Path(agent_id: agent_id),
+      headers: Operations.post_sol_v1_sol_agents_sol__lcub_agent_id_rcub__sol_session.Input.Headers.init(),
+      body: Operations.post_sol_v1_sol_agents_sol__lcub_agent_id_rcub__sol_session.Input.Body.json(request))
     return try response.ok.body.json
   }
 
-  public func createTurn(request: Components.Schemas.CreateAgentTurnRequest) async throws -> AsyncStream<Components.Schemas.AgentTurnResponseStreamChunk> {
+  public func createTurn(agent_id: String, session_id: String, request: Components.Schemas.CreateAgentTurnRequest) async throws -> AsyncStream<Components.Schemas.AgentTurnResponseStreamChunk> {
     return AsyncStream<Components.Schemas.AgentTurnResponseStreamChunk> { continuation in
       Task {
         do {
-          let response = try await self.client.post_sol_alpha_sol_agents_sol_turn_sol_create(
-            body: Operations.post_sol_alpha_sol_agents_sol_turn_sol_create.Input.Body.json(request)
-          )
+          let response = try await self.client.post_sol_v1_sol_agents_sol__lcub_agent_id_rcub__sol_session_sol__lcub_session_id_rcub__sol_turn(
+            path: Operations.post_sol_v1_sol_agents_sol__lcub_agent_id_rcub__sol_session_sol__lcub_session_id_rcub__sol_turn.Input.Path(agent_id: agent_id, session_id: session_id),
+            headers: Operations.post_sol_v1_sol_agents_sol__lcub_agent_id_rcub__sol_session_sol__lcub_session_id_rcub__sol_turn.Input.Headers.init(),
+            body: Operations.post_sol_v1_sol_agents_sol__lcub_agent_id_rcub__sol_session_sol__lcub_session_id_rcub__sol_turn.Input.Body.json(request))
           let stream = try response.ok.body.text_event_hyphen_stream.asDecodedServerSentEventsWithJSONData(
             of: Components.Schemas.AgentTurnResponseStreamChunk.self
           )
