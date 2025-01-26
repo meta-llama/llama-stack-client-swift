@@ -76,6 +76,8 @@ components:
       additionalProperties: false
       properties:
         step:
+          discriminator:
+            propertyName: step_type
           oneOf:
           - $ref: '#/components/schemas/InferenceStep'
           - $ref: '#/components/schemas/ToolExecutionStep'
@@ -118,6 +120,8 @@ components:
       additionalProperties: false
       properties:
         payload:
+          discriminator:
+            propertyName: event_type
           oneOf:
           - $ref: '#/components/schemas/AgentTurnResponseStepStartPayload'
           - $ref: '#/components/schemas/AgentTurnResponseStepProgressPayload'
@@ -136,6 +140,8 @@ components:
           default: step_complete
           type: string
         step_details:
+          discriminator:
+            propertyName: step_type
           oneOf:
           - $ref: '#/components/schemas/InferenceStep'
           - $ref: '#/components/schemas/ToolExecutionStep'
@@ -256,6 +262,8 @@ components:
       additionalProperties: false
       properties:
         eval_candidate:
+          discriminator:
+            propertyName: type
           oneOf:
           - $ref: '#/components/schemas/ModelCandidate'
           - $ref: '#/components/schemas/AgentCandidate'
@@ -263,6 +271,8 @@ components:
           type: integer
         scoring_params:
           additionalProperties:
+            discriminator:
+              propertyName: type
             oneOf:
             - $ref: '#/components/schemas/LLMAsJudgeScoringFnParams'
             - $ref: '#/components/schemas/RegexParserScoringFnParams'
@@ -399,6 +409,8 @@ components:
       additionalProperties: false
       properties:
         eval_candidate:
+          discriminator:
+            propertyName: type
           oneOf:
           - $ref: '#/components/schemas/ModelCandidate'
           - $ref: '#/components/schemas/AgentCandidate'
@@ -616,6 +628,8 @@ components:
       title: streamed completion response.
       type: object
     ContentDelta:
+      discriminator:
+        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/TextDelta'
       - $ref: '#/components/schemas/ImageDelta'
@@ -890,6 +904,8 @@ components:
             type: string
           type: array
         task_config:
+          discriminator:
+            propertyName: type
           oneOf:
           - $ref: '#/components/schemas/BenchmarkEvalTaskConfig'
           - $ref: '#/components/schemas/AppEvalTaskConfig'
@@ -1030,6 +1046,8 @@ components:
           $ref: '#/components/schemas/InterleavedContentItem'
         type: array
     InterleavedContentItem:
+      discriminator:
+        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/ImageContentItem'
       - $ref: '#/components/schemas/TextContentItem'
@@ -1235,6 +1253,8 @@ components:
       additionalProperties: false
       properties:
         event:
+          discriminator:
+            propertyName: type
           oneOf:
           - $ref: '#/components/schemas/UnstructuredLogEvent'
           - $ref: '#/components/schemas/MetricEvent'
@@ -1316,6 +1336,8 @@ components:
       - inserted_context
       type: object
     Message:
+      discriminator:
+        propertyName: role
       oneOf:
       - $ref: '#/components/schemas/UserMessage'
       - $ref: '#/components/schemas/SystemMessage'
@@ -1483,6 +1505,8 @@ components:
       - total_count
       type: object
     ParamType:
+      discriminator:
+        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/StringType'
       - $ref: '#/components/schemas/NumberType'
@@ -1786,6 +1810,8 @@ components:
       - max_chunks
       type: object
     RAGQueryGeneratorConfig:
+      discriminator:
+        propertyName: type
       oneOf:
       - $ref: '#/components/schemas/DefaultRAGQueryGeneratorConfig'
       - $ref: '#/components/schemas/LLMRAGQueryGeneratorConfig'
@@ -1900,6 +1926,8 @@ components:
         description:
           type: string
         params:
+          discriminator:
+            propertyName: type
           oneOf:
           - $ref: '#/components/schemas/LLMAsJudgeScoringFnParams'
           - $ref: '#/components/schemas/RegexParserScoringFnParams'
@@ -1978,6 +2006,8 @@ components:
       - embedding_model
       type: object
     ResponseFormat:
+      discriminator:
+        propertyName: type
       oneOf:
       - additionalProperties: false
         properties:
@@ -2037,6 +2067,8 @@ components:
       additionalProperties: false
       properties:
         task_config:
+          discriminator:
+            propertyName: type
           oneOf:
           - $ref: '#/components/schemas/BenchmarkEvalTaskConfig'
           - $ref: '#/components/schemas/AppEvalTaskConfig'
@@ -2102,6 +2134,8 @@ components:
           default: 1.0
           type: number
         strategy:
+          discriminator:
+            propertyName: type
           oneOf:
           - $ref: '#/components/schemas/GreedySamplingStrategy'
           - $ref: '#/components/schemas/TopPSamplingStrategy'
@@ -2139,7 +2173,9 @@ components:
         scoring_functions:
           additionalProperties:
             oneOf:
-            - oneOf:
+            - discriminator:
+                propertyName: type
+              oneOf:
               - $ref: '#/components/schemas/LLMAsJudgeScoringFnParams'
               - $ref: '#/components/schemas/RegexParserScoringFnParams'
               - $ref: '#/components/schemas/BasicScoringFnParams'
@@ -2178,7 +2214,9 @@ components:
         scoring_functions:
           additionalProperties:
             oneOf:
-            - oneOf:
+            - discriminator:
+                propertyName: type
+              oneOf:
               - $ref: '#/components/schemas/LLMAsJudgeScoringFnParams'
               - $ref: '#/components/schemas/RegexParserScoringFnParams'
               - $ref: '#/components/schemas/BasicScoringFnParams'
@@ -2214,6 +2252,8 @@ components:
             - type: object
           type: object
         params:
+          discriminator:
+            propertyName: type
           oneOf:
           - $ref: '#/components/schemas/LLMAsJudgeScoringFnParams'
           - $ref: '#/components/schemas/RegexParserScoringFnParams'
@@ -2465,6 +2505,8 @@ components:
             - type: object
           type: object
         payload:
+          discriminator:
+            propertyName: type
           oneOf:
           - $ref: '#/components/schemas/SpanStartPayload'
           - $ref: '#/components/schemas/SpanEndPayload'
@@ -2490,6 +2532,8 @@ components:
       additionalProperties: false
       properties:
         algorithm_config:
+          discriminator:
+            propertyName: type
           oneOf:
           - $ref: '#/components/schemas/LoraFinetuningConfig'
           - $ref: '#/components/schemas/QATFinetuningConfig'
@@ -3065,6 +3109,8 @@ components:
           type: string
         steps:
           items:
+            discriminator:
+              propertyName: step_type
             oneOf:
             - $ref: '#/components/schemas/InferenceStep'
             - $ref: '#/components/schemas/ToolExecutionStep'
