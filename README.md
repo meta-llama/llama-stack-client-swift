@@ -83,7 +83,7 @@ catch {
 
 ### Syncing the API spec
 
-Llama Stack `Types.swift` file is generated from the Llama Stack [API spec](https://github.com/meta-llama/llama-stack/blob/main/docs/resources/llama-stack-spec.yaml) in the main [Llama Stack repo](https://github.com/meta-llama/llama-stack). 
+Llama Stack `Types.swift` file is generated from the Llama Stack [API spec](https://github.com/meta-llama/llama-stack/blob/main/docs/resources/llama-stack-spec.yaml) in the main [Llama Stack repo](https://github.com/meta-llama/llama-stack).
 
 ```
 scripts/generate_swift_types.sh
@@ -92,4 +92,3 @@ scripts/generate_swift_types.sh
 By default, this script will download the latest API spec from the main branch of the Llama Stack repo. You can set `LLAMA_STACK_DIR` to a local Llama Stack repo to use a local copy of the API spec instead.
 
 This will update the `openapi.yaml` file in the Llama Stack Swift SDK source folder `Sources/LlamaStackClient`.
-
