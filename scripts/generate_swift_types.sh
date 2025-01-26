@@ -6,8 +6,10 @@ set -euo pipefail
 
 OPENAPI_FILE="llama-stack-spec.yaml"
 if [ -n "$LLAMA_STACK_DIR" ]; then
+  echo "Using local Llama Stack repo at $LLAMA_STACK_DIR"
   cp "$LLAMA_STACK_DIR/docs/resources/$OPENAPI_FILE" "Sources/LlamaStackClient/$OPENAPI_FILE"
 else
+  echo "Using remote (main branch) Llama Stack repo"
   URL="https://raw.githubusercontent.com/meta-llama/llama-stack/refs/heads/main/docs/resources/llama-stack-spec.yaml"
   curl -s $URL > "Sources/LlamaStackClient/$OPENAPI_FILE"
 fi
