@@ -32,30 +32,34 @@ For a more advanced demo using the Llama Stack Agent API and custom tool calling
 ```
 conda create -n llama-stack python=3.10
 conda activate llama-stack
-pip install llama-stack=0.1.0
+pip install --no-cache llama-stack==0.1.0 llama-models==0.1.0 llama-stack-client==0.1.0
 ```
+
 Then, either:
 ```
-llama stack build --template fireworks --image-type conda
+PYPI_VERSION=0.1.0 llama stack build --template fireworks --image-type conda
 export FIREWORKS_API_KEY="<your_fireworks_api_key>"
 llama stack run fireworks
 ```
 or
 ```
-llama stack build --template together --image-type conda
+PYPI_VERSION=0.1.0 llama stack build --template together --image-type conda
 export TOGETHER_API_KEY="<your_together_api_key>"
 llama stack run together
 ```
 
 The default port is 5000 for `llama stack run` and you can specify a different port by adding `--port <your_port>` to the end of `llama stack run fireworks|together`.
 
-6. Replace the `RemoteInference` url below with the your host IP and port:
+6. Replace the `RemoteInference` url string below with the host IP and port of the remote Llama Stack distro in Step 5:
 
 ```swift
 import LlamaStackClient
 
 let inference = RemoteInference(url: URL(string: "http://127.0.0.1:5000")!)
+```
+Below is an example code snippet to use the Llama Stack inference API. See the iOS Demos above for complete code.
 
+```swift
 for await chunk in try await inference.chatCompletion(
     request:
         Components.Schemas.ChatCompletionRequest(
