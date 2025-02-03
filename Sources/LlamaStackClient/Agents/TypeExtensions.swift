@@ -16,6 +16,17 @@ public extension Components.Schemas.CreateAgentTurnRequest.messagesPayloadPayloa
 }
 
 public extension Components.Schemas.CreateAgentTurnRequest.messagesPayloadPayload {
+    func toMessage() -> Components.Schemas.Message? {
+        switch self {
+        case .UserMessage(let userMessage):
+            return .user(userMessage)
+        case .ToolResponseMessage(let toolResponseMessage):
+            return .tool(toolResponseMessage)
+        }
+    }
+}
+
+public extension Components.Schemas.CreateAgentTurnRequest.messagesPayloadPayload {
   func toChatCompletionRequest() -> Components.Schemas.CreateAgentTurnRequest.messagesPayloadPayload {
     switch self {
     case .UserMessage(let userMessage):
