@@ -8,9 +8,13 @@ public class RemoteAgents: Agents {
   private let client: Client
   private let encoder = JSONEncoder()
 
-  public init (url: URL) {
+  public init (url: URL, apiKey: String? = nil) {
     self.url = url
-    self.client = Client(serverURL: url, transport: URLSessionTransport())
+    self.client = Client(
+      serverURL: url,
+      transport: URLSessionTransport(),
+      middlewares: apiKey.map { [BearerAuthenticationMiddleware(token: $0)] } ?? []
+    )
   }
 
   // Example helper function
