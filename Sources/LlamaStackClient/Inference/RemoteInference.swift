@@ -1,15 +1,20 @@
 import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
+import HTTPTypes
 
 public class RemoteInference: Inference {
   private let url: URL
   private let client: Client
   private let encoder = JSONEncoder()
   
-  public init (url: URL) {
+  public init (url: URL, apiKey: String? = nil) {
     self.url = url
-    self.client = Client(serverURL: url, transport: URLSessionTransport())
+    self.client = Client(
+      serverURL: url,
+      transport: URLSessionTransport(),
+      middlewares: apiKey.map { [BearerAuthenticationMiddleware(token: $0)] } ?? []
+    )
   }
   
   public func chatCompletion(request: Components.Schemas.ChatCompletionRequest) async throws -> AsyncStream<Components.Schemas.ChatCompletionResponseStreamChunk> {
