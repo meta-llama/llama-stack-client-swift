@@ -22,8 +22,8 @@ class ChatAgent {
     let session = Components.Schemas.Session(
       session_id: sessionId,
       session_name: name,
-      started_at: Date(),
-      turns: []
+      turns: [],
+      started_at: Date()
     )
 
     sessions[sessionId] = session
@@ -82,13 +82,12 @@ class ChatAgent {
           continuation.yield(chunk)
         }
         let turn = Components.Schemas.Turn(
-          input_messages: request.messages.map { $0.toAgenticSystemTurnCreateRequest() },
-          output_attachments: [],
-          output_message: outputMessage!,
+          turn_id: turnId,
           session_id: session_id,
-          started_at: Date(),
+          input_messages: request.messages.map { $0.toAgenticSystemTurnCreateRequest() },
           steps: steps,
-          turn_id: turnId
+          output_message: outputMessage!,
+          started_at: Date()
         )
         await MainActor.run {
           var s = self.sessions[session_id]
@@ -122,10 +121,10 @@ class ChatAgent {
         do {
           for try await chunk: Components.Schemas.ChatCompletionResponseStreamChunk in try await inferenceApi.chatCompletion(
             request: Components.Schemas.ChatCompletionRequest(
-              messages: inputMessages,
               model_id: agentConfig.model,
-              stream: true,
-              tools: [] //agentConfig.client_tools
+              messages: inputMessages,
+              tools: [], //agentConfig.client_tools
+              stream: true
             )
           ) {
               continuation.yield(
@@ -134,10 +133,10 @@ class ChatAgent {
                     payload:
                         .step_progress(
                           Components.Schemas.AgentTurnResponseStepProgressPayload(
-                            delta: chunk.event.delta,
                             event_type: .step_progress,
+                            step_type: .inference,
                             step_id: UUID().uuidString,
-                            step_type: .inference
+                            delta: chunk.event.delta
                           )
                         )
                   )

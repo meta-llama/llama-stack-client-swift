@@ -17,12 +17,14 @@ public class LocalAgents: Agents {
     let createSystemResponse = try await create(
       request: Components.Schemas.CreateAgentRequest(
         agent_config: Components.Schemas.AgentConfig(
-          enable_session_persistence: false,
+          sampling_params: nil,
           input_shields: [],
-          instructions: "You are a helpful assistant",
-          max_infer_iters: 1,
+          output_shields: [],
+          toolgroups: [],
           model: "Meta-Llama3.1-8B-Instruct",
-          output_shields: []
+          instructions: "You are a helpful assistant"
+//          client_tools: "Meta-Llama3.1-8B-Instruct"
+          //          tool_choicesampling_paramsoutput_shieldstoolgroupsclient_toolstool_choice: []
 //          tools: [
 //            Components.Schemas.AgentConfig.toolsPayloadPayload.FunctionCallToolDefinition(
 //              CustomTools.getCreateEventTool()
