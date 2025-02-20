@@ -20,16 +20,11 @@ public class LocalAgents: Agents {
           sampling_params: nil,
           input_shields: [],
           output_shields: [],
-          toolgroups: [],
+          client_tools: [ CustomTools.getCreateEventToolForAgent() ],
+          max_infer_iters: 1, 
           model: "Meta-Llama3.1-8B-Instruct",
-          instructions: "You are a helpful assistant"
-//          client_tools: "Meta-Llama3.1-8B-Instruct"
-          //          tool_choicesampling_paramsoutput_shieldstoolgroupsclient_toolstool_choice: []
-//          tools: [
-//            Components.Schemas.AgentConfig.toolsPayloadPayload.FunctionCallToolDefinition(
-//              CustomTools.getCreateEventTool()
-//              )
-//          ]
+          instructions: "You are a helpful assistant",
+          enable_session_persistence: false
         )
       )
     )
