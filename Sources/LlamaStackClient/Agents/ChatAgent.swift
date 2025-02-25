@@ -80,8 +80,6 @@ class ChatAgent {
             break
           case .turn_awaiting_input(_):
             break
-          case .turn_awaiting_input(_):
-            break
           }
           continuation.yield(chunk)
         }
