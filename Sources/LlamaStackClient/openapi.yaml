@@ -10,173 +10,6 @@ info:
 servers:
   - url: http://any-hosted-llama-stack.com
 paths:
-  /v1/eval/tasks/{task_id}/evaluations:
-    post:
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluateResponse'
-      tags:
-        - Eval
-      description: ''
-      parameters:
-        - name: task_id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeprecatedEvaluateRowsRequest'
-        required: true
-      deprecated: true
-  /v1/eval-tasks/{eval_task_id}:
-    get:
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - $ref: '#/components/schemas/Benchmark'
-      tags:
-        - Benchmarks
-      description: ''
-      parameters:
-        - name: eval_task_id
-          in: path
-          required: true
-          schema:
-            type: string
-      deprecated: true
-  /v1/eval/tasks/{task_id}/jobs/{job_id}:
-    get:
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - $ref: '#/components/schemas/JobStatus'
-      tags:
-        - Eval
-      description: ''
-      parameters:
-        - name: task_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: job_id
-          in: path
-          required: true
-          schema:
-            type: string
-      deprecated: true
-    delete:
-      responses:
-        '200':
-          description: OK
-      tags:
-        - Eval
-      description: ''
-      parameters:
-        - name: task_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: job_id
-          in: path
-          required: true
-          schema:
-            type: string
-      deprecated: true
-  /v1/eval/tasks/{task_id}/jobs/{job_id}/result:
-    get:
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EvaluateResponse'
-      tags:
-        - Eval
-      description: ''
-      parameters:
-        - name: task_id
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: job_id
-          in: path
-          required: true
-          schema:
-            type: string
-      deprecated: true
-  /v1/eval-tasks:
-    get:
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ListBenchmarksResponse'
-      tags:
-        - Benchmarks
-      description: ''
-      parameters: []
-      deprecated: true
-    post:
-      responses:
-        '200':
-          description: OK
-      tags:
-        - Benchmarks
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeprecatedRegisterEvalTaskRequest'
-        required: true
-      deprecated: true
-  /v1/eval/tasks/{task_id}/jobs:
-    post:
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Job'
-      tags:
-        - Eval
-      description: ''
-      parameters:
-        - name: task_id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeprecatedRunEvalRequest'
-        required: true
-      deprecated: true
   /v1/datasetio/rows:
     get:
       responses:
@@ -404,6 +237,43 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateAgentTurnRequest'
         required: true
+  /v1/files:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListBucketResponse'
+      tags:
+        - Files (Coming Soon)
+      description: List all buckets.
+      parameters:
+        - name: bucket
+          in: query
+          required: true
+          schema:
+            type: string
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileUploadResponse'
+      tags:
+        - Files (Coming Soon)
+      description: >-
+        Create a new upload session for a file identified by a bucket and key.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUploadSessionRequest'
+        required: true
   /v1/agents/{agent_id}:
     delete:
       responses:
@@ -463,6 +333,59 @@ paths:
             type: string
         - name: agent_id
           in: path
+          required: true
+          schema:
+            type: string
+  /v1/files/{bucket}/{key}:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileResponse'
+      tags:
+        - Files (Coming Soon)
+      description: >-
+        Get a file info identified by a bucket and key.
+      parameters:
+        - name: bucket
+          in: path
+          description: 'Bucket name (valid chars: a-zA-Z0-9_-)'
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: path
+          description: >-
+            Key under which the file is stored (valid chars: a-zA-Z0-9_-/.)
+          required: true
+          schema:
+            type: string
+    delete:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileResponse'
+      tags:
+        - Files (Coming Soon)
+      description: >-
+        Delete a file identified by a bucket and key.
+      parameters:
+        - name: bucket
+          in: path
+          description: 'Bucket name (valid chars: a-zA-Z0-9_-)'
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: path
+          description: >-
+            Key under which the file is stored (valid chars: a-zA-Z0-9_-/.)
           required: true
           schema:
             type: string
@@ -719,7 +642,7 @@ paths:
           schema:
             type: string
   /v1/telemetry/spans/{span_id}/tree:
-    get:
+    post:
       responses:
         '200':
           description: OK
@@ -736,18 +659,12 @@ paths:
           required: true
           schema:
             type: string
-        - name: attributes_to_return
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
-        - name: max_depth
-          in: query
-          required: false
-          schema:
-            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSpanTreeRequest'
+        required: true
   /v1/tools/{tool_name}:
     get:
       responses:
@@ -866,6 +783,55 @@ paths:
         - PostTraining (Coming Soon)
       description: ''
       parameters: []
+  /v1/files/session:{upload_id}:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/FileUploadResponse'
+      tags:
+        - Files (Coming Soon)
+      description: >-
+        Returns information about an existsing upload session
+      parameters:
+        - name: upload_id
+          in: path
+          description: ID of the upload session
+          required: true
+          schema:
+            type: string
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/FileResponse'
+      tags:
+        - Files (Coming Soon)
+      description: >-
+        Upload file content to an existing upload session. On the server, request
+        body will have the raw bytes that are uploaded.
+      parameters:
+        - name: upload_id
+          in: path
+          description: ID of the upload session
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+        required: true
   /v1/vector-dbs/{vector_db_id}:
     get:
       responses:
@@ -1080,6 +1046,25 @@ paths:
             schema:
               $ref: '#/components/schemas/RegisterDatasetRequest'
         required: true
+  /v1/files/{bucket}:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFileResponse'
+      tags:
+        - Files (Coming Soon)
+      description: List all files in a bucket.
+      parameters:
+        - name: bucket
+          in: path
+          description: 'Bucket name (valid chars: a-zA-Z0-9_-)'
+          required: true
+          schema:
+            type: string
   /v1/models:
     get:
       responses:
@@ -1368,7 +1353,7 @@ paths:
               $ref: '#/components/schemas/QueryChunksRequest'
         required: true
   /v1/telemetry/spans:
-    get:
+    post:
       responses:
         '200':
           description: OK
@@ -1379,28 +1364,15 @@ paths:
       tags:
         - Telemetry
       description: ''
-      parameters:
-        - name: attribute_filters
-          in: query
-          required: true
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/QueryCondition'
-        - name: attributes_to_return
-          in: query
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
-        - name: max_depth
-          in: query
-          required: false
-          schema:
-            type: integer
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuerySpansRequest'
+        required: true
   /v1/telemetry/traces:
-    get:
+    post:
       responses:
         '200':
           description: OK
@@ -1411,31 +1383,60 @@ paths:
       tags:
         - Telemetry
       description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryTracesRequest'
+        required: true
+  /v1/agents/{agent_id}/session/{session_id}/turn/{turn_id}/resume:
+    post:
+      responses:
+        '200':
+          description: >-
+            A Turn object if stream is False, otherwise an AsyncIterator of AgentTurnResponseStreamChunk
+            objects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Turn'
+            text/event-stream:
+              schema:
+                $ref: '#/components/schemas/AgentTurnResponseStreamChunk'
+      tags:
+        - Agents
+      description: >-
+        Resume an agent turn with executed tool call responses.
+
+        When a Turn has the status `awaiting_input` due to pending input from client
+        side tool calls, this endpoint can be used to submit the outputs from the
+        tool calls once they are ready.
       parameters:
-        - name: attribute_filters
-          in: query
-          required: false
+        - name: agent_id
+          in: path
+          description: The ID of the agent to resume.
+          required: true
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/QueryCondition'
-        - name: limit
-          in: query
-          required: false
+            type: string
+        - name: session_id
+          in: path
+          description: The ID of the session to resume.
+          required: true
           schema:
-            type: integer
-        - name: offset
-          in: query
-          required: false
+            type: string
+        - name: turn_id
+          in: path
+          description: The ID of the turn to resume.
+          required: true
           schema:
-            type: integer
-        - name: order_by
-          in: query
-          required: false
-          schema:
-            type: array
-            items:
-              type: string
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResumeAgentTurnRequest'
+        required: true
   /v1/eval/benchmarks/{benchmark_id}/jobs:
     post:
       responses:
@@ -1587,145 +1588,66 @@ jsonSchemaDialect: >-
   https://json-schema.org/draft/2020-12/schema
 components:
   schemas:
-    AgentCandidate:
+    AppendRowsRequest:
       type: object
       properties:
-        type:
+        dataset_id:
           type: string
-          const: agent
-          default: agent
-        config:
-          $ref: '#/components/schemas/AgentConfig'
+        rows:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              oneOf:
+                - type: boolean
+                - type: number
+                - type: string
+                - type: array
+                - type: object
       additionalProperties: false
       required:
-        - type
-        - config
-    AgentConfig:
+        - dataset_id
+        - rows
+      title: AppendRowsRequest
+    CompletionMessage:
       type: object
       properties:
-        sampling_params:
-          $ref: '#/components/schemas/SamplingParams'
-        input_shields:
-          type: array
-          items:
-            type: string
-        output_shields:
-          type: array
-          items:
-            type: string
-        toolgroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentTool'
-        client_tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/ToolDef'
-        tool_choice:
+        role:
+          type: string
+          const: assistant
+          default: assistant
+          description: >-
+            Must be "assistant" to identify this as the model's response
+        content:
+          $ref: '#/components/schemas/InterleavedContent'
+          description: The content of the model's response
+        stop_reason:
           type: string
           enum:
-            - auto
-            - required
+            - end_of_turn
+            - end_of_message
+            - out_of_tokens
           description: >-
-            Whether tool use is required or automatic. This is a hint to the model
-            which may not be followed. It depends on the Instruction Following capabilities
-            of the model.
-        tool_prompt_format:
-          type: string
-          enum:
-            - json
-            - function_tag
-            - python_list
-          description: >-
-            Prompt format for calling custom / zero shot tools.
-        tool_config:
-          $ref: '#/components/schemas/ToolConfig'
-        max_infer_iters:
-          type: integer
-          default: 10
-        model:
-          type: string
-        instructions:
-          type: string
-        enable_session_persistence:
-          type: boolean
-          default: false
-        response_format:
-          $ref: '#/components/schemas/ResponseFormat'
-      additionalProperties: false
-      required:
-        - model
-        - instructions
-    AgentTool:
-      oneOf:
-        - type: string
-        - type: object
-          properties:
-            name:
-              type: string
-            args:
-              type: object
-              additionalProperties:
-                oneOf:
-                  - type: boolean
-                  - type: number
-                  - type: string
-                  - type: array
-                  - type: object
-          additionalProperties: false
-          required:
-            - name
-            - args
-    AggregationFunctionType:
-      type: string
-      enum:
-        - average
-        - median
-        - categorical_count
-        - accuracy
-    BasicScoringFnParams:
-      type: object
-      properties:
-        type:
-          type: string
-          const: basic
-          default: basic
-        aggregation_functions:
+            Reason why the model stopped generating. Options are: - `StopReason.end_of_turn`:
+            The model finished generating the entire response. - `StopReason.end_of_message`:
+            The model finished generating but generated a partial response -- usually,
+            a tool call. The user may call the tool and continue the conversation
+            with the tool's response. - `StopReason.out_of_tokens`: The model ran
+            out of token budget.
+        tool_calls:
           type: array
           items:
-            $ref: '#/components/schemas/AggregationFunctionType'
+            $ref: '#/components/schemas/ToolCall'
+          description: >-
+            List of tool calls. Each tool call is a ToolCall object.
       additionalProperties: false
       required:
-        - type
-    BenchmarkConfig:
-      type: object
-      properties:
-        type:
-          type: string
-          const: benchmark
-          default: benchmark
-        eval_candidate:
-          $ref: '#/components/schemas/EvalCandidate'
-        scoring_params:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ScoringFnParams'
-        num_examples:
-          type: integer
-      additionalProperties: false
-      required:
-        - type
-        - eval_candidate
-        - scoring_params
-    EvalCandidate:
-      oneOf:
-        - $ref: '#/components/schemas/ModelCandidate'
-        - $ref: '#/components/schemas/AgentCandidate'
-      discriminator:
-        propertyName: type
-        mapping:
-          model: '#/components/schemas/ModelCandidate'
-          agent: '#/components/schemas/AgentCandidate'
+        - role
+        - content
+        - stop_reason
+      title: CompletionMessage
+      description: >-
+        A message containing the model's (assistant) response in a chat conversation.
     GrammarResponseFormat:
       type: object
       properties:
@@ -1750,6 +1672,7 @@ components:
       required:
         - type
         - bnf
+      title: GrammarResponseFormat
       description: >-
         Configuration for grammar-guided response generation.
     GreedySamplingStrategy:
@@ -1762,6 +1685,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: GreedySamplingStrategy
     ImageContentItem:
       type: object
       properties:
@@ -1790,6 +1714,7 @@ components:
       required:
         - type
         - image
+      title: ImageContentItem
       description: A image content item
     InterleavedContent:
       oneOf:
@@ -1832,67 +1757,22 @@ components:
       required:
         - type
         - json_schema
+      title: JsonSchemaResponseFormat
       description: >-
         Configuration for JSON schema-guided response generation.
-    LLMAsJudgeScoringFnParams:
-      type: object
-      properties:
-        type:
-          type: string
-          const: llm_as_judge
-          default: llm_as_judge
-        judge_model:
-          type: string
-        prompt_template:
-          type: string
-        judge_score_regexes:
-          type: array
-          items:
-            type: string
-        aggregation_functions:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregationFunctionType'
-      additionalProperties: false
-      required:
-        - type
-        - judge_model
-    ModelCandidate:
-      type: object
-      properties:
-        type:
-          type: string
-          const: model
-          default: model
-        model:
-          type: string
-        sampling_params:
-          $ref: '#/components/schemas/SamplingParams'
-        system_message:
-          $ref: '#/components/schemas/SystemMessage'
-      additionalProperties: false
-      required:
-        - type
-        - model
-        - sampling_params
-    RegexParserScoringFnParams:
-      type: object
-      properties:
-        type:
-          type: string
-          const: regex_parser
-          default: regex_parser
-        parsing_regexes:
-          type: array
-          items:
-            type: string
-        aggregation_functions:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregationFunctionType'
-      additionalProperties: false
-      required:
-        - type
+    Message:
+      oneOf:
+        - $ref: '#/components/schemas/UserMessage'
+        - $ref: '#/components/schemas/SystemMessage'
+        - $ref: '#/components/schemas/ToolResponseMessage'
+        - $ref: '#/components/schemas/CompletionMessage'
+      discriminator:
+        propertyName: role
+        mapping:
+          user: '#/components/schemas/UserMessage'
+          system: '#/components/schemas/SystemMessage'
+          tool: '#/components/schemas/ToolResponseMessage'
+          assistant: '#/components/schemas/CompletionMessage'
     ResponseFormat:
       oneOf:
         - $ref: '#/components/schemas/JsonSchemaResponseFormat'
@@ -1916,6 +1796,7 @@ components:
       additionalProperties: false
       required:
         - strategy
+      title: SamplingParams
     SamplingStrategy:
       oneOf:
         - $ref: '#/components/schemas/GreedySamplingStrategy'
@@ -1927,17 +1808,6 @@ components:
           greedy: '#/components/schemas/GreedySamplingStrategy'
           top_p: '#/components/schemas/TopPSamplingStrategy'
           top_k: '#/components/schemas/TopKSamplingStrategy'
-    ScoringFnParams:
-      oneOf:
-        - $ref: '#/components/schemas/LLMAsJudgeScoringFnParams'
-        - $ref: '#/components/schemas/RegexParserScoringFnParams'
-        - $ref: '#/components/schemas/BasicScoringFnParams'
-      discriminator:
-        propertyName: type
-        mapping:
-          llm_as_judge: '#/components/schemas/LLMAsJudgeScoringFnParams'
-          regex_parser: '#/components/schemas/RegexParserScoringFnParams'
-          basic: '#/components/schemas/BasicScoringFnParams'
     SystemMessage:
       type: object
       properties:
@@ -1957,6 +1827,7 @@ components:
       required:
         - role
         - content
+      title: SystemMessage
       description: >-
         A system message providing instructions or context to the model.
     TextContentItem:
@@ -1975,375 +1846,8 @@ components:
       required:
         - type
         - text
+      title: TextContentItem
       description: A text content item
-    ToolConfig:
-      type: object
-      properties:
-        tool_choice:
-          type: string
-          enum:
-            - auto
-            - required
-          description: >-
-            (Optional) Whether tool use is required or automatic. Defaults to ToolChoice.auto.
-          default: auto
-        tool_prompt_format:
-          type: string
-          enum:
-            - json
-            - function_tag
-            - python_list
-          description: >-
-            (Optional) Instructs the model how to format tool calls. By default, Llama
-            Stack will attempt to use a format that is best adapted to the model.
-            - `ToolPromptFormat.json`: The tool calls are formatted as a JSON object.
-            - `ToolPromptFormat.function_tag`: The tool calls are enclosed in a <function=function_name>
-            tag. - `ToolPromptFormat.python_list`: The tool calls are output as Python
-            syntax -- a list of function calls.
-        system_message_behavior:
-          type: string
-          enum:
-            - append
-            - replace
-          description: >-
-            (Optional) Config for how to override the default system prompt. - `SystemMessageBehavior.append`:
-            Appends the provided system message to the default system prompt. - `SystemMessageBehavior.replace`:
-            Replaces the default system prompt with the provided system message. The
-            system message can include the string '{{function_definitions}}' to indicate
-            where the function definitions should be inserted.
-          default: append
-      additionalProperties: false
-      required:
-        - system_message_behavior
-      description: Configuration for tool use.
-    ToolDef:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        parameters:
-          type: array
-          items:
-            $ref: '#/components/schemas/ToolParameter'
-        metadata:
-          type: object
-          additionalProperties:
-            oneOf:
-              - type: boolean
-              - type: number
-              - type: string
-              - type: array
-              - type: object
-      additionalProperties: false
-      required:
-        - name
-    ToolParameter:
-      type: object
-      properties:
-        name:
-          type: string
-        parameter_type:
-          type: string
-        description:
-          type: string
-        required:
-          type: boolean
-          default: true
-        default:
-          oneOf:
-            - type: boolean
-            - type: number
-            - type: string
-            - type: array
-            - type: object
-      additionalProperties: false
-      required:
-        - name
-        - parameter_type
-        - description
-        - required
-    TopKSamplingStrategy:
-      type: object
-      properties:
-        type:
-          type: string
-          const: top_k
-          default: top_k
-        top_k:
-          type: integer
-      additionalProperties: false
-      required:
-        - type
-        - top_k
-    TopPSamplingStrategy:
-      type: object
-      properties:
-        type:
-          type: string
-          const: top_p
-          default: top_p
-        temperature:
-          type: number
-        top_p:
-          type: number
-          default: 0.95
-      additionalProperties: false
-      required:
-        - type
-    URL:
-      type: object
-      properties:
-        uri:
-          type: string
-      additionalProperties: false
-      required:
-        - uri
-    DeprecatedEvaluateRowsRequest:
-      type: object
-      properties:
-        input_rows:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              oneOf:
-                - type: boolean
-                - type: number
-                - type: string
-                - type: array
-                - type: object
-        scoring_functions:
-          type: array
-          items:
-            type: string
-        task_config:
-          $ref: '#/components/schemas/BenchmarkConfig'
-      additionalProperties: false
-      required:
-        - input_rows
-        - scoring_functions
-        - task_config
-    EvaluateResponse:
-      type: object
-      properties:
-        generations:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              oneOf:
-                - type: boolean
-                - type: number
-                - type: string
-                - type: array
-                - type: object
-        scores:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/ScoringResult'
-      additionalProperties: false
-      required:
-        - generations
-        - scores
-    ScoringResult:
-      type: object
-      properties:
-        score_rows:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              oneOf:
-                - type: boolean
-                - type: number
-                - type: string
-                - type: array
-                - type: object
-        aggregated_results:
-          type: object
-          additionalProperties:
-            oneOf:
-              - type: boolean
-              - type: number
-              - type: string
-              - type: array
-              - type: object
-      additionalProperties: false
-      required:
-        - score_rows
-        - aggregated_results
-    Benchmark:
-      type: object
-      properties:
-        identifier:
-          type: string
-        provider_resource_id:
-          type: string
-        provider_id:
-          type: string
-        type:
-          type: string
-          const: benchmark
-          default: benchmark
-        dataset_id:
-          type: string
-        scoring_functions:
-          type: array
-          items:
-            type: string
-        metadata:
-          type: object
-          additionalProperties:
-            oneOf:
-              - type: boolean
-              - type: number
-              - type: string
-              - type: array
-              - type: object
-      additionalProperties: false
-      required:
-        - identifier
-        - provider_resource_id
-        - provider_id
-        - type
-        - dataset_id
-        - scoring_functions
-        - metadata
-    JobStatus:
-      type: string
-      enum:
-        - completed
-        - in_progress
-        - failed
-        - scheduled
-    ListBenchmarksResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Benchmark'
-      additionalProperties: false
-      required:
-        - data
-    DeprecatedRegisterEvalTaskRequest:
-      type: object
-      properties:
-        eval_task_id:
-          type: string
-        dataset_id:
-          type: string
-        scoring_functions:
-          type: array
-          items:
-            type: string
-        provider_benchmark_id:
-          type: string
-        provider_id:
-          type: string
-        metadata:
-          type: object
-          additionalProperties:
-            oneOf:
-              - type: boolean
-              - type: number
-              - type: string
-              - type: array
-              - type: object
-      additionalProperties: false
-      required:
-        - eval_task_id
-        - dataset_id
-        - scoring_functions
-    DeprecatedRunEvalRequest:
-      type: object
-      properties:
-        task_config:
-          $ref: '#/components/schemas/BenchmarkConfig'
-      additionalProperties: false
-      required:
-        - task_config
-    Job:
-      type: object
-      properties:
-        job_id:
-          type: string
-      additionalProperties: false
-      required:
-        - job_id
-    AppendRowsRequest:
-      type: object
-      properties:
-        dataset_id:
-          type: string
-        rows:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              oneOf:
-                - type: boolean
-                - type: number
-                - type: string
-                - type: array
-                - type: object
-      additionalProperties: false
-      required:
-        - dataset_id
-        - rows
-    CompletionMessage:
-      type: object
-      properties:
-        role:
-          type: string
-          const: assistant
-          default: assistant
-          description: >-
-            Must be "assistant" to identify this as the model's response
-        content:
-          $ref: '#/components/schemas/InterleavedContent'
-          description: The content of the model's response
-        stop_reason:
-          type: string
-          enum:
-            - end_of_turn
-            - end_of_message
-            - out_of_tokens
-          description: >-
-            Reason why the model stopped generating. Options are: - `StopReason.end_of_turn`:
-            The model finished generating the entire response. - `StopReason.end_of_message`:
-            The model finished generating but generated a partial response -- usually,
-            a tool call. The user may call the tool and continue the conversation
-            with the tool's response. - `StopReason.out_of_tokens`: The model ran
-            out of token budget.
-        tool_calls:
-          type: array
-          items:
-            $ref: '#/components/schemas/ToolCall'
-          description: >-
-            List of tool calls. Each tool call is a ToolCall object.
-      additionalProperties: false
-      required:
-        - role
-        - content
-        - stop_reason
-      description: >-
-        A message containing the model's (assistant) response in a chat conversation.
-    Message:
-      oneOf:
-        - $ref: '#/components/schemas/UserMessage'
-        - $ref: '#/components/schemas/SystemMessage'
-        - $ref: '#/components/schemas/ToolResponseMessage'
-        - $ref: '#/components/schemas/CompletionMessage'
-      discriminator:
-        propertyName: role
-        mapping:
-          user: '#/components/schemas/UserMessage'
-          system: '#/components/schemas/SystemMessage'
-          tool: '#/components/schemas/ToolResponseMessage'
-          assistant: '#/components/schemas/CompletionMessage'
     ToolCall:
       type: object
       properties:
@@ -2357,6 +1861,7 @@ components:
                 - wolfram_alpha
                 - photogen
                 - code_interpreter
+              title: BuiltinTool
             - type: string
         arguments:
           type: object
@@ -2385,6 +1890,7 @@ components:
         - call_id
         - tool_name
         - arguments
+      title: ToolCall
     ToolDefinition:
       type: object
       properties:
@@ -2396,6 +1902,7 @@ components:
                 - wolfram_alpha
                 - photogen
                 - code_interpreter
+              title: BuiltinTool
             - type: string
         description:
           type: string
@@ -2406,6 +1913,7 @@ components:
       additionalProperties: false
       required:
         - tool_name
+      title: ToolDefinition
     ToolParamDefinition:
       type: object
       properties:
@@ -2426,6 +1934,7 @@ components:
       additionalProperties: false
       required:
         - param_type
+      title: ToolParamDefinition
     ToolResponseMessage:
       type: object
       properties:
@@ -2447,6 +1956,7 @@ components:
                 - wolfram_alpha
                 - photogen
                 - code_interpreter
+              title: BuiltinTool
             - type: string
           description: Name of the tool that was called
         content:
@@ -2458,8 +1968,48 @@ components:
         - call_id
         - tool_name
         - content
+      title: ToolResponseMessage
       description: >-
         A message representing the result of a tool invocation.
+    TopKSamplingStrategy:
+      type: object
+      properties:
+        type:
+          type: string
+          const: top_k
+          default: top_k
+        top_k:
+          type: integer
+      additionalProperties: false
+      required:
+        - type
+        - top_k
+      title: TopKSamplingStrategy
+    TopPSamplingStrategy:
+      type: object
+      properties:
+        type:
+          type: string
+          const: top_p
+          default: top_p
+        temperature:
+          type: number
+        top_p:
+          type: number
+          default: 0.95
+      additionalProperties: false
+      required:
+        - type
+      title: TopPSamplingStrategy
+    URL:
+      type: object
+      properties:
+        uri:
+          type: string
+      additionalProperties: false
+      required:
+        - uri
+      title: URL
     UserMessage:
       type: object
       properties:
@@ -2482,6 +2032,7 @@ components:
       required:
         - role
         - content
+      title: UserMessage
       description: >-
         A message from the user in a chat conversation.
     BatchChatCompletionRequest:
@@ -2506,6 +2057,8 @@ components:
           enum:
             - auto
             - required
+            - none
+          title: ToolChoice
           description: >-
             Whether tool use is required or automatic. This is a hint to the model
             which may not be followed. It depends on the Instruction Following capabilities
@@ -2516,6 +2069,7 @@ components:
             - json
             - function_tag
             - python_list
+          title: ToolPromptFormat
           description: >-
             Prompt format for calling custom / zero shot tools.
         response_format:
@@ -2529,10 +2083,12 @@ components:
               description: >-
                 How many tokens (for each position) to return log probabilities for.
           additionalProperties: false
+          title: LogProbConfig
       additionalProperties: false
       required:
         - model
         - messages_batch
+      title: BatchChatCompletionRequest
     BatchChatCompletionResponse:
       type: object
       properties:
@@ -2543,6 +2099,7 @@ components:
       additionalProperties: false
       required:
         - batch
+      title: BatchChatCompletionResponse
     ChatCompletionResponse:
       type: object
       properties:
@@ -2562,6 +2119,7 @@ components:
       additionalProperties: false
       required:
         - completion_message
+      title: ChatCompletionResponse
       description: Response from a chat completion request.
     MetricEvent:
       type: object
@@ -2602,6 +2160,7 @@ components:
         - metric
         - value
         - unit
+      title: MetricEvent
     TokenLogProbs:
       type: object
       properties:
@@ -2614,6 +2173,7 @@ components:
       additionalProperties: false
       required:
         - logprobs_by_token
+      title: TokenLogProbs
       description: Log probabilities for generated tokens.
     BatchCompletionRequest:
       type: object
@@ -2637,10 +2197,12 @@ components:
               description: >-
                 How many tokens (for each position) to return log probabilities for.
           additionalProperties: false
+          title: LogProbConfig
       additionalProperties: false
       required:
         - model
         - content_batch
+      title: BatchCompletionRequest
     BatchCompletionResponse:
       type: object
       properties:
@@ -2651,6 +2213,7 @@ components:
       additionalProperties: false
       required:
         - batch
+      title: BatchCompletionResponse
     CompletionResponse:
       type: object
       properties:
@@ -2674,6 +2237,7 @@ components:
       required:
         - content
         - stop_reason
+      title: CompletionResponse
       description: Response from a completion request.
     CancelTrainingJobRequest:
       type: object
@@ -2683,6 +2247,55 @@ components:
       additionalProperties: false
       required:
         - job_uuid
+      title: CancelTrainingJobRequest
+    ToolConfig:
+      type: object
+      properties:
+        tool_choice:
+          oneOf:
+            - type: string
+              enum:
+                - auto
+                - required
+                - none
+              title: ToolChoice
+              description: >-
+                Whether tool use is required or automatic. This is a hint to the model
+                which may not be followed. It depends on the Instruction Following
+                capabilities of the model.
+            - type: string
+          default: auto
+          description: >-
+            (Optional) Whether tool use is automatic, required, or none. Can also
+            specify a tool name to use a specific tool. Defaults to ToolChoice.auto.
+        tool_prompt_format:
+          type: string
+          enum:
+            - json
+            - function_tag
+            - python_list
+          description: >-
+            (Optional) Instructs the model how to format tool calls. By default, Llama
+            Stack will attempt to use a format that is best adapted to the model.
+            - `ToolPromptFormat.json`: The tool calls are formatted as a JSON object.
+            - `ToolPromptFormat.function_tag`: The tool calls are enclosed in a <function=function_name>
+            tag. - `ToolPromptFormat.python_list`: The tool calls are output as Python
+            syntax -- a list of function calls.
+        system_message_behavior:
+          type: string
+          enum:
+            - append
+            - replace
+          description: >-
+            (Optional) Config for how to override the default system prompt. - `SystemMessageBehavior.append`:
+            Appends the provided system message to the default system prompt. - `SystemMessageBehavior.replace`:
+            Replaces the default system prompt with the provided system message. The
+            system message can include the string '{{function_definitions}}' to indicate
+            where the function definitions should be inserted.
+          default: append
+      additionalProperties: false
+      title: ToolConfig
+      description: Configuration for tool use.
     ChatCompletionRequest:
       type: object
       properties:
@@ -2711,6 +2324,7 @@ components:
           enum:
             - auto
             - required
+            - none
           description: >-
             (Optional) Whether tool use is required or automatic. Defaults to ToolChoice.auto.
             .. deprecated:: Use tool_config instead.
@@ -2759,6 +2373,7 @@ components:
       required:
         - model_id
         - messages
+      title: ChatCompletionRequest
     ChatCompletionResponseEvent:
       type: object
       properties:
@@ -2792,6 +2407,7 @@ components:
       required:
         - event_type
         - delta
+      title: ChatCompletionResponseEvent
       description: >-
         An event during chat completion generation.
     ChatCompletionResponseStreamChunk:
@@ -2807,6 +2423,7 @@ components:
       additionalProperties: false
       required:
         - event
+      title: ChatCompletionResponseStreamChunk
       description: >-
         A chunk of a streamed chat completion response.
     ContentDelta:
@@ -2834,6 +2451,7 @@ components:
       required:
         - type
         - image
+      title: ImageDelta
     TextDelta:
       type: object
       properties:
@@ -2847,6 +2465,7 @@ components:
       required:
         - type
         - text
+      title: TextDelta
     ToolCallDelta:
       type: object
       properties:
@@ -2865,11 +2484,13 @@ components:
             - in_progress
             - failed
             - succeeded
+          title: ToolCallParseStatus
       additionalProperties: false
       required:
         - type
         - tool_call
         - parse_status
+      title: ToolCallDelta
     CompletionRequest:
       type: object
       properties:
@@ -2910,6 +2531,7 @@ components:
       required:
         - model_id
         - content
+      title: CompletionRequest
     CompletionResponseStreamChunk:
       type: object
       properties:
@@ -2934,8 +2556,142 @@ components:
       additionalProperties: false
       required:
         - delta
+      title: CompletionResponseStreamChunk
       description: >-
         A chunk of a streamed completion response.
+    AgentConfig:
+      type: object
+      properties:
+        sampling_params:
+          $ref: '#/components/schemas/SamplingParams'
+        input_shields:
+          type: array
+          items:
+            type: string
+        output_shields:
+          type: array
+          items:
+            type: string
+        toolgroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentTool'
+        client_tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolDef'
+        tool_choice:
+          type: string
+          enum:
+            - auto
+            - required
+            - none
+          title: ToolChoice
+          description: >-
+            Whether tool use is required or automatic. This is a hint to the model
+            which may not be followed. It depends on the Instruction Following capabilities
+            of the model.
+          deprecated: true
+        tool_prompt_format:
+          type: string
+          enum:
+            - json
+            - function_tag
+            - python_list
+          title: ToolPromptFormat
+          description: >-
+            Prompt format for calling custom / zero shot tools.
+          deprecated: true
+        tool_config:
+          $ref: '#/components/schemas/ToolConfig'
+        max_infer_iters:
+          type: integer
+          default: 10
+        model:
+          type: string
+        instructions:
+          type: string
+        enable_session_persistence:
+          type: boolean
+          default: false
+        response_format:
+          $ref: '#/components/schemas/ResponseFormat'
+      additionalProperties: false
+      required:
+        - model
+        - instructions
+      title: AgentConfig
+    AgentTool:
+      oneOf:
+        - type: string
+        - type: object
+          properties:
+            name:
+              type: string
+            args:
+              type: object
+              additionalProperties:
+                oneOf:
+                  - type: boolean
+                  - type: number
+                  - type: string
+                  - type: array
+                  - type: object
+          additionalProperties: false
+          required:
+            - name
+            - args
+          title: AgentToolGroupWithArgs
+    ToolDef:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolParameter'
+        metadata:
+          type: object
+          additionalProperties:
+            oneOf:
+              - type: boolean
+              - type: number
+              - type: string
+              - type: array
+              - type: object
+      additionalProperties: false
+      required:
+        - name
+      title: ToolDef
+    ToolParameter:
+      type: object
+      properties:
+        name:
+          type: string
+        parameter_type:
+          type: string
+        description:
+          type: string
+        required:
+          type: boolean
+          default: true
+        default:
+          oneOf:
+            - type: boolean
+            - type: number
+            - type: string
+            - type: array
+            - type: object
+      additionalProperties: false
+      required:
+        - name
+        - parameter_type
+        - description
+        - required
+      title: ToolParameter
     CreateAgentRequest:
       type: object
       properties:
@@ -2944,6 +2700,7 @@ components:
       additionalProperties: false
       required:
         - agent_config
+      title: CreateAgentRequest
     AgentCreateResponse:
       type: object
       properties:
@@ -2952,6 +2709,7 @@ components:
       additionalProperties: false
       required:
         - agent_id
+      title: AgentCreateResponse
     CreateAgentSessionRequest:
       type: object
       properties:
@@ -2960,6 +2718,7 @@ components:
       additionalProperties: false
       required:
         - session_name
+      title: CreateAgentSessionRequest
     AgentSessionCreateResponse:
       type: object
       properties:
@@ -2968,6 +2727,7 @@ components:
       additionalProperties: false
       required:
         - session_id
+      title: AgentSessionCreateResponse
     CreateAgentTurnRequest:
       type: object
       properties:
@@ -2998,15 +2758,19 @@ components:
             required:
               - content
               - mime_type
+            title: Document
         toolgroups:
           type: array
           items:
             $ref: '#/components/schemas/AgentTool'
         tool_config:
           $ref: '#/components/schemas/ToolConfig'
+        allow_turn_resume:
+          type: boolean
       additionalProperties: false
       required:
         - messages
+      title: CreateAgentTurnRequest
     InferenceStep:
       type: object
       properties:
@@ -3032,6 +2796,7 @@ components:
         - step_id
         - step_type
         - model_response
+      title: InferenceStep
     MemoryRetrievalStep:
       type: object
       properties:
@@ -3060,6 +2825,7 @@ components:
         - step_type
         - vector_db_ids
         - inserted_context
+      title: MemoryRetrievalStep
     SafetyViolation:
       type: object
       properties:
@@ -3080,6 +2846,7 @@ components:
       required:
         - violation_level
         - metadata
+      title: SafetyViolation
     ShieldCallStep:
       type: object
       properties:
@@ -3104,6 +2871,7 @@ components:
         - turn_id
         - step_id
         - step_type
+      title: ShieldCallStep
     ToolExecutionStep:
       type: object
       properties:
@@ -3136,6 +2904,7 @@ components:
         - step_type
         - tool_calls
         - tool_responses
+      title: ToolExecutionStep
     ToolResponse:
       type: object
       properties:
@@ -3149,14 +2918,25 @@ components:
                 - wolfram_alpha
                 - photogen
                 - code_interpreter
+              title: BuiltinTool
             - type: string
         content:
           $ref: '#/components/schemas/InterleavedContent'
+        metadata:
+          type: object
+          additionalProperties:
+            oneOf:
+              - type: boolean
+              - type: number
+              - type: string
+              - type: array
+              - type: object
       additionalProperties: false
       required:
         - call_id
         - tool_name
         - content
+      title: ToolResponse
     Turn:
       type: object
       properties:
@@ -3206,6 +2986,7 @@ components:
             required:
               - content
               - mime_type
+            title: Attachment
         started_at:
           type: string
           format: date-time
@@ -3220,6 +3001,7 @@ components:
         - steps
         - output_message
         - started_at
+      title: Turn
       description: >-
         A single turn in an interaction with an Agentic System.
     ViolationLevel:
@@ -3228,6 +3010,7 @@ components:
         - info
         - warn
         - error
+      title: ViolationLevel
     AgentTurnResponseEvent:
       type: object
       properties:
@@ -3236,6 +3019,7 @@ components:
       additionalProperties: false
       required:
         - payload
+      title: AgentTurnResponseEvent
     AgentTurnResponseEventPayload:
       oneOf:
         - $ref: '#/components/schemas/AgentTurnResponseStepStartPayload'
@@ -3243,6 +3027,7 @@ components:
         - $ref: '#/components/schemas/AgentTurnResponseStepCompletePayload'
         - $ref: '#/components/schemas/AgentTurnResponseTurnStartPayload'
         - $ref: '#/components/schemas/AgentTurnResponseTurnCompletePayload'
+        - $ref: '#/components/schemas/AgentTurnResponseTurnAwaitingInputPayload'
       discriminator:
         propertyName: event_type
         mapping:
@@ -3251,6 +3036,7 @@ components:
           step_complete: '#/components/schemas/AgentTurnResponseStepCompletePayload'
           turn_start: '#/components/schemas/AgentTurnResponseTurnStartPayload'
           turn_complete: '#/components/schemas/AgentTurnResponseTurnCompletePayload'
+          turn_awaiting_input: '#/components/schemas/AgentTurnResponseTurnAwaitingInputPayload'
     AgentTurnResponseStepCompletePayload:
       type: object
       properties:
@@ -3265,6 +3051,7 @@ components:
             - tool_execution
             - shield_call
             - memory_retrieval
+          title: StepType
         step_id:
           type: string
         step_details:
@@ -3286,6 +3073,7 @@ components:
         - step_type
         - step_id
         - step_details
+      title: AgentTurnResponseStepCompletePayload
     AgentTurnResponseStepProgressPayload:
       type: object
       properties:
@@ -3300,6 +3088,7 @@ components:
             - tool_execution
             - shield_call
             - memory_retrieval
+          title: StepType
         step_id:
           type: string
         delta:
@@ -3310,6 +3099,7 @@ components:
         - step_type
         - step_id
         - delta
+      title: AgentTurnResponseStepProgressPayload
     AgentTurnResponseStepStartPayload:
       type: object
       properties:
@@ -3324,6 +3114,7 @@ components:
             - tool_execution
             - shield_call
             - memory_retrieval
+          title: StepType
         step_id:
           type: string
         metadata:
@@ -3340,6 +3131,7 @@ components:
         - event_type
         - step_type
         - step_id
+      title: AgentTurnResponseStepStartPayload
     AgentTurnResponseStreamChunk:
       type: object
       properties:
@@ -3348,7 +3140,23 @@ components:
       additionalProperties: false
       required:
         - event
+      title: AgentTurnResponseStreamChunk
       description: streamed agent turn completion response.
+    "AgentTurnResponseTurnAwaitingInputPayload":
+      type: object
+      properties:
+        event_type:
+          type: string
+          const: turn_awaiting_input
+          default: turn_awaiting_input
+        turn:
+          $ref: '#/components/schemas/Turn'
+      additionalProperties: false
+      required:
+        - event_type
+        - turn
+      title: >-
+        AgentTurnResponseTurnAwaitingInputPayload
     AgentTurnResponseTurnCompletePayload:
       type: object
       properties:
@@ -3362,6 +3170,7 @@ components:
       required:
         - event_type
         - turn
+      title: AgentTurnResponseTurnCompletePayload
     AgentTurnResponseTurnStartPayload:
       type: object
       properties:
@@ -3375,6 +3184,88 @@ components:
       required:
         - event_type
         - turn_id
+      title: AgentTurnResponseTurnStartPayload
+    CreateUploadSessionRequest:
+      type: object
+      properties:
+        bucket:
+          type: string
+          description: >-
+            Bucket under which the file is stored (valid chars: a-zA-Z0-9_-)
+        key:
+          type: string
+          description: >-
+            Key under which the file is stored (valid chars: a-zA-Z0-9_-/.)
+        mime_type:
+          type: string
+          description: MIME type of the file
+        size:
+          type: integer
+          description: File size in bytes
+      additionalProperties: false
+      required:
+        - bucket
+        - key
+        - mime_type
+        - size
+      title: CreateUploadSessionRequest
+    FileUploadResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the upload session
+        url:
+          type: string
+          description: Upload URL for the file or file parts
+        offset:
+          type: integer
+          description: Upload content offset
+        size:
+          type: integer
+          description: Upload content size
+      additionalProperties: false
+      required:
+        - id
+        - url
+        - offset
+        - size
+      title: FileUploadResponse
+      description: >-
+        Response after initiating a file upload session.
+    FileResponse:
+      type: object
+      properties:
+        bucket:
+          type: string
+          description: >-
+            Bucket under which the file is stored (valid chars: a-zA-Z0-9_-)
+        key:
+          type: string
+          description: >-
+            Key under which the file is stored (valid chars: a-zA-Z0-9_-/.)
+        mime_type:
+          type: string
+          description: MIME type of the file
+        url:
+          type: string
+          description: Upload URL for the file contents
+        bytes:
+          type: integer
+          description: Size of the file in bytes
+        created_at:
+          type: integer
+          description: Timestamp of when the file was created
+      additionalProperties: false
+      required:
+        - bucket
+        - key
+        - mime_type
+        - url
+        - bytes
+        - created_at
+      title: FileResponse
+      description: Response representing a file entry.
     EmbeddingsRequest:
       type: object
       properties:
@@ -3384,17 +3275,44 @@ components:
             The identifier of the model to use. The model must be an embedding model
             registered with Llama Stack and available via the /models endpoint.
         contents:
-          type: array
-          items:
-            $ref: '#/components/schemas/InterleavedContent'
+          oneOf:
+            - type: array
+              items:
+                type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/InterleavedContentItem'
           description: >-
-            List of contents to generate embeddings for. Note that content can be
-            multimodal. The behavior depends on the model and provider. Some models
-            may only support text.
+            List of contents to generate embeddings for. Each content can be a string
+            or an InterleavedContentItem (and hence can be multimodal). The behavior
+            depends on the model and provider. Some models may only support text.
+        text_truncation:
+          type: string
+          enum:
+            - none
+            - start
+            - end
+          description: >-
+            (Optional) Config for how to truncate text for embedding when text is
+            longer than the model's max sequence length.
+        output_dimension:
+          type: integer
+          description: >-
+            (Optional) Output dimensionality for the embeddings. Only supported by
+            Matryoshka models.
+        task_type:
+          type: string
+          enum:
+            - query
+            - document
+          description: >-
+            (Optional) How is the embedding being used? This is only supported by
+            asymmetric embedding models.
       additionalProperties: false
       required:
         - model_id
         - contents
+      title: EmbeddingsRequest
     EmbeddingsResponse:
       type: object
       properties:
@@ -3411,8 +3329,144 @@ components:
       additionalProperties: false
       required:
         - embeddings
+      title: EmbeddingsResponse
       description: >-
         Response containing generated embeddings.
+    AgentCandidate:
+      type: object
+      properties:
+        type:
+          type: string
+          const: agent
+          default: agent
+        config:
+          $ref: '#/components/schemas/AgentConfig'
+      additionalProperties: false
+      required:
+        - type
+        - config
+      title: AgentCandidate
+    AggregationFunctionType:
+      type: string
+      enum:
+        - average
+        - median
+        - categorical_count
+        - accuracy
+      title: AggregationFunctionType
+    BasicScoringFnParams:
+      type: object
+      properties:
+        type:
+          type: string
+          const: basic
+          default: basic
+        aggregation_functions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationFunctionType'
+      additionalProperties: false
+      required:
+        - type
+      title: BasicScoringFnParams
+    BenchmarkConfig:
+      type: object
+      properties:
+        eval_candidate:
+          $ref: '#/components/schemas/EvalCandidate'
+        scoring_params:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ScoringFnParams'
+        num_examples:
+          type: integer
+      additionalProperties: false
+      required:
+        - eval_candidate
+        - scoring_params
+      title: BenchmarkConfig
+    EvalCandidate:
+      oneOf:
+        - $ref: '#/components/schemas/ModelCandidate'
+        - $ref: '#/components/schemas/AgentCandidate'
+      discriminator:
+        propertyName: type
+        mapping:
+          model: '#/components/schemas/ModelCandidate'
+          agent: '#/components/schemas/AgentCandidate'
+    LLMAsJudgeScoringFnParams:
+      type: object
+      properties:
+        type:
+          type: string
+          const: llm_as_judge
+          default: llm_as_judge
+        judge_model:
+          type: string
+        prompt_template:
+          type: string
+        judge_score_regexes:
+          type: array
+          items:
+            type: string
+        aggregation_functions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationFunctionType'
+      additionalProperties: false
+      required:
+        - type
+        - judge_model
+      title: LLMAsJudgeScoringFnParams
+    ModelCandidate:
+      type: object
+      properties:
+        type:
+          type: string
+          const: model
+          default: model
+        model:
+          type: string
+        sampling_params:
+          $ref: '#/components/schemas/SamplingParams'
+        system_message:
+          $ref: '#/components/schemas/SystemMessage'
+      additionalProperties: false
+      required:
+        - type
+        - model
+        - sampling_params
+      title: ModelCandidate
+    RegexParserScoringFnParams:
+      type: object
+      properties:
+        type:
+          type: string
+          const: regex_parser
+          default: regex_parser
+        parsing_regexes:
+          type: array
+          items:
+            type: string
+        aggregation_functions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationFunctionType'
+      additionalProperties: false
+      required:
+        - type
+      title: RegexParserScoringFnParams
+    ScoringFnParams:
+      oneOf:
+        - $ref: '#/components/schemas/LLMAsJudgeScoringFnParams'
+        - $ref: '#/components/schemas/RegexParserScoringFnParams'
+        - $ref: '#/components/schemas/BasicScoringFnParams'
+      discriminator:
+        propertyName: type
+        mapping:
+          llm_as_judge: '#/components/schemas/LLMAsJudgeScoringFnParams'
+          regex_parser: '#/components/schemas/RegexParserScoringFnParams'
+          basic: '#/components/schemas/BasicScoringFnParams'
     EvaluateRowsRequest:
       type: object
       properties:
@@ -3438,6 +3492,58 @@ components:
         - input_rows
         - scoring_functions
         - task_config
+      title: EvaluateRowsRequest
+    EvaluateResponse:
+      type: object
+      properties:
+        generations:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              oneOf:
+                - type: boolean
+                - type: number
+                - type: string
+                - type: array
+                - type: object
+        scores:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/ScoringResult'
+      additionalProperties: false
+      required:
+        - generations
+        - scores
+      title: EvaluateResponse
+    ScoringResult:
+      type: object
+      properties:
+        score_rows:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              oneOf:
+                - type: boolean
+                - type: number
+                - type: string
+                - type: array
+                - type: object
+        aggregated_results:
+          type: object
+          additionalProperties:
+            oneOf:
+              - type: boolean
+              - type: number
+              - type: string
+              - type: array
+              - type: object
+      additionalProperties: false
+      required:
+        - score_rows
+        - aggregated_results
+      title: ScoringResult
     Session:
       type: object
       properties:
@@ -3458,6 +3564,7 @@ components:
         - session_name
         - turns
         - started_at
+      title: Session
       description: >-
         A single session of an interaction with an Agentic System.
     AgentStepResponse:
@@ -3479,6 +3586,45 @@ components:
       additionalProperties: false
       required:
         - step
+      title: AgentStepResponse
+    Benchmark:
+      type: object
+      properties:
+        identifier:
+          type: string
+        provider_resource_id:
+          type: string
+        provider_id:
+          type: string
+        type:
+          type: string
+          const: benchmark
+          default: benchmark
+        dataset_id:
+          type: string
+        scoring_functions:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties:
+            oneOf:
+              - type: boolean
+              - type: number
+              - type: string
+              - type: array
+              - type: object
+      additionalProperties: false
+      required:
+        - identifier
+        - provider_resource_id
+        - provider_id
+        - type
+        - dataset_id
+        - scoring_functions
+        - metadata
+      title: Benchmark
     AgentTurnInputType:
       type: object
       properties:
@@ -3489,6 +3635,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: AgentTurnInputType
     ArrayType:
       type: object
       properties:
@@ -3499,6 +3646,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: ArrayType
     BooleanType:
       type: object
       properties:
@@ -3509,6 +3657,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: BooleanType
     ChatCompletionInputType:
       type: object
       properties:
@@ -3519,6 +3668,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: ChatCompletionInputType
     CompletionInputType:
       type: object
       properties:
@@ -3529,6 +3679,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: CompletionInputType
     Dataset:
       type: object
       properties:
@@ -3566,6 +3717,7 @@ components:
         - dataset_schema
         - url
         - metadata
+      title: Dataset
     JsonType:
       type: object
       properties:
@@ -3576,6 +3728,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: JsonType
     NumberType:
       type: object
       properties:
@@ -3586,6 +3739,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: NumberType
     ObjectType:
       type: object
       properties:
@@ -3596,6 +3750,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: ObjectType
     ParamType:
       oneOf:
         - $ref: '#/components/schemas/StringType'
@@ -3631,6 +3786,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: StringType
     UnionType:
       type: object
       properties:
@@ -3641,6 +3797,7 @@ components:
       additionalProperties: false
       required:
         - type
+      title: UnionType
     Model:
       type: object
       properties:
@@ -3674,11 +3831,13 @@ components:
         - type
         - metadata
         - model_type
+      title: Model
     ModelType:
       type: string
       enum:
         - llm
         - embedding
+      title: ModelType
     PaginatedRowsResult:
       type: object
       properties:
@@ -3701,6 +3860,7 @@ components:
       required:
         - rows
         - total_count
+      title: PaginatedRowsResult
     ScoringFn:
       type: object
       properties:
@@ -3737,6 +3897,7 @@ components:
         - type
         - metadata
         - return_type
+      title: ScoringFn
     Shield:
       type: object
       properties:
@@ -3765,6 +3926,7 @@ components:
         - provider_resource_id
         - provider_id
         - type
+      title: Shield
       description: >-
         A safety shield resource that can be used to check content
     Span:
@@ -3799,11 +3961,24 @@ components:
         - trace_id
         - name
         - start_time
+      title: Span
+    GetSpanTreeRequest:
+      type: object
+      properties:
+        attributes_to_return:
+          type: array
+          items:
+            type: string
+        max_depth:
+          type: integer
+      additionalProperties: false
+      title: GetSpanTreeRequest
     SpanStatus:
       type: string
       enum:
         - ok
         - error
+      title: SpanStatus
     SpanWithStatus:
       type: object
       properties:
@@ -3838,6 +4013,7 @@ components:
         - trace_id
         - name
         - start_time
+      title: SpanWithStatus
     QuerySpanTreeResponse:
       type: object
       properties:
@@ -3848,6 +4024,7 @@ components:
       additionalProperties: false
       required:
         - data
+      title: QuerySpanTreeResponse
     Tool:
       type: object
       properties:
@@ -3890,12 +4067,14 @@ components:
         - tool_host
         - description
         - parameters
+      title: Tool
     ToolHost:
       type: string
       enum:
         - distribution
         - client
         - model_context_protocol
+      title: ToolHost
     ToolGroup:
       type: object
       properties:
@@ -3926,6 +4105,7 @@ components:
         - provider_resource_id
         - provider_id
         - type
+      title: ToolGroup
     Trace:
       type: object
       properties:
@@ -3944,8 +4124,10 @@ components:
         - trace_id
         - root_span_id
         - start_time
+      title: Trace
     Checkpoint:
       description: Checkpoint created during training runs
+      title: Checkpoint
     PostTrainingJobArtifactsResponse:
       type: object
       properties:
@@ -3959,7 +4141,16 @@ components:
       required:
         - job_uuid
         - checkpoints
+      title: PostTrainingJobArtifactsResponse
       description: Artifacts of a finetuning job.
+    JobStatus:
+      type: string
+      enum:
+        - completed
+        - in_progress
+        - failed
+        - scheduled
+      title: JobStatus
     PostTrainingJobStatusResponse:
       type: object
       properties:
@@ -3994,6 +4185,7 @@ components:
         - job_uuid
         - status
         - checkpoints
+      title: PostTrainingJobStatusResponse
       description: Status of a finetuning job.
     ListPostTrainingJobsResponse:
       type: object
@@ -4008,9 +4200,11 @@ components:
             additionalProperties: false
             required:
               - job_uuid
+            title: PostTrainingJob
       additionalProperties: false
       required:
         - data
+      title: ListPostTrainingJobsResponse
     VectorDB:
       type: object
       properties:
@@ -4036,6 +4230,7 @@ components:
         - type
         - embedding_model
         - embedding_dimension
+      title: VectorDB
     HealthInfo:
       type: object
       properties:
@@ -4044,6 +4239,7 @@ components:
       additionalProperties: false
       required:
         - status
+      title: HealthInfo
     RAGDocument:
       type: object
       properties:
@@ -4073,6 +4269,7 @@ components:
         - document_id
         - content
         - metadata
+      title: RAGDocument
     InsertRequest:
       type: object
       properties:
@@ -4089,6 +4286,7 @@ components:
         - documents
         - vector_db_id
         - chunk_size_in_tokens
+      title: InsertRequest
     InsertChunksRequest:
       type: object
       properties:
@@ -4114,12 +4312,14 @@ components:
             required:
               - content
               - metadata
+            title: Chunk
         ttl_seconds:
           type: integer
       additionalProperties: false
       required:
         - vector_db_id
         - chunks
+      title: InsertChunksRequest
     InvokeToolRequest:
       type: object
       properties:
@@ -4138,6 +4338,7 @@ components:
       required:
         - tool_name
         - kwargs
+      title: InvokeToolRequest
     ToolInvocationResult:
       type: object
       properties:
@@ -4147,9 +4348,53 @@ components:
           type: string
         error_code:
           type: integer
+        metadata:
+          type: object
+          additionalProperties:
+            oneOf:
+              - type: boolean
+              - type: number
+              - type: string
+              - type: array
+              - type: object
       additionalProperties: false
       required:
         - content
+      title: ToolInvocationResult
+    BucketResponse:
+      type: object
+      properties:
+        name:
+          type: string
+      additionalProperties: false
+      required:
+        - name
+      title: BucketResponse
+    ListBucketResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BucketResponse'
+          description: List of FileResponse entries
+      additionalProperties: false
+      required:
+        - data
+      title: ListBucketResponse
+      description: >-
+        Response representing a list of file entries.
+    ListBenchmarksResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Benchmark'
+      additionalProperties: false
+      required:
+        - data
+      title: ListBenchmarksResponse
     ListDatasetsResponse:
       type: object
       properties:
@@ -4160,6 +4405,21 @@ components:
       additionalProperties: false
       required:
         - data
+      title: ListDatasetsResponse
+    ListFileResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/FileResponse'
+          description: List of FileResponse entries
+      additionalProperties: false
+      required:
+        - data
+      title: ListFileResponse
+      description: >-
+        Response representing a list of file entries.
     ListModelsResponse:
       type: object
       properties:
@@ -4170,6 +4430,7 @@ components:
       additionalProperties: false
       required:
         - data
+      title: ListModelsResponse
     ProviderInfo:
       type: object
       properties:
@@ -4184,6 +4445,7 @@ components:
         - api
         - provider_id
         - provider_type
+      title: ProviderInfo
     ListProvidersResponse:
       type: object
       properties:
@@ -4194,6 +4456,7 @@ components:
       additionalProperties: false
       required:
         - data
+      title: ListProvidersResponse
     RouteInfo:
       type: object
       properties:
@@ -4210,6 +4473,7 @@ components:
         - route
         - method
         - provider_types
+      title: RouteInfo
     ListRoutesResponse:
       type: object
       properties:
@@ -4220,6 +4484,7 @@ components:
       additionalProperties: false
       required:
         - data
+      title: ListRoutesResponse
     ListScoringFunctionsResponse:
       type: object
       properties:
@@ -4230,6 +4495,7 @@ components:
       additionalProperties: false
       required:
         - data
+      title: ListScoringFunctionsResponse
     ListShieldsResponse:
       type: object
       properties:
@@ -4240,6 +4506,7 @@ components:
       additionalProperties: false
       required:
         - data
+      title: ListShieldsResponse
     ListToolGroupsResponse:
       type: object
       properties:
@@ -4250,6 +4517,7 @@ components:
       additionalProperties: false
       required:
         - data
+      title: ListToolGroupsResponse
     ListToolsResponse:
       type: object
       properties:
@@ -4260,6 +4528,7 @@ components:
       additionalProperties: false
       required:
         - data
+      title: ListToolsResponse
     ListVectorDBsResponse:
       type: object
       properties:
@@ -4270,6 +4539,7 @@ components:
       additionalProperties: false
       required:
         - data
+      title: ListVectorDBsResponse
     Event:
       oneOf:
         - $ref: '#/components/schemas/UnstructuredLogEvent'
@@ -4290,6 +4560,7 @@ components:
         - warn
         - error
         - critical
+      title: LogSeverity
     SpanEndPayload:
       type: object
       properties:
@@ -4303,6 +4574,7 @@ components:
       required:
         - type
         - status
+      title: SpanEndPayload
     SpanStartPayload:
       type: object
       properties:
@@ -4318,6 +4590,7 @@ components:
       required:
         - type
         - name
+      title: SpanStartPayload
     StructuredLogEvent:
       type: object
       properties:
@@ -4349,6 +4622,7 @@ components:
         - timestamp
         - type
         - payload
+      title: StructuredLogEvent
     StructuredLogPayload:
       oneOf:
         - $ref: '#/components/schemas/SpanStartPayload'
@@ -4392,6 +4666,7 @@ components:
         - type
         - message
         - severity
+      title: UnstructuredLogEvent
     LogEventRequest:
       type: object
       properties:
@@ -4403,6 +4678,7 @@ components:
       required:
         - event
         - ttl_seconds
+      title: LogEventRequest
     DPOAlignmentConfig:
       type: object
       properties:
@@ -4420,6 +4696,7 @@ components:
         - reward_clip
         - epsilon
         - gamma
+      title: DPOAlignmentConfig
     DataConfig:
       type: object
       properties:
@@ -4445,11 +4722,13 @@ components:
         - batch_size
         - shuffle
         - data_format
+      title: DataConfig
     DatasetFormat:
       type: string
       enum:
         - instruct
         - dialog
+      title: DatasetFormat
     EfficiencyConfig:
       type: object
       properties:
@@ -4466,6 +4745,7 @@ components:
           type: boolean
           default: false
       additionalProperties: false
+      title: EfficiencyConfig
     OptimizerConfig:
       type: object
       properties:
@@ -4483,12 +4763,14 @@ components:
         - lr
         - weight_decay
         - num_warmup_steps
+      title: OptimizerConfig
     OptimizerType:
       type: string
       enum:
         - adam
         - adamw
         - sgd
+      title: OptimizerType
     TrainingConfig:
       type: object
       properties:
@@ -4517,6 +4799,7 @@ components:
         - max_validation_steps
         - data_config
         - optimizer_config
+      title: TrainingConfig
     PreferenceOptimizeRequest:
       type: object
       properties:
@@ -4554,6 +4837,7 @@ components:
         - training_config
         - hyperparam_search_config
         - logger_config
+      title: PreferenceOptimizeRequest
     PostTrainingJob:
       type: object
       properties:
@@ -4562,6 +4846,7 @@ components:
       additionalProperties: false
       required:
         - job_uuid
+      title: PostTrainingJob
     DefaultRAGQueryGeneratorConfig:
       type: object
       properties:
@@ -4576,6 +4861,7 @@ components:
       required:
         - type
         - separator
+      title: DefaultRAGQueryGeneratorConfig
     LLMRAGQueryGeneratorConfig:
       type: object
       properties:
@@ -4592,6 +4878,7 @@ components:
         - type
         - model
         - template
+      title: LLMRAGQueryGeneratorConfig
     RAGQueryConfig:
       type: object
       properties:
@@ -4608,6 +4895,7 @@ components:
         - query_generator_config
         - max_tokens_in_context
         - max_chunks
+      title: RAGQueryConfig
     RAGQueryGeneratorConfig:
       oneOf:
         - $ref: '#/components/schemas/DefaultRAGQueryGeneratorConfig'
@@ -4632,12 +4920,25 @@ components:
       required:
         - content
         - vector_db_ids
+      title: QueryRequest
     RAGQueryResult:
       type: object
       properties:
         content:
           $ref: '#/components/schemas/InterleavedContent'
+        metadata:
+          type: object
+          additionalProperties:
+            oneOf:
+              - type: boolean
+              - type: number
+              - type: string
+              - type: array
+              - type: object
       additionalProperties: false
+      required:
+        - metadata
+      title: RAGQueryResult
     QueryChunksRequest:
       type: object
       properties:
@@ -4658,6 +4959,7 @@ components:
       required:
         - vector_db_id
         - query
+      title: QueryChunksRequest
     QueryChunksResponse:
       type: object
       properties:
@@ -4681,6 +4983,7 @@ components:
             required:
               - content
               - metadata
+            title: Chunk
         scores:
           type: array
           items:
@@ -4689,6 +4992,7 @@ components:
       required:
         - chunks
         - scores
+      title: QueryChunksResponse
     QueryCondition:
       type: object
       properties:
@@ -4708,6 +5012,7 @@ components:
         - key
         - op
         - value
+      title: QueryCondition
     QueryConditionOp:
       type: string
       enum:
@@ -4715,6 +5020,25 @@ components:
         - ne
         - gt
         - lt
+      title: QueryConditionOp
+    QuerySpansRequest:
+      type: object
+      properties:
+        attribute_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryCondition'
+        attributes_to_return:
+          type: array
+          items:
+            type: string
+        max_depth:
+          type: integer
+      additionalProperties: false
+      required:
+        - attribute_filters
+        - attributes_to_return
+      title: QuerySpansRequest
     QuerySpansResponse:
       type: object
       properties:
@@ -4725,6 +5049,24 @@ components:
       additionalProperties: false
       required:
         - data
+      title: QuerySpansResponse
+    QueryTracesRequest:
+      type: object
+      properties:
+        attribute_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryCondition'
+        limit:
+          type: integer
+        offset:
+          type: integer
+        order_by:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+      title: QueryTracesRequest
     QueryTracesResponse:
       type: object
       properties:
@@ -4735,6 +5077,7 @@ components:
       additionalProperties: false
       required:
         - data
+      title: QueryTracesResponse
     RegisterBenchmarkRequest:
       type: object
       properties:
@@ -4764,6 +5107,7 @@ components:
         - benchmark_id
         - dataset_id
         - scoring_functions
+      title: RegisterBenchmarkRequest
     RegisterDatasetRequest:
       type: object
       properties:
@@ -4793,6 +5137,7 @@ components:
         - dataset_id
         - dataset_schema
         - url
+      title: RegisterDatasetRequest
     RegisterModelRequest:
       type: object
       properties:
@@ -4816,6 +5161,7 @@ components:
       additionalProperties: false
       required:
         - model_id
+      title: RegisterModelRequest
     RegisterScoringFunctionRequest:
       type: object
       properties:
@@ -4836,6 +5182,7 @@ components:
         - scoring_fn_id
         - description
         - return_type
+      title: RegisterScoringFunctionRequest
     RegisterShieldRequest:
       type: object
       properties:
@@ -4857,6 +5204,7 @@ components:
       additionalProperties: false
       required:
         - shield_id
+      title: RegisterShieldRequest
     RegisterToolGroupRequest:
       type: object
       properties:
@@ -4879,6 +5227,7 @@ components:
       required:
         - toolgroup_id
         - provider_id
+      title: RegisterToolGroupRequest
     RegisterVectorDbRequest:
       type: object
       properties:
@@ -4896,6 +5245,23 @@ components:
       required:
         - vector_db_id
         - embedding_model
+      title: RegisterVectorDbRequest
+    ResumeAgentTurnRequest:
+      type: object
+      properties:
+        tool_responses:
+          type: array
+          items:
+            $ref: '#/components/schemas/ToolResponseMessage'
+          description: >-
+            The tool call responses to resume the turn with.
+        stream:
+          type: boolean
+          description: Whether to stream the response.
+      additionalProperties: false
+      required:
+        - tool_responses
+      title: ResumeAgentTurnRequest
     RunEvalRequest:
       type: object
       properties:
@@ -4904,6 +5270,16 @@ components:
       additionalProperties: false
       required:
         - task_config
+      title: RunEvalRequest
+    Job:
+      type: object
+      properties:
+        job_id:
+          type: string
+      additionalProperties: false
+      required:
+        - job_id
+      title: Job
     RunShieldRequest:
       type: object
       properties:
@@ -4927,12 +5303,14 @@ components:
         - shield_id
         - messages
         - params
+      title: RunShieldRequest
     RunShieldResponse:
       type: object
       properties:
         violation:
           $ref: '#/components/schemas/SafetyViolation'
       additionalProperties: false
+      title: RunShieldResponse
     SaveSpansToDatasetRequest:
       type: object
       properties:
@@ -4953,6 +5331,7 @@ components:
         - attribute_filters
         - attributes_to_save
         - dataset_id
+      title: SaveSpansToDatasetRequest
     ScoreRequest:
       type: object
       properties:
@@ -4976,6 +5355,7 @@ components:
       required:
         - input_rows
         - scoring_functions
+      title: ScoreRequest
     ScoreResponse:
       type: object
       properties:
@@ -4986,6 +5366,7 @@ components:
       additionalProperties: false
       required:
         - results
+      title: ScoreResponse
     ScoreBatchRequest:
       type: object
       properties:
@@ -5003,6 +5384,7 @@ components:
         - dataset_id
         - scoring_functions
         - save_results_dataset
+      title: ScoreBatchRequest
     ScoreBatchResponse:
       type: object
       properties:
@@ -5015,6 +5397,7 @@ components:
       additionalProperties: false
       required:
         - results
+      title: ScoreBatchResponse
     AlgorithmConfig:
       oneOf:
         - $ref: '#/components/schemas/LoraFinetuningConfig'
@@ -5057,6 +5440,7 @@ components:
         - apply_lora_to_output
         - rank
         - alpha
+      title: LoraFinetuningConfig
     QATFinetuningConfig:
       type: object
       properties:
@@ -5073,6 +5457,7 @@ components:
         - type
         - quantizer_name
         - group_size
+      title: QATFinetuningConfig
     SupervisedFineTuneRequest:
       type: object
       properties:
@@ -5111,6 +5496,7 @@ components:
         - hyperparam_search_config
         - logger_config
         - model
+      title: SupervisedFineTuneRequest
     SyntheticDataGenerateRequest:
       type: object
       properties:
@@ -5127,6 +5513,7 @@ components:
             - top_p
             - top_k_top_p
             - sigmoid
+          title: FilteringFunction
           description: The type of filtering function.
         model:
           type: string
@@ -5134,6 +5521,7 @@ components:
       required:
         - dialogs
         - filtering_function
+      title: SyntheticDataGenerateRequest
     SyntheticDataGenerationResponse:
       type: object
       properties:
@@ -5160,6 +5548,7 @@ components:
       additionalProperties: false
       required:
         - synthetic_data
+      title: SyntheticDataGenerationResponse
       description: >-
         Response from the synthetic data generation. Batch of (prompt, response, score)
         tuples that pass the threshold.
@@ -5171,6 +5560,7 @@ components:
       additionalProperties: false
       required:
         - version
+      title: VersionInfo
   responses: {}
 tags:
   - name: Agents
@@ -5196,6 +5586,7 @@ tags:
   - name: DatasetIO
   - name: Datasets
   - name: Eval
+  - name: Files (Coming Soon)
   - name: Inference
     description: >-
       This API provides the raw interface to the underlying models. Two kinds of models
@@ -5230,6 +5621,7 @@ x-tagGroups:
       - DatasetIO
       - Datasets
       - Eval
+      - Files (Coming Soon)
       - Inference
       - Inspect
       - Models
