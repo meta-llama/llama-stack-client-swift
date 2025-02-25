@@ -1,0 +1,3 @@
+[submodule "local_inference/executorch"]
+	path = local_inference/executorch
+	url = https://github.com/pytorch/executorch
