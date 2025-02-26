@@ -4,7 +4,7 @@
 
 llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](https://github.com/meta-llama/llama-stack) to iOS.
 
-**Update: February 18, 2025** The llama-stack-client-swift SDK version has been updated to 0.1.3, working with Llama Stack 0.1.3 ([release note](https://github.com/meta-llama/llama-stack/releases/tag/v0.1.3)).
+**Update: February 26, 2025** The llama-stack-client-swift SDK version has been updated to 0.1.4, working with Llama Stack 0.1.4 ([release note](https://github.com/meta-llama/llama-stack/releases/tag/v0.1.4)).
 
 ## Features
 
@@ -21,7 +21,7 @@ For a more advanced demo using the Llama Stack Agent API and custom tool calling
 
 1. Click "Xcode > File > Add Package Dependencies...".
 
-2. Add this repo URL at the top right: `https://github.com/meta-llama/llama-stack-client-swift` and 0.1.3 in the Dependency Rule, then click Add Package.
+2. Add this repo URL at the top right: `https://github.com/meta-llama/llama-stack-client-swift`, then click Add Package.
 
 3. Select and add `llama-stack-client-swift` to your app target.
 
@@ -34,18 +34,18 @@ For a more advanced demo using the Llama Stack Agent API and custom tool calling
 ```
 conda create -n llama-stack python=3.10
 conda activate llama-stack
-pip install --no-cache llama-stack==0.1.3 llama-models==0.1.3 llama-stack-client==0.1.3
+pip install --no-cache llama-stack==0.1.4 llama-models==0.1.4 llama-stack-client==0.1.4
 ```
 
 Then, either:
 ```
-PYPI_VERSION=0.1.3 llama stack build --template fireworks --image-type conda
+PYPI_VERSION=0.1.4 llama stack build --template fireworks --image-type conda
 export FIREWORKS_API_KEY="<your_fireworks_api_key>"
 llama stack run fireworks
 ```
 or
 ```
-PYPI_VERSION=0.1.3 llama stack build --template together --image-type conda
+PYPI_VERSION=0.1.4 llama stack build --template together --image-type conda
 export TOGETHER_API_KEY="<your_together_api_key>"
 llama stack run together
 ```
