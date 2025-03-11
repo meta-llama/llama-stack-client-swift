@@ -13,7 +13,7 @@ public class RemoteInference: Inference {
     self.client = Client(
       serverURL: url,
       transport: URLSessionTransport(),
-      middlewares: apiKey.map { [BearerAuthenticationMiddleware(token: $0)] } ?? []
+      middlewares: apiKey.map { [ProviderMiddleware(token: $0)] } ?? []
     )
   }
   
