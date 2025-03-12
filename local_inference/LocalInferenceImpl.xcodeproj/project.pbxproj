@@ -16,6 +16,7 @@
 		5CCBC6902CA1F7A100E958D0 /* SystemPrompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCBC68C2CA1F7A100E958D0 /* SystemPrompts.swift */; };
 		5CCBC6932CA1F7D000E958D0 /* Stencil in Frameworks */ = {isa = PBXBuildFile; productRef = 5CCBC6922CA1F7D000E958D0 /* Stencil */; };
 		BA95DFF22D7F8CBD00203D37 /* LlamaStackClient in Frameworks */ = {isa = PBXBuildFile; productRef = BA95DFF12D7F8CBD00203D37 /* LlamaStackClient */; };
+		BAFF5F192D81305000E1D87B /* LlamaStackClient in Frameworks */ = {isa = PBXBuildFile; productRef = 5CADC7192CA471CC007662D2 /* LlamaStackClient */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAFF5F192D81305000E1D87B /* LlamaStackClient in Frameworks */,
 				5CCBC6932CA1F7D000E958D0 /* Stencil in Frameworks */,
 				BA95DFF22D7F8CBD00203D37 /* LlamaStackClient in Frameworks */,
 				5CCBC6862CA1F64A00E958D0 /* LLaMARunner.framework in Frameworks */,
