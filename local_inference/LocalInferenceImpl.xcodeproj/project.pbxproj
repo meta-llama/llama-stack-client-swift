@@ -474,7 +474,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/meta-llama/llama-stack-client-swift";
 			requirement = {
-				branch = "et-v0.5.0-update";
+				branch = main;
 				kind = branch;
 			};
 		};
