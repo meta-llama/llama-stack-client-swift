@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5CADC71A2CA471CC007662D2 /* LlamaStackClient in Frameworks */ = {isa = PBXBuildFile; productRef = 5CADC7192CA471CC007662D2 /* LlamaStackClient */; };
-		5CAF3DD82CA485740029CD2B /* LlamaStackClient in Frameworks */ = {isa = PBXBuildFile; productRef = 5CAF3DD72CA485740029CD2B /* LlamaStackClient */; };
 		5CCBC60C2CA1F04A00E958D0 /* LocalInference.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CCBC60B2CA1F04A00E958D0 /* LocalInference.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CCBC6752CA1F45800E958D0 /* executorch_debug in Frameworks */ = {isa = PBXBuildFile; productRef = 5CCBC6742CA1F45800E958D0 /* executorch_debug */; };
 		5CCBC6862CA1F64A00E958D0 /* LLaMARunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CCBC6802CA1F63F00E958D0 /* LLaMARunner.framework */; platformFilter = ios; };
 		5CCBC6872CA1F64A00E958D0 /* LLaMARunner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5CCBC6802CA1F63F00E958D0 /* LLaMARunner.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5CCBC68D2CA1F7A100E958D0 /* PromptTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCBC6892CA1F7A000E958D0 /* PromptTemplate.swift */; };
@@ -18,6 +15,8 @@
 		5CCBC68F2CA1F7A100E958D0 /* Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCBC68B2CA1F7A000E958D0 /* Parsing.swift */; };
 		5CCBC6902CA1F7A100E958D0 /* SystemPrompts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCBC68C2CA1F7A100E958D0 /* SystemPrompts.swift */; };
 		5CCBC6932CA1F7D000E958D0 /* Stencil in Frameworks */ = {isa = PBXBuildFile; productRef = 5CCBC6922CA1F7D000E958D0 /* Stencil */; };
+		BA95DFF22D7F8CBD00203D37 /* LlamaStackClient in Frameworks */ = {isa = PBXBuildFile; productRef = BA95DFF12D7F8CBD00203D37 /* LlamaStackClient */; };
+		BAFF5F192D81305000E1D87B /* LlamaStackClient in Frameworks */ = {isa = PBXBuildFile; productRef = 5CADC7192CA471CC007662D2 /* LlamaStackClient */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,20 +33,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 03729ED52BB1F8DE00152F2E;
 			remoteInfo = LLaMARunner;
-		};
-		5CCBC69E2CA2036B00E958D0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5CCBC6762CA1F63F00E958D0 /* LLaMA.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5CCBC6982CA2036A00E958D0;
-			remoteInfo = LLaMAPerfBenchmark;
-		};
-		5CCBC6A02CA2036B00E958D0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5CCBC6762CA1F63F00E958D0 /* LLaMA.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5CCBC6992CA2036A00E958D0;
-			remoteInfo = LLaMAPerfBenchmarkTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -80,11 +65,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CADC71A2CA471CC007662D2 /* LlamaStackClient in Frameworks */,
-				5CAF3DD82CA485740029CD2B /* LlamaStackClient in Frameworks */,
+				BAFF5F192D81305000E1D87B /* LlamaStackClient in Frameworks */,
 				5CCBC6932CA1F7D000E958D0 /* Stencil in Frameworks */,
+				BA95DFF22D7F8CBD00203D37 /* LlamaStackClient in Frameworks */,
 				5CCBC6862CA1F64A00E958D0 /* LLaMARunner.framework in Frameworks */,
-				5CCBC6752CA1F45800E958D0 /* executorch_debug in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,8 +110,6 @@
 			children = (
 				5CCBC67E2CA1F63F00E958D0 /* LLaMA.app */,
 				5CCBC6802CA1F63F00E958D0 /* LLaMARunner.framework */,
-				5CCBC69F2CA2036B00E958D0 /* LLaMAPerfBenchmark.app */,
-				5CCBC6A12CA2036B00E958D0 /* LLaMAPerfBenchmarkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,10 +151,9 @@
 			);
 			name = LocalInferenceImpl;
 			packageProductDependencies = (
-				5CCBC6742CA1F45800E958D0 /* executorch_debug */,
 				5CCBC6922CA1F7D000E958D0 /* Stencil */,
 				5CADC7192CA471CC007662D2 /* LlamaStackClient */,
-				5CAF3DD72CA485740029CD2B /* LlamaStackClient */,
+				BA95DFF12D7F8CBD00203D37 /* LlamaStackClient */,
 			);
 			productName = LocalInferenceProvider;
 			productReference = 5CCBC6082CA1F04A00E958D0 /* LocalInferenceImpl.framework */;
@@ -203,9 +184,8 @@
 			);
 			mainGroup = 5CCBC5FE2CA1F04A00E958D0;
 			packageReferences = (
-				5CCBC6732CA1F45800E958D0 /* XCRemoteSwiftPackageReference "executorch" */,
 				5CCBC6912CA1F7D000E958D0 /* XCRemoteSwiftPackageReference "Stencil" */,
-				5CAF3DD62CA485740029CD2B /* XCRemoteSwiftPackageReference "llama-stack-client-swift" */,
+				BA95DFF02D7F8CBD00203D37 /* XCRemoteSwiftPackageReference "llama-stack-client-swift" */,
 			);
 			productRefGroup = 5CCBC6092CA1F04A00E958D0 /* Products */;
 			projectDirPath = "";
@@ -235,20 +215,6 @@
 			fileType = wrapper.framework;
 			path = LLaMARunner.framework;
 			remoteRef = 5CCBC67F2CA1F63F00E958D0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5CCBC69F2CA2036B00E958D0 /* LLaMAPerfBenchmark.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = LLaMAPerfBenchmark.app;
-			remoteRef = 5CCBC69E2CA2036B00E958D0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5CCBC6A12CA2036B00E958D0 /* LLaMAPerfBenchmarkTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = LLaMAPerfBenchmarkTests.xctest;
-			remoteRef = 5CCBC6A02CA2036B00E958D0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -427,7 +393,6 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = meta.llamatsack.LocalInferenceProvider;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -463,7 +428,6 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = meta.llamatsack.LocalInferenceProvider;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -498,28 +462,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5CAF3DD62CA485740029CD2B /* XCRemoteSwiftPackageReference "llama-stack-client-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/meta-llama/llama-stack-client-swift";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		5CCBC6732CA1F45800E958D0 /* XCRemoteSwiftPackageReference "executorch" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pytorch/executorch";
-			requirement = {
-				branch = latest;
-				kind = branch;
-			};
-		};
 		5CCBC6912CA1F7D000E958D0 /* XCRemoteSwiftPackageReference "Stencil" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stencilproject/Stencil";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.15.1;
+			};
+		};
+		BA95DFF02D7F8CBD00203D37 /* XCRemoteSwiftPackageReference "llama-stack-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/meta-llama/llama-stack-client-swift";
+			requirement = {
+				branch = "latest-release";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -529,20 +485,15 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = LlamaStackClient;
 		};
-		5CAF3DD72CA485740029CD2B /* LlamaStackClient */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5CAF3DD62CA485740029CD2B /* XCRemoteSwiftPackageReference "llama-stack-client-swift" */;
-			productName = LlamaStackClient;
-		};
-		5CCBC6742CA1F45800E958D0 /* executorch_debug */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5CCBC6732CA1F45800E958D0 /* XCRemoteSwiftPackageReference "executorch" */;
-			productName = executorch_debug;
-		};
 		5CCBC6922CA1F7D000E958D0 /* Stencil */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5CCBC6912CA1F7D000E958D0 /* XCRemoteSwiftPackageReference "Stencil" */;
 			productName = Stencil;
+		};
+		BA95DFF12D7F8CBD00203D37 /* LlamaStackClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA95DFF02D7F8CBD00203D37 /* XCRemoteSwiftPackageReference "llama-stack-client-swift" */;
+			productName = LlamaStackClient;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
