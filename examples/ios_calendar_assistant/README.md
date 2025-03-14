@@ -105,13 +105,12 @@ iOSCalendarAssistantWithLocalInf is a demo app that uses Llama Stack Swift SDK's
 
 1. On a Mac terminal, in your top level directory, run commands:
 ```
-git clone https://github.com/meta-llama/llama-stack-apps
 git clone https://github.com/meta-llama/llama-stack-client-swift
 cd llama-stack-client-swift
 git submodule update --init --recursive
 ```
 
-2. Open `llama-stack-apps/examples/ios_calendar_assistant/iOSCalendarAssistantWithLocalInf.xcodeproj` in Xcode.
+2. Open `llama-stack-client-swift/examples/ios_calendar_assistant/iOSCalendarAssistantWithLocalInf.xcodeproj` in Xcode.
 
 3. In the `iOSCalendarAssistantWithLocalInf` project panel, remove `LocalInferenceImpl.xcodeproj` and drag and drop `LocalInferenceImpl.xcodeproj` from `llama-stack-client-swift/local_inference` into the project - in the "Choose options for adding these files" dialog, select "Reference files in place" for Action.
 
