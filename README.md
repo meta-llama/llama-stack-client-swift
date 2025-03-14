@@ -4,7 +4,7 @@
 
 llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](https://github.com/meta-llama/llama-stack) to iOS.
 
-**Update: February 26, 2025** The llama-stack-client-swift SDK version has been updated to 0.1.4, working with Llama Stack 0.1.4 ([release note](https://github.com/meta-llama/llama-stack/releases/tag/v0.1.4)).
+**Update: March 14, 2025** The llama-stack-client-swift SDK version has been updated to 0.1.4.1, working with Llama Stack 0.1.4 ([release note](https://github.com/meta-llama/llama-stack/releases/tag/v0.1.4)) and ExecuTorch 0.5.0 ([release note](https://github.com/pytorch/executorch/releases/tag/v0.5.0)). Also the demo apps have been moved to this repository under `examples`.
 
 ## Features
 
