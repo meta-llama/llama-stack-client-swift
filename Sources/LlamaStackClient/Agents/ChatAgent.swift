@@ -2,12 +2,12 @@ import Foundation
 import OpenAPIRuntime
 
 
-class ChatAgent {
+public class ChatAgent {
   private let agentConfig: Components.Schemas.AgentConfig
   private let inferenceApi: Inference
   private var sessions: [String: Components.Schemas.Session]
 
-  init(
+  public init(
     agentConfig: Components.Schemas.AgentConfig,
     inferenceApi: Inference
   ) {
