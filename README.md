@@ -4,7 +4,9 @@
 
 llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](https://github.com/meta-llama/llama-stack) to iOS.
 
-**Update: March 14, 2025** The llama-stack-client-swift SDK version has been updated to 0.1.4.1, working with Llama Stack 0.1.4 ([release note](https://github.com/meta-llama/llama-stack/releases/tag/v0.1.4)) and ExecuTorch 0.5.0 ([release note](https://github.com/pytorch/executorch/releases/tag/v0.5.0)). Also the demo apps have been moved to this repository under `examples`.
+Compatibility with:
+- [Llama Stack 0.1.7](https://github.com/meta-llama/llama-stack/releases/tag/v0.1.7) 
+- [ExecuTorch 0.5.0](https://github.com/pytorch/executorch/releases/tag/v0.5.0)
 
 ## Features
 
@@ -12,9 +14,9 @@ llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](h
 - **Custom Tool Calling:**  Provide Swift tools that Llama agents can understand and use.
 
 ## iOS Demos
-See [here](https://github.com/meta-llama/llama-stack-apps/tree/main/examples/ios_quick_demo) for a quick iOS demo ([video](https://drive.google.com/file/d/1HnME3VmsYlyeFgsIOMlxZy5c8S2xP4r4/view?usp=sharing)) using a remote Llama Stack server for inferencing.
-
-For a more advanced demo using the Llama Stack Agent API and custom tool calling feature, see the [iOS Calendar Assistant demo](https://github.com/meta-llama/llama-stack-apps/tree/main/examples/ios_calendar_assistant).
+We have several demo apps to help provide reference for how to use the SDK:
+- [iOS Quick Demo](https://github.com/meta-llama/llama-stack-client-swift/tree/latest-release/examples/ios_quick_demo): Uses remote Llama Stack server for inferencing ([video](https://drive.google.com/file/d/1HnME3VmsYlyeFgsIOMlxZy5c8S2xP4r4/view?usp=sharing)).
+- [iOS Calendar Assistant Demo](https://github.com/meta-llama/llama-stack-client-swift/tree/latest-release/examples/ios_calendar_assistant): Advanced uses of Llama Stack Agent API and custom tool calling feature. There are separate projects for remote and local inferencing.
 
 
 ## Installation
@@ -34,18 +36,18 @@ For a more advanced demo using the Llama Stack Agent API and custom tool calling
 ```
 conda create -n llama-stack python=3.10
 conda activate llama-stack
-pip install --no-cache llama-stack==0.1.4 llama-models==0.1.4 llama-stack-client==0.1.4
+pip install --no-cache llama-stack==0.1.7 llama-models==0.1.7 llama-stack-client==0.1.7
 ```
 
 Then, either:
 ```
-PYPI_VERSION=0.1.4 llama stack build --template fireworks --image-type conda
+PYPI_VERSION=0.1.7 llama stack build --template fireworks --image-type conda
 export FIREWORKS_API_KEY="<your_fireworks_api_key>"
 llama stack run fireworks
 ```
 or
 ```
-PYPI_VERSION=0.1.4 llama stack build --template together --image-type conda
+PYPI_VERSION=0.1.7 llama stack build --template together --image-type conda
 export TOGETHER_API_KEY="<your_together_api_key>"
 llama stack run together
 ```
