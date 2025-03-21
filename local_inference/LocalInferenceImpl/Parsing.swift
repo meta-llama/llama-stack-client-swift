@@ -176,27 +176,38 @@ public func maybeExtractCustomToolCalls(input: String) -> [Components.Schemas.To
         return []
       }
 
-      var props: [String : Components.Schemas.ToolCall.argumentsPayload.additionalPropertiesPayload] = [:]
-      for (param_name, param) in params {
-        switch (param) {
-        case let value as String:
-          props[param_name] = .case1(value)
-        case let value as Int:
-          props[param_name] = .case2(value)
-        case let value as Double:
-          props[param_name] = .case3(value)
-        case let value as Bool:
-          props[param_name] = .case4(value)
-        default:
-          return []
+        var props: [String : Components.Schemas.ToolCall.argumentsPayload] = [:]
+        for (param_name, param) in params {
+            switch (param) {
+            case let value as String:
+                props[param_name] = .case1(value)
+            case let value as Int:
+                var additionalProps: [String: Components.Schemas.ToolCall.argumentsPayload.Case2Payload.additionalPropertiesPayload] = [:]
+                additionalProps[param_name] = .case2(value)
+                let payload = Components.Schemas.ToolCall.argumentsPayload.Case2Payload(additionalProperties: additionalProps)
+                props[param_name] = .case2(payload)
+            case let value as Double:
+                var additionalProps: [String: Components.Schemas.ToolCall.argumentsPayload.Case2Payload.additionalPropertiesPayload] = [:]
+                additionalProps[param_name] = .case3(value)
+                let payload = Components.Schemas.ToolCall.argumentsPayload.Case2Payload(additionalProperties: additionalProps)
+                props[param_name] = .case2(payload)
+            case let value as Bool:
+                var additionalProps: [String: Components.Schemas.ToolCall.argumentsPayload.Case2Payload.additionalPropertiesPayload] = [:]
+                additionalProps[param_name] = .case4(value)
+                let payload = Components.Schemas.ToolCall.argumentsPayload.Case2Payload(additionalProperties: additionalProps)
+                props[param_name] = .case2(payload)
+            default:
+                return []
+            }
         }
-      }
+        
+        let case2Payload = try Components.Schemas.ToolCall.argumentsPayload.Case2Payload(from: props as! Decoder)
 
       result.append(
         Components.Schemas.ToolCall(
           call_id: UUID().uuidString,
           tool_name: .case2(name), // custom_tool
-          arguments: .init(additionalProperties: props)
+          arguments: .case2(case2Payload)
         )
       )
     }

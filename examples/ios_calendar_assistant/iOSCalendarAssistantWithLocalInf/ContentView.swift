@@ -241,13 +241,18 @@ struct ContentView: View {
               switch (call.tool_call) {
               case .ToolCall(let toolCall):
                   var args: [String : String] = [:]
-                  for (arg_name, arg) in toolCall.arguments.additionalProperties {
-                    switch (arg) {
-                    case .case1(let s):
-                      args[arg_name] = s
-                    case .case2(_), .case3(_), .case4(_), .case5(_), .case6(_):
+                  switch toolCall.arguments {
+                  case .case1(let s):
                       break
-                    }
+                  case .case2(let case2Payload):
+                      for (arg_name, arg) in case2Payload.additionalProperties {
+                          switch (arg) {
+                          case .case1(let s):
+                              args[arg_name] = s
+                          case .case2(_), .case3(_), .case4(_), .case5(_), .case6(_):
+                              break
+                          }
+                      }
                   }
 
                   let formatter = DateFormatter()
