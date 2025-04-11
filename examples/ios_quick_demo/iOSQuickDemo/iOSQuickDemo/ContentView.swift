@@ -13,7 +13,8 @@ struct ContentView: View {
   @State private var message: String = ""
   @State private var userInput: String = "Best quotes in Godfather"
 
-  let imageUrl = "https://raw.githubusercontent.com/meta-llama/llama-models/refs/heads/main/Llama_Repo.jpeg"
+  let imageUrl1 = "https://raw.githubusercontent.com/meta-llama/llama-models/refs/heads/main/Llama_Repo.jpeg"
+  let imageUrl2 = "https://raw.githubusercontent.com/meta-llama/llama3/refs/heads/main/Llama3_Repo.jpeg"
   
   private let runnerQueue = DispatchQueue(label: "org.llamastack.iosquickdemo")
   
@@ -34,7 +35,7 @@ struct ContentView: View {
           .textFieldStyle(RoundedBorderTextFieldStyle())
           .padding()
       
-      AsyncImage(url: URL(string: imageUrl)) { phase in
+      AsyncImage(url: URL(string: imageUrl1)) { phase in
         switch phase {
         case .empty:
             ProgressView()
@@ -49,7 +50,24 @@ struct ContentView: View {
         @unknown default:
             EmptyView()
         }
-    }
+      }
+      
+      AsyncImage(url: URL(string: imageUrl2)) { phase in
+          switch phase {
+          case .empty:
+              ProgressView()
+          case .success(let image):
+              image
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+          case .failure:
+              Image(systemName: "llama")
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+          @unknown default:
+              EmptyView()
+          }
+      }
     .frame(height: 200)
       HStack {
         Button(action: {
@@ -77,9 +95,9 @@ struct ContentView: View {
         }
         
         Button(action: {
-          handleButtonClick(buttonName: "TextImage")
+          handleButtonClick(buttonName: "TextMultiImage")
         }) {
-          Text("Text Image")
+          Text("Text MultiImage")
             .font(.title2)
             .foregroundColor(.white)
             .padding()
@@ -101,21 +119,21 @@ struct ContentView: View {
     )
   }
   
-  private func userMessageToDescribeAnImage(_ imageURL: String) -> Components.Schemas.UserMessage {
+  private func userMessageToDescribeAnImage(_ imageURL1: String) -> Components.Schemas.UserMessage {
     return Components.Schemas.UserMessage(
       role: .user,
       content:
         .InterleavedContentItem(
           .image(Components.Schemas.ImageContentItem(
             _type: .image,
-            image: Components.Schemas.ImageContentItem.imagePayload( url: Components.Schemas.URL(uri: imageURL))
+            image: Components.Schemas.ImageContentItem.imagePayload( url: Components.Schemas.URL(uri: imageURL1))
             )
           )
       )
     )
   }
   
-  private func userMessageWithTextAndImage(_ imageURL: String, _ text: String) -> Components.Schemas.UserMessage {
+  private func userMessageWithTextAndMultiImage(_ text: String, _ imageURL1: String, _ imageURL2: String) -> Components.Schemas.UserMessage {
     return Components.Schemas.UserMessage(
       role: .user,
       content:
@@ -129,7 +147,13 @@ struct ContentView: View {
           Components.Schemas.InterleavedContentItem.image(
             Components.Schemas.ImageContentItem(
               _type: .image,
-              image: Components.Schemas.ImageContentItem.imagePayload( url: Components.Schemas.URL(uri: imageURL))
+              image: Components.Schemas.ImageContentItem.imagePayload( url: Components.Schemas.URL(uri: imageURL1))
+              )
+            ),
+          Components.Schemas.InterleavedContentItem.image(
+            Components.Schemas.ImageContentItem(
+              _type: .image,
+              image: Components.Schemas.ImageContentItem.imagePayload( url: Components.Schemas.URL(uri: imageURL2))
               )
             )
           ])
@@ -149,10 +173,10 @@ struct ContentView: View {
       userMessage = userMessageWithText(userInput)
     }
     else if (buttonName == "Image") {
-      userMessage = userMessageToDescribeAnImage(imageUrl)
+      userMessage = userMessageToDescribeAnImage(imageUrl1)
     }
-    else if (buttonName == "TextImage") {
-      userMessage = userMessageWithTextAndImage(imageUrl, userInput)
+    else if (buttonName == "TextMultiImage") {
+      userMessage = userMessageWithTextAndMultiImage(userInput, imageUrl1, imageUrl2)
     }
     
     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -166,17 +190,15 @@ struct ContentView: View {
       }
 
       Task {
-
-        // replace the URL string if you build and run your own Llama Stack distro as shown in https://github.com/meta-llama/llama-stack-apps/tree/main/examples/ios_quick_demo#optional-build-and-run-own-llama-stack-distro
-        let inference = RemoteInference(url: URL(string: "https://llama-stack.together.ai")!, apiKey: "YOUR_TOGETHER_API_KEY") // get the key at https://api.together.ai
-
+        // Llama 4 is not available in API providers' distro yet. To use Llama 4, you need to build llama-stack server from local https://github.com/meta-llama/llama-stack-client-swift/tree/latest-release/examples/ios_quick_demo#build-and-run-the-ios-demo
+        let inference = RemoteInference(url: URL(string: "http://localhost:8321")!)
         do {
           for await chunk in try await inference.chatCompletion(
             request:
               Components.Schemas.ChatCompletionRequest(
                 model_id:
                   //"meta-llama/Llama-3.1-8B-Instruct", // text-only Llama model
-                  "meta-llama/Llama-3.2-11B-Vision-Instruct", // image and text Llama model
+                  "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8", // Llama4 with text and image capability
                 messages: [
                   .user(userMessage)
                 ],

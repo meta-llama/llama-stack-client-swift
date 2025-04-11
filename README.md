@@ -5,7 +5,7 @@
 llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](https://github.com/meta-llama/llama-stack) to iOS.
 
 Compatible with:
-- [Llama Stack 0.1.7](https://github.com/meta-llama/llama-stack/releases/tag/v0.1.7) 
+- [Llama Stack 0.2.1](https://github.com/meta-llama/llama-stack/releases/tag/v0.2.1) 
 - [ExecuTorch 0.5.0](https://github.com/pytorch/executorch/releases/tag/v0.5.0)
 
 ## Features
@@ -29,30 +29,35 @@ We have several demo apps to help provide reference for how to use the SDK:
 
 4. On the first build: Enable & Trust the OpenAPIGenerator extension when prompted.
 
-5. The quickest way to try out the demo for remote inference is using Together.ai's Llama Stack distro at https://llama-stack.together.ai - you can skip Step 6 unless you want to build your own distro. 
+5. The quickest way to try out the demo for remote inference is using Together.ai's Llama Stack distro at https://llama-stack.together.ai - you can skip Step 6 unless you want to build your own distro. Note that Llama 4 is currently supported by building your own distro from Llama Stack main. This can be done by:
+
+```
+llama stack build --template together --image-type conda
+llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
+```
 
 6. (Optional) Set up a remote Llama Stack distributions, assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link:
 
 ```
 conda create -n llama-stack python=3.10
 conda activate llama-stack
-pip install --no-cache llama-stack==0.1.7 llama-models==0.1.7 llama-stack-client==0.1.7
+pip install --no-cache llama-stack==0.2.1 llama-models==0.2.0 llama-stack-client==0.2.1
 ```
 
 Then, either:
 ```
-PYPI_VERSION=0.1.7 llama stack build --template fireworks --image-type conda
+llama stack build --template fireworks --image-type conda
 export FIREWORKS_API_KEY="<your_fireworks_api_key>"
 llama stack run fireworks
 ```
 or
 ```
-PYPI_VERSION=0.1.7 llama stack build --template together --image-type conda
+llama stack build --template together --image-type conda
 export TOGETHER_API_KEY="<your_together_api_key>"
 llama stack run together
 ```
 
-The default port is 5000 for `llama stack run` and you can specify a different port by adding `--port <your_port>` to the end of `llama stack run fireworks|together`.
+The default port is 8321 for `llama stack run` and you can specify a different port by adding `--port <your_port>` to the end of `llama stack run fireworks|together`.
 
 Replace the `RemoteInference` url string below with the host IP and port of the remote Llama Stack distro in Step 6:
 
