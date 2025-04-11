@@ -1,38 +1,47 @@
 # iOSQuickDemo
+Update: We now support Llama 4 with Llama Stack main.
 
-iOSQuickDemo is a demo app ([video](https://drive.google.com/file/d/1X6rohq9PhVqzqWDtVKdGEhMpWaiTp79D/view?usp=sharing)) that shows how to use the Llama Stack Swift SDK ([repo](https://github.com/meta-llama/llama-stack-client-swift)) and its `ChatCompletionRequest` API with a Llama Stack server to perform remote text and image inference with Llama 3.1/3.2.
+iOSQuickDemo is a demo app ([video](https://drive.google.com/file/d/1X6rohq9PhVqzqWDtVKdGEhMpWaiTp79D/view?usp=sharing)) that shows how to use the Llama Stack Swift SDK ([repo](https://github.com/meta-llama/llama-stack-client-swift)) and its `ChatCompletionRequest` API with a Llama Stack server to perform remote text and image inference with Llama models.
 
 ![](ios1.png)
 ![](ios2.png)
 
 ## Installation
 
-The quickest way to try out the demo for remote inference is using Together.ai's Llama Stack distro at https://llama-stack.together.ai - you can skip the next section and go to the Build and Run the iOS demo section directly.
+The quickest way to try out the demo for remote inference is using Together.ai's Llama Stack distro at https://llama-stack.together.ai - you can skip the next section and go to the Build and Run the iOS demo section directly. 
 
 ## (Optional) Build and Run Own Llama Stack Distro
 
-You need to set up a remote Llama Stack distributions to run this demo. Assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link above:
+Note that Llama 4 is currently supported by building your own distro from Llama Stack main. This can be done by:
+
+```
+export TOGETHER_API_KEY="<your_together_api_key>"
+llama stack build --template together --image-type conda
+llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
+```
+
+To use PIP packages, you need to set up a remote Llama Stack distributions to run this demo. Assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link above:
 
 ```
 conda create -n llama-stack python=3.10
 conda activate llama-stack
-pip install --no-cache llama-stack==0.1.7 llama-models==0.1.7 llama-stack-client==0.1.7
+pip install --no-cache llama-stack==0.2.1 llama-models==0.2.0 llama-stack-client==0.2.1
 ```
 
 Then, either:
 ```
-PYPI_VERSION=0.1.7 llama stack build --template together --image-type conda
+llama stack build --template together --image-type conda
 export TOGETHER_API_KEY="<your_together_api_key>"
 llama stack run together
 ```
 or
 ```
-PYPI_VERSION=0.1.7 llama stack build --template fireworks --image-type conda
+llama stack build --template fireworks --image-type conda
 export FIREWORKS_API_KEY="<your_fireworks_api_key>"
 llama stack run fireworks
 ```
 
-The default port is 5000 for `llama stack run` and you can specify a different port by adding `--port <your_port>` to the end of "llama stack run fireworks|together".
+The default port is 8321 for `llama stack run` and you can specify a different port by adding `--port <your_port>` to the end of "llama stack run fireworks|together".
 
 ## Build and Run the iOS demo
 
@@ -68,7 +77,7 @@ Inside the async return of the `chatCompletion`, each returned text chunk is app
 for await chunk in try await inference.chatCompletion(
     request:
         Components.Schemas.ChatCompletionRequest(
-        model_id: "meta-llama/Llama-3.1-8B-Instruct",
+        model_id: "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
         messages: [
             .user(
             Components.Schemas.UserMessage(
