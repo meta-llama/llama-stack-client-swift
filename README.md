@@ -36,12 +36,6 @@ llama stack build --template together --image-type conda
 llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
 ```
 
-If you used uv, you can now start llama stack with one command:
-
-```
-uv run --with llama-stack llama stack build --template together --image-type venv --run
-```
-
 6. (Optional) Set up a remote Llama Stack distributions, assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link:
 
 ```
