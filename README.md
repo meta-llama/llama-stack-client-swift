@@ -5,7 +5,7 @@
 llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](https://github.com/meta-llama/llama-stack) to iOS.
 
 Compatible with:
-- [Llama Stack 0.2.1](https://github.com/meta-llama/llama-stack/releases/tag/v0.2.1) 
+- [Llama Stack 0.2.1](https://github.com/meta-llama/llama-stack/releases/tag/v0.2.1)
 - [ExecuTorch 0.5.0](https://github.com/pytorch/executorch/releases/tag/v0.5.0)
 
 ## Features
@@ -34,6 +34,12 @@ We have several demo apps to help provide reference for how to use the SDK:
 ```
 llama stack build --template together --image-type conda
 llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
+```
+
+If you used uv, you can now start llama stack with one command:
+
+```
+uv run --with llama-stack llama stack build --template together --image-type venv --run
 ```
 
 6. (Optional) Set up a remote Llama Stack distributions, assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link:
