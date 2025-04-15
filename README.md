@@ -31,7 +31,6 @@ We have several demo apps to help provide reference for how to use the SDK:
 
 5. The quickest way to try out the demo for remote inference is using Together.ai's Llama Stack distro at https://llama-stack.together.ai - you can skip Step 6 unless you want to build your own distro.
 *Note that Llama 4 is currently only supported by building your own distro from Llama Stack PIP package or main.*
-```
 
 6. (Optional) Set up a remote Llama Stack distributions, assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link:
 
