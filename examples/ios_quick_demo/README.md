@@ -1,5 +1,5 @@
 # iOSQuickDemo
-Update: We now support Llama 4 with Llama Stack main.
+Update: We now support Llama 4.
 
 iOSQuickDemo is a demo app ([video](https://drive.google.com/file/d/1X6rohq9PhVqzqWDtVKdGEhMpWaiTp79D/view?usp=sharing)) that shows how to use the Llama Stack Swift SDK ([repo](https://github.com/meta-llama/llama-stack-client-swift)) and its `ChatCompletionRequest` API with a Llama Stack server to perform remote text and image inference with Llama models.
 
@@ -8,13 +8,14 @@ iOSQuickDemo is a demo app ([video](https://drive.google.com/file/d/1X6rohq9PhVq
 
 ## Installation
 
-The quickest way to try out the demo for remote inference is using Together.ai's Llama Stack distro at https://llama-stack.together.ai - you can skip the next section and go to the Build and Run the iOS demo section directly. 
+The quickest way to try out the demo for remote inference is using Together.ai's Llama Stack distro at https://llama-stack.together.ai - you can skip the next section and go to the Build and Run the iOS demo section directly.
 
 ## (Optional) Build and Run Own Llama Stack Distro
 
-Note that Llama 4 is currently supported by building your own distro from Llama Stack main. This can be done by:
+Note that Llama 4 is currently supported by building your own distro from Llama Stack PIP package or main. This can be done by:
 
 ```
+pip install -U llama_stack
 export TOGETHER_API_KEY="<your_together_api_key>"
 llama stack build --template together --image-type conda
 llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
@@ -25,7 +26,7 @@ To use PIP packages, you need to set up a remote Llama Stack distributions to ru
 ```
 conda create -n llama-stack python=3.10
 conda activate llama-stack
-pip install --no-cache llama-stack==0.2.1 llama-models==0.2.0 llama-stack-client==0.2.1
+pip install --no-cache llama-stack==0.2.2 llama-models==0.2.0 llama-stack-client==0.2.2
 ```
 
 Then, either:
@@ -52,10 +53,10 @@ The default port is 8321 for `llama stack run` and you can specify a different p
 let inference = RemoteInference(url: URL(string: "https://llama-stack.together.ai")!, apiKey: "YOUR_TOGETHER_API_KEY")
 ```
 
-Or replace the line above with the host IP and port of the remote Llama Stack distro (e.g. http://localhost:5000) in Build and Run Own Llama Stack Distro:
+Or replace the line above with the host IP and port of the remote Llama Stack distro (e.g. http://localhost:8321) in Build and Run Own Llama Stack Distro:
 
 ```
-let inference = RemoteInference(url: URL(string: "https://localhost:5000")!)
+let inference = RemoteInference(url: URL(string: "https://localhost:8321")!)
 ```
 
 **Note:** In order for the app to access the remote URL, the app's `Info.plist` needs to have the entry `App Transport Security Settings` with `Allow Arbitrary Loads` set to YES.

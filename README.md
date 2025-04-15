@@ -5,7 +5,7 @@
 llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](https://github.com/meta-llama/llama-stack) to iOS.
 
 Compatible with:
-- [Llama Stack 0.2.1](https://github.com/meta-llama/llama-stack/releases/tag/v0.2.1)
+- [Llama Stack 0.2.2](https://github.com/meta-llama/llama-stack/releases/tag/v0.2.2)
 - [ExecuTorch 0.5.0](https://github.com/pytorch/executorch/releases/tag/v0.5.0)
 
 ## Features
@@ -29,11 +29,8 @@ We have several demo apps to help provide reference for how to use the SDK:
 
 4. On the first build: Enable & Trust the OpenAPIGenerator extension when prompted.
 
-5. The quickest way to try out the demo for remote inference is using Together.ai's Llama Stack distro at https://llama-stack.together.ai - you can skip Step 6 unless you want to build your own distro. Note that Llama 4 is currently supported by building your own distro from Llama Stack main. This can be done by:
-
-```
-llama stack build --template together --image-type conda
-llama stack run --image-type conda ~/.llama/distributions/together/together-run.yaml
+5. The quickest way to try out the demo for remote inference is using Together.ai's Llama Stack distro at https://llama-stack.together.ai - you can skip Step 6 unless you want to build your own distro.
+*Note that Llama 4 is currently only supported by building your own distro from Llama Stack PIP package or main.*
 ```
 
 6. (Optional) Set up a remote Llama Stack distributions, assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link:
@@ -41,7 +38,7 @@ llama stack run --image-type conda ~/.llama/distributions/together/together-run.
 ```
 conda create -n llama-stack python=3.10
 conda activate llama-stack
-pip install --no-cache llama-stack==0.2.1 llama-models==0.2.0 llama-stack-client==0.2.1
+pip install --no-cache llama-stack==0.2.2 llama-models==0.2.0 llama-stack-client==0.2.2
 ```
 
 Then, either:
@@ -75,7 +72,7 @@ Below is an example code snippet to use the Llama Stack inference API. See the i
 for await chunk in try await inference.chatCompletion(
     request:
         Components.Schemas.ChatCompletionRequest(
-        model_id: "meta-llama/Llama-3.1-8B-Instruct",
+        model_id: "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8",
         messages: [
             .user(
             Components.Schemas.UserMessage(
