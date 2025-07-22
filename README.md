@@ -35,9 +35,9 @@ We have several demo apps to help provide reference for how to use the SDK:
 6. (Optional) Set up a remote Llama Stack distributions, assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link:
 
 ```
-conda create -n llama-stack python=3.10
+conda create -n llama-stack python=3.12
 conda activate llama-stack
-pip install --no-cache llama-stack==0.2.2 llama-models==0.2.0 llama-stack-client==0.2.2
+pip install --no-cache llama-stack==0.2.14 llama-models==0.2.0 llama-stack-client==0.2.14
 ```
 
 Then, either:
