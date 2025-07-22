@@ -57,7 +57,7 @@ let agent = RemoteAgents(url: URL(string: "https://localhost:5000")!)
 
 Also, to allow the app to add event to the Calendar app, the `Info.plist` needs to have an entry `Privacy - Calendars Usage Description` and when running the app for the first time, you need to accept the Calendar access request.
 
-4. Build the run the app on an iOS simulator or your device. 
+4. Build the run the app on an iOS simulator or your device.
 
 Note: For your first-time build, you may need to Enable and Trust the OpenAPI Generator plugin. A link to enable will be available in the logs. You may need to do a clean build, close Xcode and then restart it again to avoid any cache issues. Otherwise, you may see "Bad Access too URLSession" errors during inference.
 
