@@ -17,9 +17,9 @@ The quickest way to try out the demo for remote inference is using Together.ai's
 You need to set up a remote Llama Stack distributions to run this demo. Assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link above:
 
 ```
-conda create -n llama-stack python=3.10
+conda create -n llama-stack python=3.12
 conda activate llama-stack
-pip install --no-cache llama-stack==0.2.1 llama-models==0.2.0 llama-stack-client==0.2.1
+pip install --no-cache llama-stack==0.2.14 llama-models==0.2.0 llama-stack-client==0.2.14
 ```
 
 Then, either:
@@ -57,7 +57,7 @@ let agent = RemoteAgents(url: URL(string: "https://localhost:5000")!)
 
 Also, to allow the app to add event to the Calendar app, the `Info.plist` needs to have an entry `Privacy - Calendars Usage Description` and when running the app for the first time, you need to accept the Calendar access request.
 
-4. Build the run the app on an iOS simulator or your device. 
+4. Build the run the app on an iOS simulator or your device.
 
 Note: For your first-time build, you may need to Enable and Trust the OpenAPI Generator plugin. A link to enable will be available in the logs. You may need to do a clean build, close Xcode and then restart it again to avoid any cache issues. Otherwise, you may see "Bad Access too URLSession" errors during inference.
 

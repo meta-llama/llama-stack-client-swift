@@ -24,9 +24,9 @@ llama stack run --image-type conda ~/.llama/distributions/together/together-run.
 To use PIP packages, you need to set up a remote Llama Stack distributions to run this demo. Assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link above:
 
 ```
-conda create -n llama-stack python=3.10
+conda create -n llama-stack python=3.12
 conda activate llama-stack
-pip install --no-cache llama-stack==0.2.2 llama-models==0.2.0 llama-stack-client==0.2.2
+pip install --no-cache llama-stack==0.2.14 llama-models==0.2.0 llama-stack-client==0.2.14
 ```
 
 Then, either:

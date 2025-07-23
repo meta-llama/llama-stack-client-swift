@@ -5,19 +5,21 @@
 llama-stack-client-swift brings the inference and agents APIs of [Llama Stack](https://github.com/meta-llama/llama-stack) to iOS.
 
 Compatible with:
-- [Llama Stack 0.2.2](https://github.com/meta-llama/llama-stack/releases/tag/v0.2.2)
+
+- [Llama Stack 0.2.14](https://github.com/meta-llama/llama-stack/releases/tag/v0.2.14)
 - [ExecuTorch 0.5.0](https://github.com/pytorch/executorch/releases/tag/v0.5.0)
 
 ## Features
 
 - **Inference & Agents:** Leverage remote Llama Stack distributions for inference, code execution, and safety.
-- **Custom Tool Calling:**  Provide Swift tools that Llama agents can understand and use.
+- **Custom Tool Calling:** Provide Swift tools that Llama agents can understand and use.
 
 ## iOS Demos
+
 We have several demo apps to help provide reference for how to use the SDK:
+
 - [iOS Quick Demo](https://github.com/meta-llama/llama-stack-client-swift/tree/latest-release/examples/ios_quick_demo): Uses remote Llama Stack server for inferencing ([video](https://drive.google.com/file/d/1HnME3VmsYlyeFgsIOMlxZy5c8S2xP4r4/view?usp=sharing)).
 - [iOS Calendar Assistant Demo](https://github.com/meta-llama/llama-stack-client-swift/tree/latest-release/examples/ios_calendar_assistant): Advanced uses of Llama Stack Agent API and custom tool calling feature. There are separate projects for remote and local inferencing.
-
 
 ## Installation
 
@@ -30,23 +32,26 @@ We have several demo apps to help provide reference for how to use the SDK:
 4. On the first build: Enable & Trust the OpenAPIGenerator extension when prompted.
 
 5. The quickest way to try out the demo for remote inference is using Together.ai's Llama Stack distro at https://llama-stack.together.ai - you can skip Step 6 unless you want to build your own distro.
-*Note that Llama 4 is currently only supported by building your own distro from Llama Stack PIP package or main.*
+   _Note that Llama 4 is currently only supported by building your own distro from Llama Stack PIP package or main._
 
 6. (Optional) Set up a remote Llama Stack distributions, assuming you have a [Fireworks](https://fireworks.ai/account/api-keys) or [Together](https://api.together.ai/) API key, which you can get easily by clicking the link:
 
 ```
-conda create -n llama-stack python=3.10
+conda create -n llama-stack python=3.12
 conda activate llama-stack
-pip install --no-cache llama-stack==0.2.2 llama-models==0.2.0 llama-stack-client==0.2.2
+pip install --no-cache llama-stack==0.2.14 llama-models==0.2.0 llama-stack-client==0.2.14
 ```
 
 Then, either:
+
 ```
 llama stack build --template fireworks --image-type conda
 export FIREWORKS_API_KEY="<your_fireworks_api_key>"
 llama stack run fireworks
 ```
+
 or
+
 ```
 llama stack build --template together --image-type conda
 export TOGETHER_API_KEY="<your_together_api_key>"
